@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hi5profe - Aprende inglés, impulsa tu futuro</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fafbfc;
+            color: #1e293b;
+            overflow-x: hidden;
+        }
+        /* Smooth motor pulse & float animation for CTA buttons */
+        @keyframes motorPulse {
+            0% { transform: scale(1); box-shadow: 0 10px 25px -5px rgba(168, 85, 247, 0.4); }
+            50% { transform: scale(1.03); box-shadow: 0 15px 35px -5px rgba(236, 72, 153, 0.6); }
+            100% { transform: scale(1); box-shadow: 0 10px 25px -5px rgba(168, 85, 247, 0.4); }
+        }
+        .btn-motor-pulse {
+            animation: motorPulse 2.5s infinite ease-in-out;
+        }
+
+        /* Enhanced Phosphorescent Neon Breathing Glow Effect */
+        @keyframes phosphorBreathe {
+            0%, 100% {
+                box-shadow: 0 0 15px rgba(168, 85, 247, 0.35), 0 0 30px rgba(236, 72, 153, 0.2);
+                border-color: rgba(168, 85, 247, 0.5);
+            }
+            50% {
+                box-shadow: 0 0 35px rgba(168, 85, 247, 0.9), 0 0 65px rgba(236, 72, 153, 0.7), 0 0 90px rgba(147, 51, 234, 0.5);
+                border-color: rgba(236, 72, 153, 1);
+            }
+        }
+        .phosphor-breathe {
+            animation: phosphorBreathe 3s infinite ease-in-out;
+            border: 3px solid rgba(168, 85, 247, 0.6);
+        }
+
+        /* Golden 3D Shiny Effect for VIP Card */
+        @keyframes vipShine {
+            0% { left: -150%; }
+            20% { left: 150%; }
+            100% { left: 150%; }
+        }
+        .vip-gold-3d {
+            background: linear-gradient(145deg, #fbe790 0%, #f6c84c 50%, #e1a01c 100%);
+            box-shadow: 
+                0 20px 25px -5px rgba(225, 160, 28, 0.4), 
+                0 10px 10px -5px rgba(225, 160, 28, 0.2),
+                inset 2px 2px 10px rgba(255, 255, 255, 0.9),
+                inset -4px -4px 15px rgba(180, 120, 15, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            position: relative;
+            overflow: hidden;
+        }
+        .vip-gold-3d::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -150%;
+            width: 80%; height: 100%;
+            background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0) 100%);
+            transform: skewX(-25deg);
+            animation: vipShine 4s infinite;
+            pointer-events: none;
+        }
+
+        /* Dynamic scroll entrance/exit animation bidirectional */
+        .scroll-animate {
+            transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+            opacity: 0;
+            transform: translateY(40px) scale(0.97);
+        }
+        .scroll-animate.active {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    } else {
+                        // Re-triggerable bidirectional scroll animation
+                        entry.target.classList.remove('active');
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.scroll-animate').forEach(el => {
+                observer.observe(el);
+            });
+        });
+
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            const icon = document.getElementById('menuIcon');
+            menu.classList.toggle('hidden');
+            if(menu.classList.contains('hidden')) {
+                icon.className = 'fa-solid fa-bars text-xl';
+            } else {
+                icon.className = 'fa-solid fa-xmark text-xl';
+            }
+        }
+
+        // Modals Management
+        let currentPlanType = 'Prueba Gratuita';
+        function openModal(modalId, planName = 'Prueba Gratuita') {
+            currentPlanType = planName;
+            const titleEl = document.getElementById('signupModalTitle');
+            const submitBtn = document.getElementById('signupSubmitBtn');
+            if(titleEl) {
+                if(planName === 'PRO') {
+                    titleEl.textContent = 'Inscríbete al Plan Boost Pro';
+                    if(submitBtn) {
+                        submitBtn.textContent = 'Obtener Pro';
+                        submitBtn.className = 'w-full py-4 bg-gradient-to-r from-slate-200 via-slate-100 to-slate-300 text-slate-900 font-extrabold rounded-2xl shadow-xl shadow-slate-300/30 hover:opacity-95 transition text-base btn-motor-pulse mt-2 border border-slate-300';
+                    }
+                } else if(planName === 'VIP') {
+                    titleEl.textContent = 'Inscríbete al Plan VIP / Teams';
+                    if(submitBtn) {
+                        submitBtn.textContent = 'Iniciar VIP';
+                        submitBtn.className = 'w-full py-4 bg-gradient-to-r from-amber-300 via-yellow-500 to-amber-600 text-slate-900 font-extrabold rounded-2xl shadow-xl shadow-amber-500/40 hover:opacity-95 transition text-base btn-motor-pulse mt-2 border border-yellow-400';
+                    }
+                } else {
+                    titleEl.textContent = 'Completa tus datos para enviarlos directamente';
+                    if(submitBtn) {
+                        submitBtn.textContent = 'Comenzar prueba gratis';
+                        submitBtn.className = 'w-full py-4 bg-gradient-to-r from-purple-600 to-pink-500 text-white font-bold rounded-2xl shadow-xl shadow-purple-500/30 hover:opacity-95 transition text-base btn-motor-pulse mt-2';
+                    }
+                }
+            }
+            document.getElementById(modalId).classList.remove('hidden');
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.add('hidden');
+        }
+
+        // Toast Message Notification
+        function showToast(message) {
+            const toast = document.getElementById('toastNotification');
+            const msg = document.getElementById('toastMessage');
+            msg.textContent = message;
+            toast.classList.remove('translate-y-32', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-32', 'opacity-0');
+            }, 3500);
+        }
+
+        // Welcome Video Player activation & scroll
+        function playHeroVideo() {
+            const video = document.getElementById('heroWelcomeVideo');
+            const overlay = document.getElementById('videoOverlay');
+            
+            overlay.style.opacity = '0';
+            setTimeout(() => {
+                overlay.style.display = 'none';
+            }, 300);
+            
+            video.controls = true;
+            video.play().catch(() => {
+                showToast('Video listo. Puedes enlazar tu archivo de video en el código.');
+            });
+            document.getElementById('videoContainer').scrollIntoView({behavior: 'smooth', block: 'center'});
+        }
+
+        // WhatsApp Form Submit: Prueba Gratuita / Pro / VIP
+        function handleWhatsAppSignup(event) {
+            event.preventDefault();
+            const name = document.getElementById('waName').value;
+            const age = document.getElementById('waAge').value;
+            const level = document.getElementById('waLevel').value;
+            const country = document.getElementById('waCountry').value;
+
+            let message = '';
+            if(currentPlanType === 'PRO') {
+                message = `Hola! Quiero comenzar clases en la versión PRO.%0A%0A*Mis datos:*%0A- *Nombre completo:* ${encodeURIComponent(name)}%0A- *Edad:* ${encodeURIComponent(age)}%0A- *Nivel de inglés:* ${encodeURIComponent(level)}%0A- *País:* ${encodeURIComponent(country)}`;
+            } else if(currentPlanType === 'VIP') {
+                message = `Hola! Quiero iniciar en el Plan VIP / Teams.%0A%0A*Mis datos:*%0A- *Nombre completo:* ${encodeURIComponent(name)}%0A- *Edad:* ${encodeURIComponent(age)}%0A- *Nivel de inglés:* ${encodeURIComponent(level)}%0A- *País:* ${encodeURIComponent(country)}`;
+            } else {
+                message = `Hola! Quiero registrarme a Hi5profe.%0A%0A*Mis datos:*%0A- *Nombre completo:* ${encodeURIComponent(name)}%0A- *Edad:* ${encodeURIComponent(age)}%0A- *Nivel de inglés:* ${encodeURIComponent(level)}%0A- *País:* ${encodeURIComponent(country)}`;
+            }
+            
+            window.open(`https://wa.me/51936932398?text=${message}`, '_blank');
+            closeModal('signupModal');
+            showToast('¡Redirigiendo a WhatsApp con tus datos!');
+        }
+
+        // WhatsApp Form Submit: Clases en Vivo
+        function handleLiveClassWhatsApp(event) {
+            event.preventDefault();
+            const name = document.getElementById('liveName').value;
+            const level = document.getElementById('liveLevel').value;
+
+            const message = `Hola, quiero unirme a los streams clases en vivo.%0A%0A*Mis datos:*%0A- *Nombre completo:* ${encodeURIComponent(name)}%0A- *Nivel de inglés:* ${encodeURIComponent(level)}`;
+            
+            window.open(`https://wa.me/51936932398?text=${message}`, '_blank');
+            closeModal('liveClassModal');
+            showToast('¡Redirigiendo a WhatsApp para las clases en vivo!');
+        }
+
+        // WhatsApp Form Submit: Horarios Flexibles
+        function handleFlexibleScheduleWhatsApp(event) {
+            event.preventDefault();
+            const name = document.getElementById('schedName').value;
+            const country = document.getElementById('schedCountry').value;
+            const shift = document.getElementById('schedShift').value;
+            const frequency = document.getElementById('schedFrequency').value;
+
+            const message = `Hola! Me interesa configurar mis Horarios Flexibles en Hi5profe.%0A%0A*Mis datos:*%0A- *Nombre completo:* ${encodeURIComponent(name)}%0A- *País:* ${encodeURIComponent(country)}%0A- *Turno preferido:* ${encodeURIComponent(shift)}%0A- *Frecuencia de clases:* ${encodeURIComponent(frequency)}`;
+            
+            window.open(`https://wa.me/51936932398?text=${message}`, '_blank');
+            closeModal('flexibleScheduleModal');
+            showToast('¡Redirigiendo a WhatsApp con tus datos de horario!');
+        }
+    </script>
+</head>
+<body class="bg-[#fafbfc] text-[#1e293b]">
+
+    <div id="toastNotification" class="fixed bottom-6 right-24 z-50 transform translate-y-32 opacity-0 transition-all duration-500 bg-slate-900 text-white px-6 py-3 rounded-2xl shadow-2xl flex items-center space-x-3 border border-slate-700">
+        <i class="fa-solid fa-circle-check text-purple-400 text-xl"></i>
+        <span id="toastMessage" class="text-sm font-medium">Notificación</span>
+    </div>
+
+    <!-- Floating WhatsApp Button (Bottom Right) -->
+    <a href="https://wa.me/51936932398?text=Hola,%20quiero%20más%20información%20sobre%20Hi5profe" target="_blank" class="fixed bottom-6 right-6 z-50 w-12 h-12 bg-emerald-500 hover:bg-emerald-600 text-white rounded-full flex items-center justify-center shadow-xl transition-all duration-300 transform hover:scale-110 btn-motor-pulse">
+        <i class="fa-brands fa-whatsapp text-2xl"></i>
+    </a>
+
+    <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <a href="#inicio" class="flex items-center group cursor-pointer">
+                <img src="hi5.svg" alt="Hi5profe Logo" class="h-10 sm:h-12 w-auto transition-transform duration-300 group-hover:scale-105">
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden md:flex items-center space-x-8 font-medium text-slate-600">
+                <a href="#inicio" class="text-purple-600 font-semibold transition hover:text-purple-700">Inicio</a>
+                <a href="#cursos" class="transition hover:text-purple-600">Cursos</a>
+                <a href="#recursos" class="transition hover:text-purple-600">Recursos</a>
+                <a href="#precios" class="transition hover:text-purple-600">Precios</a>
+                <a href="#contacto" class="transition hover:text-purple-600">Contacto</a>
+            </nav>
+
+            <!-- Desktop CTA -->
+            <div class="hidden md:flex items-center space-x-4">
+                <button onclick="openModal('loginModal')" class="text-sm font-semibold text-slate-700 hover:text-purple-600 transition">Iniciar sesión</button>
+                <button onclick="openModal('signupModal', 'Prueba Gratuita')" class="bg-gradient-to-r from-purple-600 to-pink-500 text-white text-sm font-semibold px-6 py-3 rounded-full shadow-lg shadow-purple-500/25 hover:opacity-95 transition transform hover:scale-105">Únete ahora</button>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button onclick="toggleMobileMenu()" class="md:hidden text-slate-700 p-2 focus:outline-none">
+                <i id="menuIcon" class="fa-solid fa-bars text-xl"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobileMenu" class="hidden md:hidden bg-white border-b border-slate-100 px-6 py-5 space-y-4 shadow-xl">
+            <a href="#inicio" onclick="toggleMobileMenu()" class="block font-medium text-purple-600">Inicio</a>
+            <a href="#cursos" onclick="toggleMobileMenu()" class="block font-medium text-slate-700">Cursos</a>
+            <a href="#recursos" onclick="toggleMobileMenu()" class="block font-medium text-slate-700">Recursos</a>
+            <a href="#precios" onclick="toggleMobileMenu()" class="block font-medium text-slate-700">Precios</a>
+            <a href="#contacto" onclick="toggleMobileMenu()" class="block font-medium text-slate-700">Contacto</a>
+            <div class="pt-4 border-t border-slate-100 flex flex-col space-y-3">
+                <button onclick="openModal('loginModal'); toggleMobileMenu();" class="w-full text-center py-2.5 font-semibold text-slate-700 border border-slate-200 rounded-full">Iniciar sesión</button>
+                <button onclick="openModal('signupModal', 'Prueba Gratuita'); toggleMobileMenu();" class="w-full text-center py-2.5 font-semibold text-white bg-gradient-to-r from-purple-600 to-pink-500 rounded-full shadow-md">Únete ahora</button>
+            </div>
+        </div>
+    </header>
+
+    <section id="inicio" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-20 overflow-hidden scroll-animate">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            
+            <!-- Left Column: Title & CTA -->
+            <div class="lg:col-span-6 space-y-8">
+                
+                <h1 class="text-4xl sm:text-6xl font-extrabold text-slate-900 tracking-tight leading-[1.1]">
+                    Aprende inglés. <br><span class="bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent">Impulsa tu futuro.</span>
+                </h1>
+
+                <p class="text-lg text-slate-600 leading-relaxed max-w-xl">
+                    En Hi5profe tienes todo lo que necesitas para hablar inglés con confianza: cursos, ejercicios prácticos, recursos interactivos y seguimiento personalizado.
+                </p>
+
+                <div class="flex flex-col sm:flex-row items-stretch sm:items-center space-y-4 sm:space-y-0 sm:space-x-4">
+                    <button onclick="openModal('signupModal', 'Prueba Gratuita')" class="bg-gradient-to-r from-purple-600 to-pink-500 text-white font-semibold px-8 py-4 rounded-full shadow-xl shadow-purple-500/30 hover:opacity-95 transition text-center text-base btn-motor-pulse">
+                        Empieza gratis ahora
+                    </button>
+                    <button onclick="playHeroVideo()" class="flex items-center justify-center space-x-3 bg-white border border-slate-200 text-slate-700 font-semibold px-6 py-4 rounded-full shadow-sm hover:bg-slate-50 transition text-base">
+                        <span class="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center text-purple-600">
+                            <i class="fa-solid fa-play text-xs pl-0.5"></i>
+                        </span>
+                        <span>Ver cómo funciona</span>
+                    </button>
+                </div>
+
+                <div class="flex items-center space-x-4 pt-4 border-t border-slate-100">
+                    <div class="flex -space-x-2 overflow-hidden">
+                        <img class="inline-block h-10 w-10 rounded-full ring-2 ring-white object-cover" src="https://placehold.co/100x100/6366f1/ffffff?text=U1" alt="Usuario">
+                        <img class="inline-block h-10 w-10 rounded-full ring-2 ring-white object-cover" src="https://placehold.co/100x100/ec4899/ffffff?text=U2" alt="Usuario">
+                        <img class="inline-block h-10 w-10 rounded-full ring-2 ring-white object-cover" src="https://placehold.co/100x100/8b5cf6/ffffff?text=U3" alt="Usuario">
+                        <img class="inline-block h-10 w-10 rounded-full ring-2 ring-white object-cover" src="https://placehold.co/100x100/3b82f6/ffffff?text=U4" alt="Usuario">
+                    </div>
+                    <div>
+                        <div class="flex items-center space-x-1 text-amber-400 text-sm">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <span class="font-bold text-slate-800 ml-1">4.9/5</span>
+                        </div>
+                        <p class="text-xs text-slate-500 font-medium">Basado en +2,000 estudiantes activos</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Welcome Video Player & Interactive Floating Widgets -->
+            <div class="lg:col-span-6 relative">
+                <div class="absolute -top-10 -left-10 w-72 h-72 bg-purple-200/50 rounded-full blur-3xl pointer-events-none"></div>
+                <div class="absolute -bottom-10 -right-10 w-72 h-72 bg-pink-200/50 rounded-full blur-3xl pointer-events-none"></div>
+
+                <div class="relative bg-gradient-to-tr from-purple-900 to-indigo-900 p-3 sm:p-4 rounded-3xl shadow-2xl shadow-indigo-900/30">
+                    
+                    <!-- HTML5 Welcome Video Player Container -->
+                    <div id="videoContainer" class="relative w-full aspect-video rounded-2xl overflow-hidden bg-slate-900 shadow-inner">
+                        <video id="heroWelcomeVideo" class="w-full h-full object-cover" poster="https://placehold.co/1200x675/1e1b4b/ffffff?text=Hi5profe+Bienvenida">
+                            <source src="" type="video/mp4">
+                            Tu navegador no soporta videos HTML5.
+                        </video>
+
+                        <!-- Video Overlay Trigger -->
+                        <div id="videoOverlay" class="absolute inset-0 bg-slate-900/40 backdrop-blur-[2px] flex flex-col items-center justify-center transition-opacity duration-300">
+                            <button onclick="playHeroVideo()" class="w-20 h-20 rounded-full bg-gradient-to-r from-purple-600 to-pink-500 text-white flex items-center justify-center text-2xl shadow-2xl shadow-pink-500/50 hover:scale-110 transition transform">
+                                <i class="fa-solid fa-play pl-1"></i>
+                            </button>
+                            <span class="mt-3 text-white font-semibold text-sm tracking-wide bg-slate-900/70 px-4 py-1.5 rounded-full border border-slate-700">Ver Video de Bienvenida</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="recursos" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 scroll-animate">
+        <div class="bg-white rounded-3xl p-6 sm:p-8 neon-breathe-border relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            
+            <div class="flex items-start space-x-4">
+                <div class="w-12 h-12 rounded-2xl bg-purple-50 flex items-center justify-center text-purple-600 text-xl flex-shrink-0">
+                    <i class="fa-solid fa-book-open"></i>
+                </div>
+                <div>
+                    <h3 class="font-bold text-slate-900 text-base">Cursos interactivos</h3>
+                    <p class="text-xs text-slate-500 mt-1 leading-relaxed">Lecciones dinámicas y actualizadas constantemente para tu nivel.</p>
+                </div>
+            </div>
+
+            <div class="flex items-start space-x-4">
+                <div class="w-12 h-12 rounded-2xl bg-pink-50 flex items-center justify-center text-pink-600 text-xl flex-shrink-0">
+                    <i class="fa-solid fa-comments"></i>
+                </div>
+                <div>
+                    <h3 class="font-bold text-slate-900 text-base">Practica hablando</h3>
+                    <p class="text-xs text-slate-500 mt-1 leading-relaxed">Mejora tu pronunciación y fluidez con herramientas inteligentes.</p>
+                </div>
+            </div>
+
+            <div class="flex items-start space-x-4">
+                <div class="w-12 h-12 rounded-2xl bg-emerald-50 flex items-center justify-center text-emerald-600 text-xl flex-shrink-0">
+                    <i class="fa-solid fa-chart-line"></i>
+                </div>
+                <div>
+                    <h3 class="font-bold text-slate-900 text-base">Seguimiento personal</h3>
+                    <p class="text-xs text-slate-500 mt-1 leading-relaxed">Monitorea tu progreso diario y tus objetivos cumplidos.</p>
+                </div>
+            </div>
+
+            <div class="flex items-start space-x-4">
+                <div class="w-12 h-12 rounded-2xl bg-amber-50 flex items-center justify-center text-amber-600 text-xl flex-shrink-0">
+                    <i class="fa-solid fa-rocket"></i>
+                </div>
+                <div>
+                    <h3 class="font-bold text-slate-900 text-base">Aprende a tu ritmo</h3>
+                    <p class="text-xs text-slate-500 mt-1 leading-relaxed">Estudia cuando y donde quieras desde cualquier dispositivo.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="cursos" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 scroll-animate">
+        <div class="mb-12 text-center sm:text-left flex flex-col sm:flex-row sm:items-end sm:justify-between">
+            <div>
+                <div class="flex items-center justify-center sm:justify-start space-x-3 mb-4">
+                    <span class="h-px w-8 bg-gradient-to-r from-transparent to-purple-500 sm:hidden"></span>
+                    <span class="text-xs font-bold uppercase tracking-[0.25em] bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">Modalidades</span>
+                    <span class="h-px w-16 bg-gradient-to-l from-transparent to-purple-500 sm:bg-gradient-to-r sm:from-purple-500 sm:to-transparent"></span>
+                </div>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">Recibe clases <span class="bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">online</span> ahora</h2>
+                <p class="text-slate-600 mt-2 text-base max-w-xl">Aprende en vivo con clases dinámicas, horarios flexibles y acompañamiento personalizado de primer nivel.</p>
+            </div>
+            <div class="mt-6 sm:mt-0">
+                <span class="text-xs font-semibold text-slate-400 uppercase tracking-widest border-b border-slate-200 pb-1">Acceso desde cualquier dispositivo</span>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            
+            <!-- Card 1: Clases en Vivo -->
+            <div class="bg-white p-6 rounded-3xl shadow-xl border border-slate-100 flex flex-col justify-between hover:shadow-2xl transition group">
+                <div>
+                    <div class="relative aspect-video rounded-2xl overflow-hidden mb-5 bg-slate-900">
+                        <img src="https://placehold.co/600x400/e2e8f0/475569?text=Clases+en+Vivo" alt="Clases en Vivo" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <div class="absolute top-3 left-3 bg-red-600 text-white text-[10px] font-extrabold px-2.5 py-1 rounded-full uppercase tracking-wider flex items-center space-x-1.5 shadow-md">
+                            <span class="w-1.5 h-1.5 rounded-full bg-white animate-ping"></span>
+                            <span>LIVE</span>
+                        </div>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900">Clases en vivo</h3>
+                    <p class="text-xs text-slate-500 mt-1 leading-relaxed">Practica en tiempo real con profesores expertos.</p>
+                </div>
+                <div class="pt-6 mt-6 border-t border-slate-100 flex items-center justify-between">
+                    <span class="text-xs font-extrabold text-purple-600">Próxima sesión en 15m</span>
+                    <button onclick="openModal('liveClassModal')" class="w-10 h-10 rounded-full bg-purple-50 text-purple-600 flex items-center justify-center hover:bg-purple-600 hover:text-white transition shadow-sm">
+                        <i class="fa-solid fa-arrow-right text-sm"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Card 2: Horarios Flexibles -->
+            <div class="bg-white p-6 rounded-3xl shadow-xl border border-slate-100 flex flex-col justify-between hover:shadow-2xl transition group">
+                <div>
+                    <div class="relative aspect-video rounded-2xl overflow-hidden mb-5 bg-gradient-to-tr from-blue-600 to-indigo-600 p-6 flex flex-col items-center justify-center text-white text-center shadow-inner">
+                        <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:12px_12px]"></div>
+                        <i class="fa-solid fa-calendar-days text-4xl mb-2 text-white"></i>
+                        <span class="text-sm font-extrabold tracking-wide">Disponibilidad 24/7</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900">Horarios flexibles</h3>
+                    <p class="text-xs text-slate-500 mt-1 leading-relaxed">Elige los horarios que mejor se adapten a tu rutina.</p>
+                </div>
+                <div class="pt-6 mt-6 border-t border-slate-100 flex items-center justify-between">
+                    <span class="text-xs font-extrabold text-blue-600">Personalizable</span>
+                    <button onclick="openModal('flexibleScheduleModal')" class="w-10 h-10 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center hover:bg-blue-600 hover:text-white transition shadow-sm">
+                        <i class="fa-solid fa-arrow-right text-sm"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Card 3: Speaking Club -->
+            <div class="bg-white p-6 rounded-3xl shadow-xl border border-slate-100 flex flex-col justify-between hover:shadow-2xl transition group">
+                <div>
+                    <div class="relative aspect-video rounded-2xl overflow-hidden mb-5 bg-slate-100">
+                        <img src="https://placehold.co/600x400/e2e8f0/475569?text=Speaking+Club" alt="Speaking Club" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900">Speaking Club</h3>
+                    <p class="text-xs text-slate-500 mt-1 leading-relaxed">Conversaciones guiadas para ganar confianza al hablar.</p>
+                </div>
+                <div class="pt-6 mt-6 border-t border-slate-100 flex items-center justify-between">
+                    <span class="text-xs font-extrabold text-pink-600">Grupos reducidos</span>
+                    <button onclick="openModal('signupModal', 'Prueba Gratuita')" class="w-10 h-10 rounded-full bg-pink-50 text-pink-600 flex items-center justify-center hover:bg-pink-600 hover:text-white transition shadow-sm">
+                        <i class="fa-solid fa-arrow-right text-sm"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Card 4: Tutor Personalizado -->
+            <div class="bg-white p-6 rounded-3xl shadow-xl border border-slate-100 flex flex-col justify-between hover:shadow-2xl transition group">
+                <div>
+                    <div class="relative aspect-video rounded-2xl overflow-hidden mb-5 bg-slate-100">
+                        <img src="https://placehold.co/600x400/e2e8f0/475569?text=Tutor+Personalizado" alt="Tutor Personalizado" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900">Tutor personalizado</h3>
+                    <p class="text-xs text-slate-500 mt-1 leading-relaxed">Recibe feedback y guía según tus objetivos.</p>
+                </div>
+                <div class="pt-6 mt-6 border-t border-slate-100 flex items-center justify-between">
+                    <span class="text-xs font-extrabold text-amber-600">1 a 1 disponible</span>
+                    <button onclick="openModal('signupModal', 'Prueba Gratuita')" class="w-10 h-10 rounded-full bg-amber-50 text-amber-600 flex items-center justify-center hover:bg-amber-600 hover:text-white transition shadow-sm">
+                        <i class="fa-solid fa-arrow-right text-sm"></i>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 scroll-animate">
+        <div class="bg-white rounded-3xl p-6 sm:p-10 shadow-xl border border-slate-100 overflow-hidden">
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between mb-8">
+                <div>
+                    <div class="flex items-center space-x-3 mb-3">
+                        <span class="h-px w-8 bg-gradient-to-r from-transparent to-purple-500"></span>
+                        <span class="text-xs font-bold uppercase tracking-[0.25em] bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">Clases destacadas</span>
+                        <span class="h-px w-16 bg-gradient-to-l from-transparent to-purple-500 sm:bg-gradient-to-r sm:from-purple-500 sm:to-transparent"></span>
+                    </div>
+                    <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Explora nuestras lecciones en <span class="bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">video</span></h3>
+                </div>
+                <p class="text-sm text-slate-500 mt-4 md:mt-0 max-w-sm border-l-2 border-purple-100 pl-4 py-1">Desliza o descubre contenido exclusivo para acelerar tu aprendizaje del idioma.</p>
+            </div>
+
+            <!-- Horizontal Moving Video Set Marquee -->
+            <div class="w-full overflow-hidden py-4 relative">
+                <style>
+                    @keyframes videoMarquee {
+                        0% { transform: translateX(0); }
+                        100% { transform: translateX(-50%); }
+                    }
+                    .animate-video-marquee {
+                        display: flex;
+                        width: max-content;
+                        animation: videoMarquee 22s linear infinite;
+                    }
+                    .animate-video-marquee:hover {
+                        animation-play-state: paused;
+                    }
+                </style>
+                <div class="animate-video-marquee flex gap-6">
+                    <!-- Video Card 1 -->
+                    <div class="w-80 sm:w-96 bg-slate-900 rounded-2xl overflow-hidden shadow-xl border border-slate-800 flex-shrink-0 group">
+                        <div class="aspect-video relative overflow-hidden bg-slate-950">
+                            <img src="https://placehold.co/600x340/1e1b4b/ffffff?text=Leccion+1:+Vocabulario" alt="Video 1" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            <div class="absolute inset-0 bg-slate-900/30 flex items-center justify-center">
+                                <button onclick="showToast('Reproduciendo clase de vocabulario')" class="w-14 h-14 rounded-full bg-purple-600 text-white flex items-center justify-center shadow-lg group-hover:scale-110 transition text-lg">
+                                    <i class="fa-solid fa-play pl-0.5"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="p-5 bg-slate-900 text-white">
+                            <div class="flex items-center justify-between text-xs text-purple-400 mb-1">
+                                <span class="font-bold uppercase tracking-wider">Módulo 1</span>
+                                <span class="bg-purple-950 px-2 py-0.5 rounded-full text-[10px]">12 min</span>
+                            </div>
+                            <h4 class="font-extrabold text-base">Vocabulario esencial para entrevistas</h4>
+                        </div>
+                    </div>
+
+                    <!-- Video Card 2 -->
+                    <div class="w-80 sm:w-96 bg-slate-900 rounded-2xl overflow-hidden shadow-xl border border-slate-800 flex-shrink-0 group">
+                        <div class="aspect-video relative overflow-hidden bg-slate-950">
+                            <img src="https://placehold.co/600x340/31103f/ffffff?text=Leccion+2:+Pronunciacion" alt="Video 2" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            <div class="absolute inset-0 bg-slate-900/30 flex items-center justify-center">
+                                <button onclick="showToast('Reproduciendo clase de pronunciación')" class="w-14 h-14 rounded-full bg-pink-600 text-white flex items-center justify-center shadow-lg group-hover:scale-110 transition text-lg">
+                                    <i class="fa-solid fa-play pl-0.5"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="p-5 bg-slate-900 text-white">
+                            <div class="flex items-center justify-between text-xs text-pink-400 mb-1">
+                                <span class="font-bold uppercase tracking-wider">Módulo 2</span>
+                                <span class="bg-pink-950 px-2 py-0.5 rounded-full text-[10px]">15 min</span>
+                            </div>
+                            <h4 class="font-extrabold text-base">Técnicas de pronunciación fluida</h4>
+                        </div>
+                    </div>
+
+                    <!-- Video Card 3 -->
+                    <div class="w-80 sm:w-96 bg-slate-900 rounded-2xl overflow-hidden shadow-xl border border-slate-800 flex-shrink-0 group">
+                        <div class="aspect-video relative overflow-hidden bg-slate-950">
+                            <img src="https://placehold.co/600x340/112233/ffffff?text=Leccion+3:+Gramatica" alt="Video 3" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            <div class="absolute inset-0 bg-slate-900/30 flex items-center justify-center">
+                                <button onclick="showToast('Reproduciendo clase de gramática')" class="w-14 h-14 rounded-full bg-blue-600 text-white flex items-center justify-center shadow-lg group-hover:scale-110 transition text-lg">
+                                    <i class="fa-solid fa-play pl-0.5"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="p-5 bg-slate-900 text-white">
+                            <div class="flex items-center justify-between text-xs text-blue-400 mb-1">
+                                <span class="font-bold uppercase tracking-wider">Módulo 3</span>
+                                <span class="bg-blue-950 px-2 py-0.5 rounded-full text-[10px]">10 min</span>
+                            </div>
+                            <h4 class="font-extrabold text-base">Dominando los tiempos verbales</h4>
+                        </div>
+                    </div>
+
+                    <!-- Duplicate set for infinite smooth marquee looping -->
+                    <div class="w-80 sm:w-96 bg-slate-900 rounded-2xl overflow-hidden shadow-xl border border-slate-800 flex-shrink-0 group">
+                        <div class="aspect-video relative overflow-hidden bg-slate-950">
+                            <img src="https://placehold.co/600x340/1e1b4b/ffffff?text=Leccion+1:+Vocabulario" alt="Video 1" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            <div class="absolute inset-0 bg-slate-900/30 flex items-center justify-center">
+                                <button onclick="showToast('Reproduciendo clase de vocabulario')" class="w-14 h-14 rounded-full bg-purple-600 text-white flex items-center justify-center shadow-lg group-hover:scale-110 transition text-lg">
+                                    <i class="fa-solid fa-play pl-0.5"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="p-5 bg-slate-900 text-white">
+                            <div class="flex items-center justify-between text-xs text-purple-400 mb-1">
+                                <span class="font-bold uppercase tracking-wider">Módulo 1</span>
+                                <span class="bg-purple-950 px-2 py-0.5 rounded-full text-[10px]">12 min</span>
+                            </div>
+                            <h4 class="font-extrabold text-base">Vocabulario esencial para entrevistas</h4>
+                        </div>
+                    </div>
+
+                    <div class="w-80 sm:w-96 bg-slate-900 rounded-2xl overflow-hidden shadow-xl border border-slate-800 flex-shrink-0 group">
+                        <div class="aspect-video relative overflow-hidden bg-slate-950">
+                            <img src="https://placehold.co/600x340/31103f/ffffff?text=Leccion+2:+Pronunciacion" alt="Video 2" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            <div class="absolute inset-0 bg-slate-900/30 flex items-center justify-center">
+                                <button onclick="showToast('Reproduciendo clase de pronunciación')" class="w-14 h-14 rounded-full bg-pink-600 text-white flex items-center justify-center shadow-lg group-hover:scale-110 transition text-lg">
+                                    <i class="fa-solid fa-play pl-0.5"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="p-5 bg-slate-900 text-white">
+                            <div class="flex items-center justify-between text-xs text-pink-400 mb-1">
+                                <span class="font-bold uppercase tracking-wider">Módulo 2</span>
+                                <span class="bg-pink-950 px-2 py-0.5 rounded-full text-[10px]">15 min</span>
+                            </div>
+                            <h4 class="font-extrabold text-base">Técnicas de pronunciación fluida</h4>
+                        </div>
+                    </div>
+
+                    <div class="w-80 sm:w-96 bg-slate-900 rounded-2xl overflow-hidden shadow-xl border border-slate-800 flex-shrink-0 group">
+                        <div class="aspect-video relative overflow-hidden bg-slate-950">
+                            <img src="https://placehold.co/600x340/112233/ffffff?text=Leccion+3:+Gramatica" alt="Video 3" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            <div class="absolute inset-0 bg-slate-900/30 flex items-center justify-center">
+                                <button onclick="showToast('Reproduciendo clase de gramática')" class="w-14 h-14 rounded-full bg-blue-600 text-white flex items-center justify-center shadow-lg group-hover:scale-110 transition text-lg">
+                                    <i class="fa-solid fa-play pl-0.5"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="p-5 bg-slate-900 text-white">
+                            <div class="flex items-center justify-between text-xs text-blue-400 mb-1">
+                                <span class="font-bold uppercase tracking-wider">Módulo 3</span>
+                                <span class="bg-blue-950 px-2 py-0.5 rounded-full text-[10px]">10 min</span>
+                            </div>
+                            <h4 class="font-extrabold text-base">Dominando los tiempos verbales</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="precios" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 scroll-animate">
+        <div class="text-center max-w-2xl mx-auto mb-16">
+            <div class="flex items-center justify-center space-x-3 mb-4">
+                <span class="h-px w-10 bg-gradient-to-r from-transparent to-purple-500"></span>
+                <span class="text-xs font-bold uppercase tracking-[0.25em] bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">Planes accesibles</span>
+                <span class="h-px w-10 bg-gradient-to-l from-transparent to-purple-500"></span>
+            </div>
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">Invierte en tu futuro hoy</h2>
+            <p class="text-slate-600 mt-3 text-base">Elige el plan ideal para alcanzar tus metas profesionales y personales.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto items-stretch">
+            
+            <!-- Plan Básico -->
+            <div class="bg-white rounded-3xl p-8 shadow-xl border border-slate-100 flex flex-col justify-between hover:shadow-2xl transition">
+                <div>
+                    <h3 class="text-xl font-bold text-slate-900">Plan Básico</h3>
+                    <p class="text-xs text-slate-500 mt-1">Ideal para dar tus primeros pasos.</p>
+                    <div class="my-6">
+                        <span class="text-4xl font-extrabold text-slate-900">$0</span>
+                        <span class="text-slate-500 text-sm font-medium"> / para siempre</span>
+                    </div>
+                    <ul class="space-y-4 text-sm text-slate-600 mb-8">
+                        <li class="flex items-center space-x-3">
+                            <i class="fa-solid fa-check text-purple-600"></i>
+                            <span>3 lecciones diarias</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <i class="fa-solid fa-check text-purple-600"></i>
+                            <span>Ejercicios de vocabulario</span>
+                        </li>
+                        <li class="flex items-center space-x-3 text-slate-300">
+                            <i class="fa-solid fa-xmark text-slate-300"></i>
+                            <span>Clases en vivo</span>
+                        </li>
+                    </ul>
+                </div>
+                <button onclick="openModal('signupModal', 'Prueba Gratuita')" class="w-full py-3.5 border-2 border-purple-600 text-purple-600 font-semibold rounded-2xl hover:bg-purple-50 transition">
+                    Empezar gratis
+                </button>
+            </div>
+
+            <!-- Plan Pro (Most Popular) -->
+            <div class="bg-[#121124] rounded-3xl p-8 shadow-2xl border border-purple-900 flex flex-col justify-between relative text-white transform md:-translate-y-4">
+                <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-purple-600 to-pink-500 text-white text-[10px] font-extrabold px-4 py-1.5 rounded-full uppercase tracking-wider shadow-lg">
+                    Más Popular
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-white">Plan Boost Pro</h3>
+                    <p class="text-xs text-slate-400 mt-1">Todo lo que necesitas para hablar fluido.</p>
+                    <div class="my-6">
+                        <span class="text-4xl font-extrabold text-white">$19</span>
+                        <span class="text-slate-400 text-sm font-medium"> / mes</span>
+                    </div>
+                    <ul class="space-y-4 text-sm text-slate-300 mb-8">
+                        <li class="flex items-center space-x-3">
+                            <i class="fa-solid fa-check text-pink-400"></i>
+                            <span>Acceso ilimitado a recursos interactivos</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <i class="fa-solid fa-check text-pink-400"></i>
+                            <span>Clases en vivo grupo reducido</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <i class="fa-solid fa-check text-pink-400"></i>
+                            <span>Speaking Club</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <i class="fa-solid fa-check text-pink-400"></i>
+                            <span>Certificado oficial B2</span>
+                        </li>
+                    </ul>
+                </div>
+                <button onclick="openModal('signupModal', 'PRO')" class="w-full py-4 bg-gradient-to-r from-slate-200 via-slate-100 to-slate-300 text-slate-900 font-extrabold rounded-2xl shadow-xl shadow-slate-300/30 hover:opacity-95 transition btn-motor-pulse border border-slate-300">
+                    Obtener Pro
+                </button>
+            </div>
+
+            <!-- Plan VIP / Teams -->
+            <div class="vip-gold-3d rounded-3xl p-8 flex flex-col justify-between hover:scale-[1.03] transition-transform duration-300">
+                <div class="relative z-10">
+                    <h3 class="text-xl font-extrabold text-slate-900">Plan VIP / Teams</h3>
+                    <p class="text-xs text-slate-800 mt-1 font-medium">Para profesionales y empresas.</p>
+                    <div class="my-6">
+                        <span class="text-4xl font-extrabold text-slate-900">$49</span>
+                        <span class="text-slate-800 text-sm font-bold"> / mes</span>
+                    </div>
+                    <ul class="space-y-4 text-sm text-slate-900 font-medium mb-8">
+                        <li class="flex items-center space-x-3">
+                            <i class="fa-solid fa-check text-slate-900 font-black"></i>
+                            <span>Todo lo del plan Pro</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <i class="fa-solid fa-check text-slate-900 font-black"></i>
+                            <span>Tutor 1 a 1 exclusivo</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <i class="fa-solid fa-check text-slate-900 font-black"></i>
+                            <span>Inglés de negocios avanzado</span>
+                        </li>
+                    </ul>
+                </div>
+                <button onclick="openModal('signupModal', 'VIP')" class="relative z-10 w-full py-3.5 bg-slate-900 text-amber-300 font-extrabold rounded-2xl shadow-xl shadow-slate-900/30 hover:bg-slate-800 hover:text-amber-400 transition border border-slate-800">
+                    Iniciar VIP
+                </button>
+            </div>
+
+        </div>
+    </section>
+
+    <footer id="contacto" class="bg-slate-900 text-slate-400 py-12 border-t border-slate-800 scroll-animate">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+            <div class="space-y-4">
+                <a href="#inicio" class="flex items-center group cursor-pointer inline-block">
+                    <img src="hi5.svg" alt="Hi5profe Logo" class="h-10 sm:h-12 w-auto transition-transform duration-300 group-hover:scale-105">
+                </a>
+                <p class="text-xs text-slate-400 leading-relaxed">Impulsando tu futuro profesional y personal a través del dominio total del inglés.</p>
+            </div>
+            <div>
+                <h4 class="text-white font-bold text-sm mb-4">Enlaces Rápidos</h4>
+                <ul class="space-y-2 text-xs">
+                    <li><a href="#inicio" class="hover:text-white transition">Inicio</a></li>
+                    <li><a href="#cursos" class="hover:text-white transition">Cursos</a></li>
+                    <li><a href="#precios" class="hover:text-white transition">Precios</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-white font-bold text-sm mb-4">Legal</h4>
+                <ul class="space-y-2 text-xs">
+                    <li><a href="#" class="hover:text-white transition">Términos y condiciones</a></li>
+                    <li><a href="#" class="hover:text-white transition">Política de privacidad</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-white font-bold text-sm mb-4">Contacto Directo</h4>
+                <p class="text-xs text-slate-400 leading-relaxed">Escríbenos directamente por WhatsApp para cualquier consulta.</p>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 border-t border-slate-800 text-center text-xs text-slate-500">
+            &copy; 2026 Hi5profe. Todos los derechos reservados.
+        </div>
+    </footer>
+
+    <!-- MODAL 1: REGISTRO / PRUEBA GRATIS / PRO (WhatsApp Integration) -->
+    <div id="signupModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-md p-4">
+        <div class="bg-slate-950 border border-slate-800 rounded-3xl p-6 sm:p-8 max-w-md w-full shadow-2xl relative animate-in fade-in zoom-in duration-300 text-white">
+            <button onclick="closeModal('signupModal')" class="absolute top-5 right-5 text-slate-400 hover:text-white transition">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <div class="text-center mb-6">
+                <h3 id="signupModalTitle" class="text-2xl font-extrabold text-white tracking-tight">Completa tus datos para enviarlos directamente</h3>
+                <p class="text-xs text-slate-400 mt-1">Empieza tu viaje hacia la fluidez hoy mismo</p>
+            </div>
+
+            <form onsubmit="handleWhatsAppSignup(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-slate-300 uppercase mb-1">Nombre completo</label>
+                    <input type="text" id="waName" required placeholder="Ej. Carlos Pérez" class="w-full px-4 py-3 rounded-xl border border-slate-700 text-sm focus:outline-none focus:border-purple-500 bg-slate-900 text-white placeholder-slate-500">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-300 uppercase mb-1">Edad</label>
+                    <input type="number" id="waAge" required placeholder="Ej. 25" class="w-full px-4 py-3 rounded-xl border border-slate-700 text-sm focus:outline-none focus:border-purple-500 bg-slate-900 text-white placeholder-slate-500">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-300 uppercase mb-1">Nivel de inglés</label>
+                    <select id="waLevel" required class="w-full px-4 py-3 rounded-xl border border-slate-700 text-sm focus:outline-none focus:border-purple-500 bg-slate-900 text-white">
+                        <option value="" disabled selected class="text-slate-500">Selecciona tu nivel</option>
+                        <option value="Básico">Básico</option>
+                        <option value="Intermedio">Intermedio</option>
+                        <option value="Avanzado">Avanzado</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-300 uppercase mb-1">País</label>
+                    <input type="text" id="waCountry" required placeholder="Ej. Perú, México, Colombia..." class="w-full px-4 py-3 rounded-xl border border-slate-700 text-sm focus:outline-none focus:border-purple-500 bg-slate-900 text-white placeholder-slate-500">
+                </div>
+                <button type="submit" id="signupSubmitBtn" class="w-full py-4 bg-gradient-to-r from-purple-600 to-pink-500 text-white font-bold rounded-2xl shadow-xl shadow-purple-500/30 hover:opacity-95 transition text-base btn-motor-pulse mt-2">
+                    Comenzar prueba gratis
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL 2: CLASES EN VIVO (WhatsApp Stream Integration) -->
+    <div id="liveClassModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4">
+        <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-md w-full shadow-2xl relative">
+            <button onclick="closeModal('liveClassModal')" class="absolute top-5 right-5 text-slate-400 hover:text-slate-600">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <div class="text-center mb-6">
+                <div class="w-14 h-14 rounded-2xl bg-purple-100 text-purple-600 flex items-center justify-center mx-auto mb-3 text-2xl">
+                    <i class="fa-solid fa-tower-broadcast"></i>
+                </div>
+                <h3 class="text-xl font-extrabold text-slate-900">Clase en Vivo Disponible</h3>
+                <p class="text-xs text-slate-500 mt-1">Únete ahora con tu profesor asignado y comienza a practicar tu pronunciación en tiempo real.</p>
+            </div>
+
+            <form onsubmit="handleLiveClassWhatsApp(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Nombre completo</label>
+                    <input type="text" id="liveName" required placeholder="Ej. Ana Gómez" class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-purple-600 bg-slate-50">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Nivel de inglés</label>
+                    <select id="liveLevel" required class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-purple-600 bg-slate-50">
+                        <option value="" disabled selected>Selecciona tu nivel</option>
+                        <option value="Básico">Básico</option>
+                        <option value="Intermedio">Intermedio</option>
+                        <option value="Avanzado">Avanzado</option>
+                    </select>
+                </div>
+                <button type="submit" class="w-full py-4 bg-gradient-to-r from-purple-600 to-pink-500 text-white font-bold rounded-2xl shadow-xl shadow-purple-500/30 hover:opacity-95 transition text-base mt-2">
+                    Unirme a la sesión ahora
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL 3: HORARIOS FLEXIBLES (WhatsApp Schedule Integration) -->
+    <div id="flexibleScheduleModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4">
+        <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-md w-full shadow-2xl relative">
+            <button onclick="closeModal('flexibleScheduleModal')" class="absolute top-5 right-5 text-slate-400 hover:text-slate-600">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <div class="text-center mb-6">
+                <div class="w-14 h-14 rounded-2xl bg-blue-100 text-blue-600 flex items-center justify-center mx-auto mb-3 text-2xl">
+                    <i class="fa-solid fa-calendar-days"></i>
+                </div>
+                <h3 class="text-xl font-extrabold text-slate-900">Configura tus Horarios Flexibles</h3>
+                <p class="text-xs text-slate-500 mt-1">Elige tu disponibilidad para coordinar tus clases directamente por WhatsApp.</p>
+            </div>
+
+            <form onsubmit="handleFlexibleScheduleWhatsApp(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Nombre completo</label>
+                    <input type="text" id="schedName" required placeholder="Ej. Luis Torres" class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-purple-600 bg-slate-50">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 uppercase mb-1">País</label>
+                    <input type="text" id="schedCountry" required placeholder="Ej. Perú, Argentina..." class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-purple-600 bg-slate-50">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Turno preferido</label>
+                    <select id="schedShift" required class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-purple-600 bg-slate-50">
+                        <option value="" disabled selected>Selecciona tu turno</option>
+                        <option value="Mañana">Mañana</option>
+                        <option value="Tarde">Tarde</option>
+                        <option value="Noche">Noche</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Frecuencia de clases</label>
+                    <select id="schedFrequency" required class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-purple-600 bg-slate-50">
+                        <option value="" disabled selected>Selecciona frecuencia</option>
+                        <option value="Diario">Diario</option>
+                        <option value="Interdiario">Interdiario</option>
+                        <option value="Sabatino">Sabatino</option>
+                    </select>
+                </div>
+                <button type="submit" class="w-full py-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold rounded-2xl shadow-xl shadow-blue-500/30 hover:opacity-95 transition text-base mt-2">
+                    Enviar solicitud por WhatsApp
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL 4: INICIAR SESIÓN -->
+    <div id="loginModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4">
+        <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-md w-full shadow-2xl relative">
+            <button onclick="closeModal('loginModal')" class="absolute top-5 right-5 text-slate-400 hover:text-slate-600">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <div class="text-center mb-6">
+                <h3 class="text-xl font-extrabold text-slate-900">Iniciar sesión</h3>
+                <p class="text-xs text-slate-500 mt-1">Accede a tu cuenta de Hi5profe</p>
+            </div>
+
+            <form onsubmit="event.preventDefault(); closeModal('loginModal'); showToast('¡Bienvenido de vuelta!');" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Correo electrónico</label>
+                    <input type="email" required placeholder="tucorreo@email.com" class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-purple-600 bg-slate-50">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Contraseña</label>
+                    <input type="password" required placeholder="••••••••" class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-purple-600 bg-slate-50">
+                </div>
+                <button type="submit" class="w-full py-4 bg-gradient-to-r from-purple-600 to-pink-500 text-white font-bold rounded-2xl shadow-xl shadow-purple-500/30 hover:opacity-95 transition text-base mt-2">
+                    Entrar a mi cuenta
+                </button>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>
