@@ -256,9 +256,17 @@
             
             overlay.classList.add('active');
             
-            // Simular carga y cerrar
+            // Simular carga y redirigir
             setTimeout(() => {
                 overlay.classList.remove('active');
+                
+                if (lang === 'English') {
+                    // Redirige a tu subpágina basada en tu repositorio
+                    window.location.href = 'aprendoinglés.html'; 
+                } else if (lang === 'Spanish') {
+                    // Ruta provisional para la otra opción
+                    window.location.href = 'learnspanish.html'; 
+                }
             }, 2500);
         }
     </script>
