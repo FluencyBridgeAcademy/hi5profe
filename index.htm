@@ -1,1 +1,266 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hi5profe - Aprende Idiomas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background-color: #fdfbf7;
+            /* Fun polka dot background */
+            background-image: radial-gradient(#000000 1px, transparent 1px);
+            background-size: 24px 24px;
+            color: #111;
+            overflow-x: hidden;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
 
+        .brutal-border {
+            border: 4px solid #000;
+        }
+
+        .brutal-shadow {
+            box-shadow: 8px 8px 0px 0px rgba(0,0,0,1);
+            transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .brutal-shadow:hover {
+            transform: translate(-4px, -4px);
+            box-shadow: 12px 12px 0px 0px rgba(0,0,0,1);
+        }
+
+        .brutal-shadow:active {
+            transform: translate(4px, 4px);
+            box-shadow: 0px 0px 0px 0px rgba(0,0,0,1);
+        }
+
+        .card-spanish {
+            background-color: #FFDE59; /* Energetic Yellow */
+        }
+        
+        .card-english {
+            background-color: #5CE1E6; /* Fresh Cyan */
+        }
+
+        .marquee-container {
+            width: 100%;
+            overflow: hidden;
+            background: #000;
+            color: #fff;
+            padding: 0.5rem 0;
+            border-bottom: 4px solid #000;
+        }
+
+        .marquee-content {
+            display: inline-block;
+            white-space: nowrap;
+            animation: marquee 20s linear infinite;
+            font-weight: 700;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        #toast-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(5px);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        #toast-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .toast-box {
+            background: #fff;
+            padding: 3rem;
+            border-radius: 24px;
+            transform: scale(0.8) translateY(50px);
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-align: center;
+        }
+
+        #toast-overlay.active .toast-box {
+            transform: scale(1) translateY(0);
+        }
+
+        .flag-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            background: white;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="marquee-container">
+        <div class="marquee-content">
+            HI5PROFE ⚡ THE ULTIMATE ENVIRONMENT FOR FLUENCY ⚡ EL ENTORNO DEFINITIVO PARA FLUIDEZ ⚡ HI5PROFE ⚡ THE ULTIMATE ENVIRONMENT FOR FLUENCY ⚡ EL ENTORNO DEFINITIVO PARA FLUIDEZ ⚡ HI5PROFE ⚡
+        </div>
+    </div>
+
+    <nav class="w-full p-6 md:px-12 flex justify-between items-center z-50">
+        <div class="flex items-center gap-3 cursor-pointer group">
+            <div class="w-14 h-14 bg-white brutal-border brutal-shadow rounded-xl flex items-center justify-center overflow-hidden">
+                <img src="h5.svg" alt="Hi5profe Logo" class="w-10 h-10 object-contain" onerror="this.src='https://placehold.co/40x40/000/fff?text=H5'">
+            </div>
+            <span class="text-3xl font-bold tracking-tight text-black group-hover:-rotate-2 transition-transform">
+                Hi5profe
+            </span>
+        </div>
+        
+        <div class="hidden md:flex items-center gap-6">
+            <a href="#" class="font-bold text-lg hover:underline decoration-4 underline-offset-4 decoration-[#FFDE59]">Entrar</a>
+            <button class="bg-[#FF6B6B] text-white px-8 py-3 rounded-full font-bold text-lg brutal-border brutal-shadow">
+                Regístrate
+            </button>
+        </div>
+    </nav>
+
+    <main class="flex-grow flex flex-col items-center justify-center w-full px-6 py-12 z-10 max-w-6xl mx-auto">
+        
+        <header class="text-center mb-16 w-full">
+            <h1 class="text-6xl md:text-8xl font-black mb-6 leading-none">
+                Aprende sin <br> <span class="bg-[#A3E635] px-4 brutal-border inline-block -rotate-2 mt-2">límites.</span>
+            </h1>
+            <p class="text-xl md:text-2xl font-semibold max-w-2xl mx-auto">
+                Selecciona tu camino y comienza la aventura hoy mismo.
+            </p>
+        </header>
+
+        <div class="grid md:grid-cols-2 gap-10 w-full">
+            
+            <!-- Spanish Card -->
+            <button class="card-spanish brutal-border brutal-shadow rounded-3xl p-8 md:p-12 flex flex-col items-center text-center relative overflow-hidden group" onclick="selectPath('Spanish')">
+                <div class="absolute top-4 right-4 bg-black text-white text-xs font-bold px-4 py-2 rounded-full brutal-border">
+                    FOR ENGLISH SPEAKERS
+                </div>
+                
+                <div class="w-32 h-32 bg-white brutal-border rounded-full flex items-center justify-center mb-8 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] group-hover:rotate-12 transition-transform">
+                    <img src="españa.svg" alt="Spain" class="flag-icon brutal-border" onerror="this.src='https://placehold.co/80x80/FFDE59/000?text=ES'">
+                </div>
+                
+                <h2 class="text-4xl md:text-5xl font-black mb-4 text-black">Learn<br>Spanish</h2>
+                <p class="text-black/80 font-semibold text-lg mb-8">
+                    Master real-world vocabulary and conversational skills natively.
+                </p>
+                
+                <div class="w-full bg-white text-black font-bold text-xl py-4 brutal-border rounded-2xl group-hover:bg-black group-hover:text-white transition-colors">
+                    Start Learning ➔
+                </div>
+            </button>
+
+            <!-- English Card -->
+            <button class="card-english brutal-border brutal-shadow rounded-3xl p-8 md:p-12 flex flex-col items-center text-center relative overflow-hidden group" onclick="selectPath('English')">
+                <div class="absolute top-4 right-4 bg-black text-white text-xs font-bold px-4 py-2 rounded-full brutal-border">
+                    PARA HISPANOHABLANTES
+                </div>
+                
+                <div class="w-32 h-32 bg-white brutal-border rounded-full flex items-center justify-center mb-8 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] group-hover:-rotate-12 transition-transform">
+                    <img src="english.svg" alt="English" class="flag-icon brutal-border" onerror="this.src='https://placehold.co/80x80/5CE1E6/000?text=EN'">
+                </div>
+                
+                <h2 class="text-4xl md:text-5xl font-black mb-4 text-black">Aprender<br>Inglés</h2>
+                <p class="text-black/80 font-semibold text-lg mb-8">
+                    Mejora tu fluidez, pronunciación y abre nuevas oportunidades globales.
+                </p>
+                
+                <div class="w-full bg-white text-black font-bold text-xl py-4 brutal-border rounded-2xl group-hover:bg-black group-hover:text-white transition-colors">
+                    Empezar Viaje ➔
+                </div>
+            </button>
+
+        </div>
+    </main>
+
+    <footer class="w-full border-t-4 border-black bg-white p-6 mt-auto">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 font-bold">
+            <p>&copy; 2026 Hi5profe.</p>
+            <div class="flex gap-6">
+                <a href="#" class="hover:underline decoration-2">Privacidad</a>
+                <a href="#" class="hover:underline decoration-2">Términos</a>
+            </div>
+        </div>
+    </footer>
+
+    <div id="toast-overlay">
+        <div class="toast-box brutal-border brutal-shadow">
+            <div id="toast-emoji" class="text-6xl mb-4">🚀</div>
+            <h3 id="toast-title" class="text-3xl font-black mb-2">Preparando entorno...</h3>
+            <p id="toast-desc" class="font-semibold text-gray-600">Espera un momento</p>
+        </div>
+    </div>
+
+    <script>
+        function playPopSound() {
+            try {
+                const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(400, ctx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(800, ctx.currentTime + 0.1);
+                
+                gain.gain.setValueAtTime(0.5, ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.1);
+                
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.start();
+                osc.stop(ctx.currentTime + 0.1);
+            } catch(e) {
+                console.log("Audio not supported", e);
+            }
+        }
+
+        function selectPath(lang) {
+            playPopSound();
+            
+            const overlay = document.getElementById('toast-overlay');
+            const title = document.getElementById('toast-title');
+            const desc = document.getElementById('toast-desc');
+            const emoji = document.getElementById('toast-emoji');
+            
+            if (lang === 'Spanish') {
+                emoji.innerText = '💃';
+                title.innerText = 'Let\'s go!';
+                desc.innerText = 'Loading Spanish environment...';
+            } else {
+                emoji.innerText = '🚀';
+                title.innerText = '¡Vámonos!';
+                desc.innerText = 'Cargando entorno de Inglés...';
+            }
+            
+            overlay.classList.add('active');
+            
+            // Simular carga y cerrar
+            setTimeout(() => {
+                overlay.classList.remove('active');
+            }, 2500);
+        }
+    </script>
+</body>
+</html>
