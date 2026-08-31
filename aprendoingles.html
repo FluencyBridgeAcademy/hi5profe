@@ -88,6 +88,18 @@
             animation: bounceZ 3s infinite ease-in-out;
             will-change: transform;
         }
+
+        /* Floating Icon Animation para Recursos */
+        @keyframes floatGentle {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-8px) scale(1.05); }
+        }
+        .animate-float-gentle {
+            animation: floatGentle 3.5s ease-in-out infinite;
+        }
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
     </style>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
@@ -357,41 +369,41 @@
     <section id="recursos" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 scroll-animate">
         <div class="bg-white rounded-3xl p-6 sm:p-8 neon-breathe-border relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             
-            <div class="flex items-start space-x-4">
-                <div class="w-12 h-12 rounded-2xl bg-purple-50 flex items-center justify-center flex-shrink-0 transition-transform hover:scale-110 duration-300">
-                    <img src="tablet.svg" alt="Icono Cursos Interactivos" class="w-7 h-7 object-contain">
+            <div class="flex items-start space-x-4 group">
+                <div class="flex-shrink-0 animate-float-gentle">
+                    <img src="tablet.svg" alt="Icono Cursos Interactivos" class="w-14 h-14 sm:w-16 sm:h-16 object-contain drop-shadow-md group-hover:drop-shadow-xl transition-all duration-300">
                 </div>
-                <div>
+                <div class="pt-1">
                     <h3 class="font-bold text-slate-900 text-base">Cursos interactivos</h3>
                     <p class="text-xs text-slate-500 mt-1 leading-relaxed">Lecciones dinámicas y actualizadas constantemente para tu nivel.</p>
                 </div>
             </div>
 
-            <div class="flex items-start space-x-4">
-                <div class="w-12 h-12 rounded-2xl bg-pink-50 flex items-center justify-center flex-shrink-0 transition-transform hover:scale-110 duration-300">
-                    <img src="practica.svg" alt="Icono Práctica de Habla" class="w-7 h-7 object-contain">
+            <div class="flex items-start space-x-4 group">
+                <div class="flex-shrink-0 animate-float-gentle delay-1">
+                    <img src="practica.svg" alt="Icono Práctica de Habla" class="w-14 h-14 sm:w-16 sm:h-16 object-contain drop-shadow-md group-hover:drop-shadow-xl transition-all duration-300">
                 </div>
-                <div>
+                <div class="pt-1">
                     <h3 class="font-bold text-slate-900 text-base">Practica hablando</h3>
                     <p class="text-xs text-slate-500 mt-1 leading-relaxed">Mejora tu pronunciación y fluidez con herramientas inteligentes.</p>
                 </div>
             </div>
 
-            <div class="flex items-start space-x-4">
-                <div class="w-12 h-12 rounded-2xl bg-emerald-50 flex items-center justify-center flex-shrink-0 transition-transform hover:scale-110 duration-300">
-                    <img src="seguir.svg" alt="Icono Seguimiento Personal" class="w-7 h-7 object-contain">
+            <div class="flex items-start space-x-4 group">
+                <div class="flex-shrink-0 animate-float-gentle delay-2">
+                    <img src="seguir.svg" alt="Icono Seguimiento Personal" class="w-14 h-14 sm:w-16 sm:h-16 object-contain drop-shadow-md group-hover:drop-shadow-xl transition-all duration-300">
                 </div>
-                <div>
+                <div class="pt-1">
                     <h3 class="font-bold text-slate-900 text-base">Seguimiento personal</h3>
                     <p class="text-xs text-slate-500 mt-1 leading-relaxed">Monitorea tu progreso diario y tus objetivos cumplidos.</p>
                 </div>
             </div>
 
-            <div class="flex items-start space-x-4">
-                <div class="w-12 h-12 rounded-2xl bg-amber-50 flex items-center justify-center flex-shrink-0 transition-transform hover:scale-110 duration-300">
-                    <img src="learn.svg" alt="Icono Aprende a tu ritmo" class="w-7 h-7 object-contain">
+            <div class="flex items-start space-x-4 group">
+                <div class="flex-shrink-0 animate-float-gentle delay-3">
+                    <img src="learn.svg" alt="Icono Aprende a tu ritmo" class="w-14 h-14 sm:w-16 sm:h-16 object-contain drop-shadow-md group-hover:drop-shadow-xl transition-all duration-300">
                 </div>
-                <div>
+                <div class="pt-1">
                     <h3 class="font-bold text-slate-900 text-base">Aprende a tu ritmo</h3>
                     <p class="text-xs text-slate-500 mt-1 leading-relaxed">Estudia cuando y donde quieras desde cualquier dispositivo.</p>
                 </div>
