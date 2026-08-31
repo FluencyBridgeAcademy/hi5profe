@@ -78,6 +78,16 @@
             opacity: 1;
             transform: translateY(0) scale(1);
         }
+
+        /* Z-Axis Bounce Effect (Adelante hacia atrás) para el título principal */
+        @keyframes bounceZ {
+            0%, 100% { transform: scale(1); text-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+            50% { transform: scale(1.08); text-shadow: 0 15px 25px rgba(0,0,0,0.15); }
+        }
+        .animate-bounce-z {
+            animation: bounceZ 3s infinite ease-in-out;
+            will-change: transform;
+        }
     </style>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
@@ -225,8 +235,9 @@
 
     <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-            <a href="#inicio" class="flex items-center group cursor-pointer">
-                <img src="hi5.svg" alt="Hi5profe Logo" class="h-10 sm:h-12 w-auto transition-transform duration-300 group-hover:scale-105">
+            <a href="#inicio" class="flex items-center space-x-3 group cursor-pointer">
+                <img src="hi5.svg" alt="Hi5profe Logo Icono" class="h-10 sm:h-12 w-auto transition-transform duration-300 group-hover:scale-105">
+                <span class="text-2xl font-black text-slate-900 tracking-tight transition-colors duration-300 group-hover:text-purple-600">Hi5profe</span>
             </a>
 
             <!-- Desktop Nav Links -->
@@ -270,9 +281,16 @@
             <!-- Left Column: Title & CTA -->
             <div class="lg:col-span-6 space-y-8">
                 
-               <h1 class="text-4xl sm:text-6xl font-extrabold text-slate-900 tracking-tight leading-[1.1]">
-                Aprende inglés. <br><span class="bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent">Impulsa tu futuro.</span>
-            </h1>
+                <div class="space-y-2">
+                    <h1 class="text-6xl sm:text-7xl lg:text-[5.5rem] font-black tracking-tighter leading-none mb-4">
+                        <span class="inline-block animate-bounce-z origin-left cursor-default">
+                            <span class="text-purple-600">H</span><span class="text-pink-500">i</span><span class="text-amber-500">5</span><span class="text-emerald-500">p</span><span class="text-blue-500">r</span><span class="text-indigo-500">o</span><span class="text-fuchsia-500">f</span><span class="text-rose-500">e</span>
+                        </span>
+                    </h1>
+                    <h2 class="text-4xl sm:text-5xl font-extrabold text-slate-900 tracking-tight leading-[1.1]">
+                        Aprende inglés. <br><span class="bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent">Impulsa tu futuro.</span>
+                    </h2>
+                </div>
 
                 <p class="text-lg text-slate-600 leading-relaxed max-w-xl">
                     En Hi5profe tienes todo lo que necesitas para hablar inglés con confianza: cursos, ejercicios prácticos, recursos interactivos y seguimiento personalizado.
