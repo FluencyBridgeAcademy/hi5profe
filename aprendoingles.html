@@ -160,23 +160,6 @@
             }, 3500);
         }
 
-        // Welcome Video Player activation & scroll
-        function playHeroVideo() {
-            const video = document.getElementById('heroWelcomeVideo');
-            const overlay = document.getElementById('videoOverlay');
-            
-            overlay.style.opacity = '0';
-            setTimeout(() => {
-                overlay.style.display = 'none';
-            }, 300);
-            
-            video.controls = true;
-            video.play().catch(() => {
-                showToast('Video listo. Puedes enlazar tu archivo de video en el código.');
-            });
-            document.getElementById('videoContainer').scrollIntoView({behavior: 'smooth', block: 'center'});
-        }
-
         // WhatsApp Form Submit: Prueba Gratuita / Pro / VIP
         function handleWhatsAppSignup(event) {
             event.preventDefault();
@@ -299,7 +282,7 @@
                     <button onclick="openModal('signupModal', 'Prueba Gratuita')" class="bg-gradient-to-r from-purple-600 to-pink-500 text-white font-semibold px-8 py-4 rounded-full shadow-xl shadow-purple-500/30 hover:opacity-95 transition text-center text-base btn-motor-pulse">
                         Empieza gratis ahora
                     </button>
-                    <button onclick="playHeroVideo()" class="flex items-center justify-center space-x-3 bg-white border border-slate-200 text-slate-700 font-semibold px-6 py-4 rounded-full shadow-sm hover:bg-slate-50 transition text-base">
+                    <button onclick="document.getElementById('videoContainer').scrollIntoView({behavior: 'smooth', block: 'center'})" class="flex items-center justify-center space-x-3 bg-white border border-slate-200 text-slate-700 font-semibold px-6 py-4 rounded-full shadow-sm hover:bg-slate-50 transition text-base">
                         <span class="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center text-purple-600">
                             <i class="fa-solid fa-play text-xs pl-0.5"></i>
                         </span>
@@ -329,26 +312,23 @@
             </div>
 
             <!-- Right Column: Welcome Video Player & Interactive Floating Widgets -->
-            <div class="lg:col-span-6 relative">
+            <div class="lg:col-span-6 relative flex justify-center lg:justify-end">
                 <div class="absolute -top-10 -left-10 w-72 h-72 bg-purple-200/50 rounded-full blur-3xl pointer-events-none"></div>
                 <div class="absolute -bottom-10 -right-10 w-72 h-72 bg-pink-200/50 rounded-full blur-3xl pointer-events-none"></div>
 
-                <div class="relative bg-gradient-to-tr from-purple-900 to-indigo-900 p-3 sm:p-4 rounded-3xl shadow-2xl shadow-indigo-900/30">
+                <div class="relative bg-gradient-to-tr from-purple-900 to-indigo-900 p-3 sm:p-4 rounded-3xl shadow-2xl shadow-indigo-900/30 w-full max-w-sm">
                     
-                    <!-- HTML5 Welcome Video Player Container -->
-                    <div id="videoContainer" class="relative w-full aspect-video rounded-2xl overflow-hidden bg-slate-900 shadow-inner">
-                        <video id="heroWelcomeVideo" class="w-full h-full object-cover" poster="https://placehold.co/1200x675/1e1b4b/ffffff?text=Hi5profe+Bienvenida">
-                            <source src="" type="video/mp4">
-                            Tu navegador no soporta videos HTML5.
-                        </video>
-
-                        <!-- Video Overlay Trigger -->
-                        <div id="videoOverlay" class="absolute inset-0 bg-slate-900/40 backdrop-blur-[2px] flex flex-col items-center justify-center transition-opacity duration-300">
-                            <button onclick="playHeroVideo()" class="w-20 h-20 rounded-full bg-gradient-to-r from-purple-600 to-pink-500 text-white flex items-center justify-center text-2xl shadow-2xl shadow-pink-500/50 hover:scale-110 transition transform">
-                                <i class="fa-solid fa-play pl-1"></i>
-                            </button>
-                            <span class="mt-3 text-white font-semibold text-sm tracking-wide bg-slate-900/70 px-4 py-1.5 rounded-full border border-slate-700">Ver Video de Bienvenida</span>
-                        </div>
+                    <!-- YouTube Welcome Video Player Container (Vertical Format) -->
+                    <div id="videoContainer" class="relative w-full aspect-[9/16] rounded-2xl overflow-hidden bg-slate-900 shadow-inner">
+                        <iframe 
+                            src="https://www.youtube.com/embed/9PyXlyQsoh0?rel=0&modestbranding=1" 
+                            title="Hi5profe Video de Bienvenida" 
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                            referrerpolicy="strict-origin-when-cross-origin" 
+                            allowfullscreen
+                            class="absolute top-0 left-0 w-full h-full rounded-2xl"
+                        ></iframe>
                     </div>
 
                 </div>
@@ -504,12 +484,12 @@
                 <div>
                     <div class="flex items-center space-x-3 mb-3">
                         <span class="h-px w-8 bg-gradient-to-r from-transparent to-purple-500"></span>
-                        <span class="text-xs font-bold uppercase tracking-[0.25em] bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">Clases destacadas</span>
+                        <span class="text-xs font-bold uppercase tracking-[0.25em] bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">Casos de éxito</span>
                         <span class="h-px w-16 bg-gradient-to-l from-transparent to-purple-500 sm:bg-gradient-to-r sm:from-purple-500 sm:to-transparent"></span>
                     </div>
-                    <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Explora nuestras lecciones en <span class="bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">video</span></h3>
+                    <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Así hablan nuestros estudiantes en solo <span class="bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">3 meses</span></h3>
                 </div>
-                <p class="text-sm text-slate-500 mt-4 md:mt-0 max-w-sm border-l-2 border-purple-100 pl-4 py-1">Desliza o descubre contenido exclusivo para acelerar tu aprendizaje del idioma.</p>
+                <p class="text-sm text-slate-500 mt-4 md:mt-0 max-w-sm border-l-2 border-purple-100 pl-4 py-1">Mira el progreso real de nuestra comunidad. Desliza para escuchar sus resultados.</p>
             </div>
 
             <!-- Horizontal Moving Video Set Marquee -->
@@ -530,114 +510,114 @@
                 </style>
                 <div class="animate-video-marquee flex gap-6">
                     <!-- Video Card 1 -->
-                    <div class="w-80 sm:w-96 bg-slate-900 rounded-2xl overflow-hidden shadow-xl border border-slate-800 flex-shrink-0 group">
-                        <div class="aspect-video relative overflow-hidden bg-slate-950">
-                            <img src="https://placehold.co/600x340/1e1b4b/ffffff?text=Leccion+1:+Vocabulario" alt="Video 1" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    <div class="w-64 sm:w-72 bg-slate-900 rounded-3xl overflow-hidden shadow-xl border border-slate-800 flex-shrink-0 group flex flex-col">
+                        <div class="aspect-[9/16] relative overflow-hidden bg-slate-950">
+                            <img src="https://placehold.co/360x640/1e1b4b/ffffff?text=Testimonio\nCarlos+P." alt="Testimonio Carlos" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
                             <div class="absolute inset-0 bg-slate-900/30 flex items-center justify-center">
-                                <button onclick="showToast('Reproduciendo clase de vocabulario')" class="w-14 h-14 rounded-full bg-purple-600 text-white flex items-center justify-center shadow-lg group-hover:scale-110 transition text-lg">
+                                <button onclick="showToast('Reproduciendo testimonio de Carlos')" class="w-14 h-14 rounded-full bg-purple-600 text-white flex items-center justify-center shadow-lg group-hover:scale-110 transition text-lg">
                                     <i class="fa-solid fa-play pl-0.5"></i>
                                 </button>
                             </div>
                         </div>
-                        <div class="p-5 bg-slate-900 text-white">
-                            <div class="flex items-center justify-between text-xs text-purple-400 mb-1">
-                                <span class="font-bold uppercase tracking-wider">Módulo 1</span>
-                                <span class="bg-purple-950 px-2 py-0.5 rounded-full text-[10px]">12 min</span>
+                        <div class="p-5 bg-slate-900 text-white flex-grow">
+                            <div class="flex items-center justify-between text-xs text-purple-400 mb-2">
+                                <span class="font-bold uppercase tracking-wider">Logro</span>
+                                <span class="bg-purple-950 px-2 py-0.5 rounded-full text-[10px]">Ascenso Laboral</span>
                             </div>
-                            <h4 class="font-extrabold text-base">Vocabulario esencial para entrevistas</h4>
+                            <h4 class="font-extrabold text-base leading-tight">De trabarme al hablar a liderar reuniones en inglés</h4>
                         </div>
                     </div>
 
                     <!-- Video Card 2 -->
-                    <div class="w-80 sm:w-96 bg-slate-900 rounded-2xl overflow-hidden shadow-xl border border-slate-800 flex-shrink-0 group">
-                        <div class="aspect-video relative overflow-hidden bg-slate-950">
-                            <img src="https://placehold.co/600x340/31103f/ffffff?text=Leccion+2:+Pronunciacion" alt="Video 2" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    <div class="w-64 sm:w-72 bg-slate-900 rounded-3xl overflow-hidden shadow-xl border border-slate-800 flex-shrink-0 group flex flex-col">
+                        <div class="aspect-[9/16] relative overflow-hidden bg-slate-950">
+                            <img src="https://placehold.co/360x640/31103f/ffffff?text=Testimonio\nAna+G." alt="Testimonio Ana" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
                             <div class="absolute inset-0 bg-slate-900/30 flex items-center justify-center">
-                                <button onclick="showToast('Reproduciendo clase de pronunciación')" class="w-14 h-14 rounded-full bg-pink-600 text-white flex items-center justify-center shadow-lg group-hover:scale-110 transition text-lg">
+                                <button onclick="showToast('Reproduciendo testimonio de Ana')" class="w-14 h-14 rounded-full bg-pink-600 text-white flex items-center justify-center shadow-lg group-hover:scale-110 transition text-lg">
                                     <i class="fa-solid fa-play pl-0.5"></i>
                                 </button>
                             </div>
                         </div>
-                        <div class="p-5 bg-slate-900 text-white">
-                            <div class="flex items-center justify-between text-xs text-pink-400 mb-1">
-                                <span class="font-bold uppercase tracking-wider">Módulo 2</span>
-                                <span class="bg-pink-950 px-2 py-0.5 rounded-full text-[10px]">15 min</span>
+                        <div class="p-5 bg-slate-900 text-white flex-grow">
+                            <div class="flex items-center justify-between text-xs text-pink-400 mb-2">
+                                <span class="font-bold uppercase tracking-wider">Logro</span>
+                                <span class="bg-pink-950 px-2 py-0.5 rounded-full text-[10px]">Trabajo Remoto</span>
                             </div>
-                            <h4 class="font-extrabold text-base">Técnicas de pronunciación fluida</h4>
+                            <h4 class="font-extrabold text-base leading-tight">Conseguí el puesto remoto que tanto soñaba</h4>
                         </div>
                     </div>
 
                     <!-- Video Card 3 -->
-                    <div class="w-80 sm:w-96 bg-slate-900 rounded-2xl overflow-hidden shadow-xl border border-slate-800 flex-shrink-0 group">
-                        <div class="aspect-video relative overflow-hidden bg-slate-950">
-                            <img src="https://placehold.co/600x340/112233/ffffff?text=Leccion+3:+Gramatica" alt="Video 3" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    <div class="w-64 sm:w-72 bg-slate-900 rounded-3xl overflow-hidden shadow-xl border border-slate-800 flex-shrink-0 group flex flex-col">
+                        <div class="aspect-[9/16] relative overflow-hidden bg-slate-950">
+                            <img src="https://placehold.co/360x640/112233/ffffff?text=Testimonio\nDavid+M." alt="Testimonio David" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
                             <div class="absolute inset-0 bg-slate-900/30 flex items-center justify-center">
-                                <button onclick="showToast('Reproduciendo clase de gramática')" class="w-14 h-14 rounded-full bg-blue-600 text-white flex items-center justify-center shadow-lg group-hover:scale-110 transition text-lg">
+                                <button onclick="showToast('Reproduciendo testimonio de David')" class="w-14 h-14 rounded-full bg-blue-600 text-white flex items-center justify-center shadow-lg group-hover:scale-110 transition text-lg">
                                     <i class="fa-solid fa-play pl-0.5"></i>
                                 </button>
                             </div>
                         </div>
-                        <div class="p-5 bg-slate-900 text-white">
-                            <div class="flex items-center justify-between text-xs text-blue-400 mb-1">
-                                <span class="font-bold uppercase tracking-wider">Módulo 3</span>
-                                <span class="bg-blue-950 px-2 py-0.5 rounded-full text-[10px]">10 min</span>
+                        <div class="p-5 bg-slate-900 text-white flex-grow">
+                            <div class="flex items-center justify-between text-xs text-blue-400 mb-2">
+                                <span class="font-bold uppercase tracking-wider">Logro</span>
+                                <span class="bg-blue-950 px-2 py-0.5 rounded-full text-[10px]">Certificación B2</span>
                             </div>
-                            <h4 class="font-extrabold text-base">Dominando los tiempos verbales</h4>
+                            <h4 class="font-extrabold text-base leading-tight">Aprobé mi examen y me fui a estudiar a Canadá</h4>
                         </div>
                     </div>
 
                     <!-- Duplicate set for infinite smooth marquee looping -->
-                    <div class="w-80 sm:w-96 bg-slate-900 rounded-2xl overflow-hidden shadow-xl border border-slate-800 flex-shrink-0 group">
-                        <div class="aspect-video relative overflow-hidden bg-slate-950">
-                            <img src="https://placehold.co/600x340/1e1b4b/ffffff?text=Leccion+1:+Vocabulario" alt="Video 1" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    <div class="w-64 sm:w-72 bg-slate-900 rounded-3xl overflow-hidden shadow-xl border border-slate-800 flex-shrink-0 group flex flex-col">
+                        <div class="aspect-[9/16] relative overflow-hidden bg-slate-950">
+                            <img src="https://placehold.co/360x640/1e1b4b/ffffff?text=Testimonio\nCarlos+P." alt="Testimonio Carlos" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
                             <div class="absolute inset-0 bg-slate-900/30 flex items-center justify-center">
-                                <button onclick="showToast('Reproduciendo clase de vocabulario')" class="w-14 h-14 rounded-full bg-purple-600 text-white flex items-center justify-center shadow-lg group-hover:scale-110 transition text-lg">
+                                <button onclick="showToast('Reproduciendo testimonio de Carlos')" class="w-14 h-14 rounded-full bg-purple-600 text-white flex items-center justify-center shadow-lg group-hover:scale-110 transition text-lg">
                                     <i class="fa-solid fa-play pl-0.5"></i>
                                 </button>
                             </div>
                         </div>
-                        <div class="p-5 bg-slate-900 text-white">
-                            <div class="flex items-center justify-between text-xs text-purple-400 mb-1">
-                                <span class="font-bold uppercase tracking-wider">Módulo 1</span>
-                                <span class="bg-purple-950 px-2 py-0.5 rounded-full text-[10px]">12 min</span>
+                        <div class="p-5 bg-slate-900 text-white flex-grow">
+                            <div class="flex items-center justify-between text-xs text-purple-400 mb-2">
+                                <span class="font-bold uppercase tracking-wider">Logro</span>
+                                <span class="bg-purple-950 px-2 py-0.5 rounded-full text-[10px]">Ascenso Laboral</span>
                             </div>
-                            <h4 class="font-extrabold text-base">Vocabulario esencial para entrevistas</h4>
+                            <h4 class="font-extrabold text-base leading-tight">De trabarme al hablar a liderar reuniones en inglés</h4>
                         </div>
                     </div>
 
-                    <div class="w-80 sm:w-96 bg-slate-900 rounded-2xl overflow-hidden shadow-xl border border-slate-800 flex-shrink-0 group">
-                        <div class="aspect-video relative overflow-hidden bg-slate-950">
-                            <img src="https://placehold.co/600x340/31103f/ffffff?text=Leccion+2:+Pronunciacion" alt="Video 2" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    <div class="w-64 sm:w-72 bg-slate-900 rounded-3xl overflow-hidden shadow-xl border border-slate-800 flex-shrink-0 group flex flex-col">
+                        <div class="aspect-[9/16] relative overflow-hidden bg-slate-950">
+                            <img src="https://placehold.co/360x640/31103f/ffffff?text=Testimonio\nAna+G." alt="Testimonio Ana" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
                             <div class="absolute inset-0 bg-slate-900/30 flex items-center justify-center">
-                                <button onclick="showToast('Reproduciendo clase de pronunciación')" class="w-14 h-14 rounded-full bg-pink-600 text-white flex items-center justify-center shadow-lg group-hover:scale-110 transition text-lg">
+                                <button onclick="showToast('Reproduciendo testimonio de Ana')" class="w-14 h-14 rounded-full bg-pink-600 text-white flex items-center justify-center shadow-lg group-hover:scale-110 transition text-lg">
                                     <i class="fa-solid fa-play pl-0.5"></i>
                                 </button>
                             </div>
                         </div>
-                        <div class="p-5 bg-slate-900 text-white">
-                            <div class="flex items-center justify-between text-xs text-pink-400 mb-1">
-                                <span class="font-bold uppercase tracking-wider">Módulo 2</span>
-                                <span class="bg-pink-950 px-2 py-0.5 rounded-full text-[10px]">15 min</span>
+                        <div class="p-5 bg-slate-900 text-white flex-grow">
+                            <div class="flex items-center justify-between text-xs text-pink-400 mb-2">
+                                <span class="font-bold uppercase tracking-wider">Logro</span>
+                                <span class="bg-pink-950 px-2 py-0.5 rounded-full text-[10px]">Trabajo Remoto</span>
                             </div>
-                            <h4 class="font-extrabold text-base">Técnicas de pronunciación fluida</h4>
+                            <h4 class="font-extrabold text-base leading-tight">Conseguí el puesto remoto que tanto soñaba</h4>
                         </div>
                     </div>
 
-                    <div class="w-80 sm:w-96 bg-slate-900 rounded-2xl overflow-hidden shadow-xl border border-slate-800 flex-shrink-0 group">
-                        <div class="aspect-video relative overflow-hidden bg-slate-950">
-                            <img src="https://placehold.co/600x340/112233/ffffff?text=Leccion+3:+Gramatica" alt="Video 3" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    <div class="w-64 sm:w-72 bg-slate-900 rounded-3xl overflow-hidden shadow-xl border border-slate-800 flex-shrink-0 group flex flex-col">
+                        <div class="aspect-[9/16] relative overflow-hidden bg-slate-950">
+                            <img src="https://placehold.co/360x640/112233/ffffff?text=Testimonio\nDavid+M." alt="Testimonio David" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
                             <div class="absolute inset-0 bg-slate-900/30 flex items-center justify-center">
-                                <button onclick="showToast('Reproduciendo clase de gramática')" class="w-14 h-14 rounded-full bg-blue-600 text-white flex items-center justify-center shadow-lg group-hover:scale-110 transition text-lg">
+                                <button onclick="showToast('Reproduciendo testimonio de David')" class="w-14 h-14 rounded-full bg-blue-600 text-white flex items-center justify-center shadow-lg group-hover:scale-110 transition text-lg">
                                     <i class="fa-solid fa-play pl-0.5"></i>
                                 </button>
                             </div>
                         </div>
-                        <div class="p-5 bg-slate-900 text-white">
-                            <div class="flex items-center justify-between text-xs text-blue-400 mb-1">
-                                <span class="font-bold uppercase tracking-wider">Módulo 3</span>
-                                <span class="bg-blue-950 px-2 py-0.5 rounded-full text-[10px]">10 min</span>
+                        <div class="p-5 bg-slate-900 text-white flex-grow">
+                            <div class="flex items-center justify-between text-xs text-blue-400 mb-2">
+                                <span class="font-bold uppercase tracking-wider">Logro</span>
+                                <span class="bg-blue-950 px-2 py-0.5 rounded-full text-[10px]">Certificación B2</span>
                             </div>
-                            <h4 class="font-extrabold text-base">Dominando los tiempos verbales</h4>
+                            <h4 class="font-extrabold text-base leading-tight">Aprobé mi examen y me fui a estudiar a Canadá</h4>
                         </div>
                     </div>
                 </div>
@@ -942,5 +922,7 @@
         </div>
     </div>
 
+</body>
+</html>
 </body>
 </html>
