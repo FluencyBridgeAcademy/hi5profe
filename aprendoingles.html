@@ -538,22 +538,28 @@
                     }
                 </style>
                 <div class="animate-video-marquee flex gap-6">
-                    <!-- Video Card 1 -->
+                    <!-- Video Card 1 (Now YouTube Short for Carlos Ortega) -->
                     <div class="w-64 sm:w-72 bg-slate-900 rounded-3xl overflow-hidden shadow-xl border border-slate-800 flex-shrink-0 group flex flex-col">
-                        <div class="aspect-[9/16] relative overflow-hidden bg-slate-950">
-                            <img src="https://placehold.co/360x640/1e1b4b/ffffff?text=Testimonio\nCarlos+P." alt="Testimonio Carlos" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                            <div class="absolute inset-0 bg-slate-900/30 flex items-center justify-center">
-                                <button onclick="showToast('Reproduciendo testimonio de Carlos')" class="w-14 h-14 rounded-full bg-purple-600 text-white flex items-center justify-center shadow-lg group-hover:scale-110 transition text-lg">
-                                    <i class="fa-solid fa-play pl-0.5"></i>
-                                </button>
-                            </div>
+                        <div class="aspect-[9/16] relative overflow-hidden bg-slate-950 group-hover:pause-marquee">
+                            <!-- Overlay to prevent accidental clicks while scrolling, requires hover to interact -->
+                            <div class="absolute inset-0 z-10 bg-transparent" onmouseover="this.style.pointerEvents='none'"></div>
+                            <iframe 
+                                src="https://www.youtube.com/embed/ja5EoCiIJAg?rel=0&modestbranding=1" 
+                                title="Testimonio Carlos Ortega" 
+                                frameborder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                                referrerpolicy="strict-origin-when-cross-origin" 
+                                allowfullscreen
+                                class="absolute top-0 left-0 w-full h-full"
+                            ></iframe>
                         </div>
-                        <div class="p-5 bg-slate-900 text-white flex-grow">
+                        <div class="p-5 bg-slate-900 text-white flex-grow z-20 relative pointer-events-none">
                             <div class="flex items-center justify-between text-xs text-purple-400 mb-2">
                                 <span class="font-bold uppercase tracking-wider">Logro</span>
-                                <span class="bg-purple-950 px-2 py-0.5 rounded-full text-[10px]">Ascenso Laboral</span>
+                                <span class="bg-purple-950 px-2 py-0.5 rounded-full text-[10px]">Certificación B2</span>
                             </div>
-                            <h4 class="font-extrabold text-base leading-tight">De trabarme al hablar a liderar reuniones en inglés</h4>
+                            <h4 class="font-extrabold text-base leading-tight">Alcanzó el nivel B2 para obtener su grado de bachillerato</h4>
+                            <p class="text-[10px] text-slate-400 mt-2">Carlos Ortega (Lima, Perú)</p>
                         </div>
                     </div>
 
@@ -576,41 +582,54 @@
                         </div>
                     </div>
 
-                    <!-- Video Card 3 -->
+                    <!-- Video Card 3 (Now YouTube Short for Jhonatan's Mom) -->
                     <div class="w-64 sm:w-72 bg-slate-900 rounded-3xl overflow-hidden shadow-xl border border-slate-800 flex-shrink-0 group flex flex-col">
-                        <div class="aspect-[9/16] relative overflow-hidden bg-slate-950">
-                            <img src="https://placehold.co/360x640/112233/ffffff?text=Testimonio\nDavid+M." alt="Testimonio David" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                            <div class="absolute inset-0 bg-slate-900/30 flex items-center justify-center">
-                                <button onclick="showToast('Reproduciendo testimonio de David')" class="w-14 h-14 rounded-full bg-blue-600 text-white flex items-center justify-center shadow-lg group-hover:scale-110 transition text-lg">
-                                    <i class="fa-solid fa-play pl-0.5"></i>
-                                </button>
-                            </div>
+                        <div class="aspect-[9/16] relative overflow-hidden bg-slate-950 group-hover:pause-marquee">
+                            <!-- Overlay to prevent accidental clicks while scrolling, requires hover to interact -->
+                            <div class="absolute inset-0 z-10 bg-transparent" onmouseover="this.style.pointerEvents='none'"></div>
+                            <iframe 
+                                src="https://www.youtube.com/embed/irPCGL-VixI?rel=0&modestbranding=1" 
+                                title="Testimonio Diga de la Cruz" 
+                                frameborder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                                referrerpolicy="strict-origin-when-cross-origin" 
+                                allowfullscreen
+                                class="absolute top-0 left-0 w-full h-full"
+                            ></iframe>
                         </div>
-                        <div class="p-5 bg-slate-900 text-white flex-grow">
+                        <div class="p-5 bg-slate-900 text-white flex-grow z-20 relative pointer-events-none">
                             <div class="flex items-center justify-between text-xs text-blue-400 mb-2">
                                 <span class="font-bold uppercase tracking-wider">Logro</span>
-                                <span class="bg-blue-950 px-2 py-0.5 rounded-full text-[10px]">Certificación B2</span>
+                                <span class="bg-blue-950 px-2 py-0.5 rounded-full text-[10px]">Primeros Puestos</span>
                             </div>
-                            <h4 class="font-extrabold text-base leading-tight">Aprobé mi examen y me fui a estudiar a Canadá</h4>
+                            <h4 class="font-extrabold text-base leading-tight">Certificado de mérito primeros puestos de su hijo</h4>
+                            <p class="text-[10px] text-slate-400 mt-2">Diga de la Cruz (Mamá de Jhonatan)</p>
                         </div>
                     </div>
 
                     <!-- Duplicate set for infinite smooth marquee looping -->
+                    <!-- Duplicate Video Card 1 (Carlos Ortega) -->
                     <div class="w-64 sm:w-72 bg-slate-900 rounded-3xl overflow-hidden shadow-xl border border-slate-800 flex-shrink-0 group flex flex-col">
-                        <div class="aspect-[9/16] relative overflow-hidden bg-slate-950">
-                            <img src="https://placehold.co/360x640/1e1b4b/ffffff?text=Testimonio\nCarlos+P." alt="Testimonio Carlos" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                            <div class="absolute inset-0 bg-slate-900/30 flex items-center justify-center">
-                                <button onclick="showToast('Reproduciendo testimonio de Carlos')" class="w-14 h-14 rounded-full bg-purple-600 text-white flex items-center justify-center shadow-lg group-hover:scale-110 transition text-lg">
-                                    <i class="fa-solid fa-play pl-0.5"></i>
-                                </button>
-                            </div>
+                        <div class="aspect-[9/16] relative overflow-hidden bg-slate-950 group-hover:pause-marquee">
+                            <!-- Overlay to prevent accidental clicks while scrolling, requires hover to interact -->
+                            <div class="absolute inset-0 z-10 bg-transparent" onmouseover="this.style.pointerEvents='none'"></div>
+                            <iframe 
+                                src="https://www.youtube.com/embed/ja5EoCiIJAg?rel=0&modestbranding=1" 
+                                title="Testimonio Carlos Ortega" 
+                                frameborder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                                referrerpolicy="strict-origin-when-cross-origin" 
+                                allowfullscreen
+                                class="absolute top-0 left-0 w-full h-full"
+                            ></iframe>
                         </div>
-                        <div class="p-5 bg-slate-900 text-white flex-grow">
+                        <div class="p-5 bg-slate-900 text-white flex-grow z-20 relative pointer-events-none">
                             <div class="flex items-center justify-between text-xs text-purple-400 mb-2">
                                 <span class="font-bold uppercase tracking-wider">Logro</span>
-                                <span class="bg-purple-950 px-2 py-0.5 rounded-full text-[10px]">Ascenso Laboral</span>
+                                <span class="bg-purple-950 px-2 py-0.5 rounded-full text-[10px]">Certificación B2</span>
                             </div>
-                            <h4 class="font-extrabold text-base leading-tight">De trabarme al hablar a liderar reuniones en inglés</h4>
+                            <h4 class="font-extrabold text-base leading-tight">Alcanzó el nivel B2 para obtener su grado de bachillerato</h4>
+                            <p class="text-[10px] text-slate-400 mt-2">Carlos Ortega (Lima, Perú)</p>
                         </div>
                     </div>
 
@@ -632,21 +651,28 @@
                         </div>
                     </div>
 
+                    <!-- Duplicate Video Card 3 (Now YouTube Short for Jhonatan's Mom) -->
                     <div class="w-64 sm:w-72 bg-slate-900 rounded-3xl overflow-hidden shadow-xl border border-slate-800 flex-shrink-0 group flex flex-col">
                         <div class="aspect-[9/16] relative overflow-hidden bg-slate-950">
-                            <img src="https://placehold.co/360x640/112233/ffffff?text=Testimonio\nDavid+M." alt="Testimonio David" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                            <div class="absolute inset-0 bg-slate-900/30 flex items-center justify-center">
-                                <button onclick="showToast('Reproduciendo testimonio de David')" class="w-14 h-14 rounded-full bg-blue-600 text-white flex items-center justify-center shadow-lg group-hover:scale-110 transition text-lg">
-                                    <i class="fa-solid fa-play pl-0.5"></i>
-                                </button>
-                            </div>
+                            <!-- Overlay to prevent accidental clicks while scrolling, requires hover to interact -->
+                            <div class="absolute inset-0 z-10 bg-transparent" onmouseover="this.style.pointerEvents='none'"></div>
+                            <iframe 
+                                src="https://www.youtube.com/embed/irPCGL-VixI?rel=0&modestbranding=1" 
+                                title="Testimonio Diga de la Cruz" 
+                                frameborder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                                referrerpolicy="strict-origin-when-cross-origin" 
+                                allowfullscreen
+                                class="absolute top-0 left-0 w-full h-full"
+                            ></iframe>
                         </div>
-                        <div class="p-5 bg-slate-900 text-white flex-grow">
+                        <div class="p-5 bg-slate-900 text-white flex-grow z-20 relative pointer-events-none">
                             <div class="flex items-center justify-between text-xs text-blue-400 mb-2">
                                 <span class="font-bold uppercase tracking-wider">Logro</span>
-                                <span class="bg-blue-950 px-2 py-0.5 rounded-full text-[10px]">Certificación B2</span>
+                                <span class="bg-blue-950 px-2 py-0.5 rounded-full text-[10px]">Primeros Puestos</span>
                             </div>
-                            <h4 class="font-extrabold text-base leading-tight">Aprobé mi examen y me fui a estudiar a Canadá</h4>
+                            <h4 class="font-extrabold text-base leading-tight">Certificado de mérito primeros puestos de su hijo</h4>
+                            <p class="text-[10px] text-slate-400 mt-2">Diga de la Cruz (Mamá de Jhonatan)</p>
                         </div>
                     </div>
                 </div>
