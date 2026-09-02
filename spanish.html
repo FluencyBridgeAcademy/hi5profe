@@ -3,381 +3,455 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Learn Spanish - Boost Your Future</title>
+    <title>Learn Spanish - Boost Your Future | Hi5Profe</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f5f3ff',
+                            100: '#ede9fe',
+                            500: '#8b5cf6',
+                            600: '#7c3aed',
+                            700: '#6d28d9',
+                            900: '#4c1d95',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        /* Custom purple color from the design */
-        .bg-purple-custom { background-color: #8E2DE2; background-image: linear-gradient(to right, #8E2DE2, #4A00E0); }
-        .text-purple-custom { color: #4A00E0; }
-        .border-purple-custom { border-color: #4A00E0; }
-        /* Vertical Video Container */
+        .bg-purple-custom { 
+            background: linear-gradient(135deg, #7c3aed 0%, #4c1d95 100%); 
+        }
+        .text-purple-custom { color: #7c3aed; }
+        .border-purple-custom { border-color: #7c3aed; }
+        
         .aspect-video-vertical {
             aspect-ratio: 9 / 16;
         }
-        /* Wavy Text Animation */
-        @keyframes bounceWave {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
+
+        /* Sleek glowing gradient header text effect */
+        .gradient-brand-text {
+            background: linear-gradient(135deg, #7c3aed 0%, #db2777 50%, #ea580c 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
-        .animate-wave {
-            display: inline-block;
-            animation: bounceWave 1.5s infinite ease-in-out;
+
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
         }
-        .delay-1 { animation-delay: 0.0s; }
-        .delay-2 { animation-delay: 0.1s; }
-        .delay-3 { animation-delay: 0.2s; }
-        .delay-4 { animation-delay: 0.3s; }
-        .delay-5 { animation-delay: 0.4s; }
-        .delay-6 { animation-delay: 0.5s; }
-        .delay-7 { animation-delay: 0.6s; }
-        .delay-8 { animation-delay: 0.7s; }
+        .animate-float {
+            animation: floatSlow 4s ease-in-out infinite;
+        }
     </style>
 </head>
-<body class="bg-gray-50 font-sans">
+<body class="bg-slate-50 font-sans text-slate-800 antialiased selection:bg-purple-500 selection:text-white">
 
-    <!-- Header -->
-    <header class="bg-white py-4 shadow-sm fixed w-full z-10 top-0">
+    <header class="bg-white/90 backdrop-blur-md py-4 shadow-sm fixed w-full z-50 top-0 transition-all">
         <div class="container mx-auto flex justify-between items-center px-4 lg:px-8">
-            <a href="#" class="flex items-center text-2xl font-bold text-purple-custom">
-                <span class="mr-2 flex items-center">
-                    <img src="manito.svg" alt="Hi5Profe Logo" class="h-8 w-auto">
-                </span> Hi5Profe
+            <a href="#" class="flex items-center gap-3 group">
+                <img src="logomania.svg" alt="Hi5Profe Logo" class="h-11 w-auto group-hover:scale-105 transition-transform drop-shadow-sm rounded-xl">
+                <div class="text-2xl font-extrabold tracking-tight flex items-center">
+                    <span class="text-slate-900">Hi5</span><span class="text-purple-600">Profe</span>
+                </div>
             </a>
-            <nav class="hidden md:flex space-x-8 text-gray-600 font-medium">
-                <a href="#hero" class="hover:text-purple-custom">Home</a>
-                <a href="#features" class="hover:text-purple-custom">Features</a>
-                <a href="#modalities" class="hover:text-purple-custom">Modalities</a>
-                <a href="#pricing" class="hover:text-purple-custom">Pricing</a>
+            <nav class="hidden md:flex space-x-8 text-slate-600 font-semibold text-sm">
+                <a href="#hero" class="hover:text-purple-600 transition-colors">Home</a>
+                <a href="#features" class="hover:text-purple-600 transition-colors">Features</a>
+                <a href="#modalities" class="hover:text-purple-600 transition-colors">Modalities</a>
+                <a href="#testimonials" class="hover:text-purple-600 transition-colors">Success Stories</a>
+                <a href="#pricing" class="hover:text-purple-600 transition-colors">Pricing</a>
             </nav>
             <div class="flex items-center space-x-4">
-                <a href="#" class="bg-purple-custom text-white font-bold py-2 px-6 rounded-full hover:opacity-90 transition duration-300">Start Now</a>
+                <a href="#pricing" class="bg-purple-600 text-white font-bold py-2.5 px-6 rounded-xl shadow-lg shadow-purple-600/30 hover:bg-purple-700 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200 text-sm">Start Now</a>
             </div>
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section id="hero" class="pt-24 pb-16 md:pt-32 md:pb-24 bg-gradient-to-br from-purple-50 to-white">
-        <div class="container mx-auto px-4 lg:px-8 flex flex-col md:flex-row items-center">
-            <div class="md:w-1/2 mb-10 md:mb-0 text-center md:text-left pr-0 md:pr-10">
-                <div class="text-4xl md:text-5xl lg:text-6xl font-black mb-6 tracking-widest drop-shadow-md">
-                    <span class="animate-wave delay-1 text-blue-500">H</span>
-                    <span class="animate-wave delay-2 text-pink-500">i</span>
-                    <span class="animate-wave delay-3 text-yellow-500">5</span>
-                    <span class="animate-wave delay-4 text-green-500">P</span>
-                    <span class="animate-wave delay-5 text-purple-500">r</span>
-                    <span class="animate-wave delay-6 text-red-500">o</span>
-                    <span class="animate-wave delay-7 text-indigo-500">f</span>
-                    <span class="animate-wave delay-8 text-teal-500">e</span>
+    <section id="hero" class="pt-32 pb-20 md:pt-40 md:pb-28 bg-gradient-to-b from-purple-50/70 via-white to-white overflow-hidden">
+        <div class="container mx-auto px-4 lg:px-8 flex flex-col lg:flex-row items-center gap-12 lg:gap-8">
+            <div class="lg:w-1/2 text-center lg:text-left">
+                <!-- Premium Typography Title Badge -->
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-100/80 text-purple-700 font-bold text-xs uppercase tracking-wider mb-6 shadow-sm">
+                    <span class="w-2 h-2 rounded-full bg-purple-600 animate-pulse"></span>
+                    The Ultimate Spanish Learning Platform
                 </div>
-                <h1 class="text-4xl lg:text-5xl font-extrabold text-gray-900 leading-tight mb-6 mt-4">
+                
+                <h1 class="text-5xl sm:text-6xl lg:text-7xl font-extrabold text-slate-900 tracking-tight leading-[1.1] mb-6">
                     Learn Spanish. <br>
-                    <span class="text-purple-custom">Boost Your Future.</span>
+                    <span class="gradient-brand-text">Boost Your Future.</span>
                 </h1>
-                <p class="text-lg text-gray-600 mb-8">
-                    At Hi5Profe, you have everything you need to speak Spanish with confidence: courses, practical exercises, interactive resources, and personalized tracking.
+                
+                <p class="text-lg text-slate-600 mb-8 max-w-xl mx-auto lg:mx-0 leading-relaxed">
+                    At Hi5Profe, you get everything you need to speak Spanish with complete confidence: interactive lessons, live practice, smart tools, and 1-on-1 expert support.
                 </p>
-                <div class="flex justify-center md:justify-start space-x-4">
-                    <a href="#" class="bg-purple-custom text-white font-bold py-3 px-8 rounded-full hover:opacity-90 transition duration-300">Start Free Now</a>
-                    <a href="#" class="flex items-center text-gray-700 hover:text-purple-custom font-medium">
-                        <span class="mr-2 bg-white p-2 rounded-full shadow-md flex items-center justify-center"><img src="play.svg" alt="Play" class="w-3 h-3 m-0.5"></span>
-                        See How It Works
+
+                <div class="flex flex-col sm:flex-row justify-center lg:justify-start gap-4 mb-10">
+                    <a href="#pricing" class="bg-purple-600 text-white font-bold py-4 px-8 rounded-2xl shadow-xl shadow-purple-600/25 hover:bg-purple-700 hover:scale-[1.02] transition-all duration-200 text-center flex items-center justify-center gap-2">
+                        <span>Start Free Now</span>
+                        <i class="fas fa-arrow-right text-xs"></i>
+                    </a>
+                    <a href="#testimonials" class="flex items-center justify-center gap-3 text-slate-700 hover:text-purple-600 font-bold px-6 py-4 rounded-2xl bg-white border border-slate-200 shadow-sm hover:border-purple-200 transition-all">
+                        <div class="w-8 h-8 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center shadow-inner">
+                            <i class="fas fa-play text-xs"></i>
+                        </div>
+                        <span>See How It Works</span>
                     </a>
                 </div>
-                <div class="mt-8 flex items-center justify-center md:justify-start">
-                    <div class="flex -space-x-2 mr-3">
-                        <img src="julio.svg" alt="User 1" class="w-8 h-8 rounded-full border-2 border-white object-cover">
-                        <img src="celine.svg" alt="User 2" class="w-8 h-8 rounded-full border-2 border-white object-cover">
-                        <img src="bray.svg" alt="User 3" class="w-8 h-8 rounded-full border-2 border-white object-cover">
-                        <img src="homa.svg" alt="User 4" class="w-8 h-8 rounded-full border-2 border-white object-cover">
+
+                <!-- Social Proof & Ratings -->
+                <div class="pt-6 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+                    <div class="flex -space-x-3">
+                        <img src="https://picsum.photos/seed/user1/100" alt="Student" class="w-10 h-10 rounded-full border-2 border-white object-cover shadow">
+                        <img src="https://picsum.photos/seed/user2/100" alt="Student" class="w-10 h-10 rounded-full border-2 border-white object-cover shadow">
+                        <img src="https://picsum.photos/seed/user3/100" alt="Student" class="w-10 h-10 rounded-full border-2 border-white object-cover shadow">
+                        <img src="https://picsum.photos/seed/user4/100" alt="Student" class="w-10 h-10 rounded-full border-2 border-white object-cover shadow">
                     </div>
-                    <div class="flex items-center text-yellow-400">
-                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
-                        <span class="text-gray-600 ml-2">4.9/5</span>
+                    <div>
+                        <div class="flex items-center gap-1 text-amber-400 text-sm">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                            <span class="text-slate-800 font-bold ml-1.5">4.9 / 5.0</span>
+                        </div>
+                        <p class="text-xs text-slate-500 font-medium">Trusted by over 2,000+ active global students</p>
                     </div>
-                    <span class="text-gray-500 text-sm ml-2 hidden sm:block">Based on +2,000 active students</span>
                 </div>
             </div>
-            <div class="md:w-1/2 flex justify-center">
-                <div class="relative w-full max-w-md aspect-video-vertical bg-black rounded-xl overflow-hidden shadow-2xl">
-                    <img src="https://picsum.photos/seed/spanish-welcome-vertical/450/800" alt="Bienvenida" class="w-full h-full object-cover opacity-50">
-                    <div class="absolute inset-0 flex flex-col justify-center items-center text-white">
-                        <i class="fas fa-play-circle text-6xl md:text-7xl mb-4 cursor-pointer hover:scale-110 transition-transform duration-300"></i>
-                        <h3 class="text-2xl font-bold mb-2">Hi5Profe Welcome</h3>
-                        <p class="text-sm font-medium bg-black bg-opacity-50 px-4 py-2 rounded-full">Watch Welcome Video</p>
+
+            <!-- Hero Video Preview Card -->
+            <div class="lg:w-1/2 flex justify-center">
+                <div class="relative w-full max-w-sm aspect-video-vertical bg-slate-900 rounded-3xl overflow-hidden shadow-2xl border-4 border-white animate-float group cursor-pointer">
+                    <img src="https://picsum.photos/seed/bridge-welcome/450/800" alt="Welcome Preview" class="w-full h-full object-cover opacity-70 group-hover:scale-105 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/30 to-transparent flex flex-col justify-between p-6 text-white">
+                        <div class="flex justify-between items-center">
+                            <span class="bg-purple-600/90 backdrop-blur-md text-[10px] uppercase font-extrabold px-3 py-1 rounded-full tracking-wider">Featured Video</span>
+                            <div class="w-8 h-8 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center">
+                                <i class="fas fa-volume-high text-xs"></i>
+                            </div>
+                        </div>
+                        <div class="text-center my-auto">
+                            <div class="w-16 h-16 bg-white/90 backdrop-blur-md text-purple-700 rounded-full flex items-center justify-center mx-auto mb-4 shadow-xl group-hover:scale-110 transition-transform">
+                                <i class="fas fa-play text-xl ml-1"></i>
+                            </div>
+                            <h3 class="text-xl font-extrabold mb-1">Hi5Profe Welcome</h3>
+                            <p class="text-xs text-slate-300 font-medium">Watch 1-minute introduction</p>
+                        </div>
+                        <div class="bg-white/10 backdrop-blur-md py-2.5 px-4 rounded-xl text-center text-xs font-semibold border border-white/10">
+                            Tap to start watching
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Features Section -->
-    <section id="features" class="py-16 bg-white">
+    <section id="features" class="py-20 bg-white">
         <div class="container mx-auto px-4 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <h2 class="text-sm font-bold text-purple-600 uppercase tracking-widest mb-3">Why Choose Hi5Profe</h2>
+                <h3 class="text-3xl lg:text-4xl font-extrabold text-slate-900">Designed for Real Fluency</h3>
+                <p class="text-slate-600 mt-3 text-base">Everything you need, built into an intuitive, seamless learning journey.</p>
+            </div>
+            
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 <!-- Feature 1 -->
-                <div class="bg-purple-50 rounded-lg p-6 text-center">
-                    <div class="w-12 h-12 bg-purple-100 text-purple-custom rounded-full flex items-center justify-center mx-auto mb-4 text-2xl">
-                        <img src="tablet.svg" alt="Interactive Courses" class="w-6 h-6">
+                <div class="bg-slate-50/80 rounded-3xl p-8 border border-slate-100 hover:border-purple-200 hover:bg-white hover:shadow-xl transition-all duration-300 group">
+                    <div class="w-14 h-14 bg-purple-100 text-purple-600 rounded-2xl flex items-center justify-center mb-6 text-2xl group-hover:bg-purple-600 group-hover:text-white transition-colors">
+                        <i class="fas fa-laptop-code"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-800 mb-2">Interactive Courses</h3>
-                    <p class="text-gray-600">Dynamic and constantly updated lessons for your level.</p>
+                    <h4 class="text-xl font-bold text-slate-900 mb-3">Interactive Courses</h4>
+                    <p class="text-slate-600 text-sm leading-relaxed">Dynamic, bite-sized lessons tailored precisely to your current level and goals.</p>
                 </div>
                 <!-- Feature 2 -->
-                <div class="bg-pink-50 rounded-lg p-6 text-center">
-                    <div class="w-12 h-12 bg-pink-100 text-pink-500 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl">
-                        <img src="practica.svg" alt="Practice Speaking" class="w-6 h-6">
+                <div class="bg-slate-50/80 rounded-3xl p-8 border border-slate-100 hover:border-pink-200 hover:bg-white hover:shadow-xl transition-all duration-300 group">
+                    <div class="w-14 h-14 bg-pink-100 text-pink-600 rounded-2xl flex items-center justify-center mb-6 text-2xl group-hover:bg-pink-600 group-hover:text-white transition-colors">
+                        <i class="fas fa-comments"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-800 mb-2">Practice Speaking</h3>
-                    <p class="text-gray-600">Improve your pronunciation and fluency with smart tools.</p>
+                    <h4 class="text-xl font-bold text-slate-900 mb-3">Practice Speaking</h4>
+                    <p class="text-slate-600 text-sm leading-relaxed">Boost pronunciation, overcome fear, and master conversational fluency naturally.</p>
                 </div>
                 <!-- Feature 3 -->
-                <div class="bg-green-50 rounded-lg p-6 text-center">
-                    <div class="w-12 h-12 bg-green-100 text-green-500 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl">
-                        <img src="seguir.svg" alt="Personal Tracking" class="w-6 h-6">
+                <div class="bg-slate-50/80 rounded-3xl p-8 border border-slate-100 hover:border-emerald-200 hover:bg-white hover:shadow-xl transition-all duration-300 group">
+                    <div class="w-14 h-14 bg-emerald-100 text-emerald-600 rounded-2xl flex items-center justify-center mb-6 text-2xl group-hover:bg-emerald-600 group-hover:text-white transition-colors">
+                        <i class="fas fa-chart-line"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-800 mb-2">Personal Tracking</h3>
-                    <p class="text-gray-600">Monitor your daily progress and completed objectives.</p>
+                    <h4 class="text-xl font-bold text-slate-900 mb-3">Personal Tracking</h4>
+                    <p class="text-slate-600 text-sm leading-relaxed">Monitor daily streaks, target objectives, and watch your vocabulary expand day by day.</p>
                 </div>
                 <!-- Feature 4 -->
-                <div class="bg-yellow-50 rounded-lg p-6 text-center">
-                    <div class="w-12 h-12 bg-yellow-100 text-yellow-500 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl">
-                        <img src="learn.svg" alt="Learn at Your Pace" class="w-6 h-6">
+                <div class="bg-slate-50/80 rounded-3xl p-8 border border-slate-100 hover:border-amber-200 hover:bg-white hover:shadow-xl transition-all duration-300 group">
+                    <div class="w-14 h-14 bg-amber-100 text-amber-600 rounded-2xl flex items-center justify-center mb-6 text-2xl group-hover:bg-amber-500 group-hover:text-white transition-colors">
+                        <i class="fas fa-clock"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-800 mb-2">Learn at Your Pace</h3>
-                    <p class="text-gray-600">Study when and where you want from any device.</p>
+                    <h4 class="text-xl font-bold text-slate-900 mb-3">Learn at Your Pace</h4>
+                    <p class="text-slate-600 text-sm leading-relaxed">Study whenever and wherever you want across mobile, tablet, or desktop devices.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Modalities Section -->
-    <section id="modalities" class="py-16 bg-gray-50">
+    <section id="modalities" class="py-20 bg-slate-50">
         <div class="container mx-auto px-4 lg:px-8">
-            <div class="text-center mb-12">
-                <h2 class="text-lg font-bold text-purple-custom uppercase tracking-wider mb-2">MODALITIES</h2>
-                <h3 class="text-3xl lg:text-4xl font-extrabold text-gray-900">Take <span class="text-purple-custom">Online</span> Classes Now</h3>
-                <p class="text-gray-600 mt-4 max-w-2xl mx-auto">Learn live with dynamic classes, flexible schedules, and top-tier personalized support.</p>
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <h2 class="text-sm font-bold text-purple-600 uppercase tracking-widest mb-3">Learning Modalities</h2>
+                <h3 class="text-3xl lg:text-4xl font-extrabold text-slate-900">Take Online Classes Your Way</h3>
+                <p class="text-slate-600 mt-3 text-base">Choose from flexible group sessions or intensive 1-on-1 guidance with expert native tutors.</p>
             </div>
+            
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <!-- Modality 1: Live Classes -->
-                <div class="bg-white rounded-xl shadow-md p-6 border border-gray-200 hover:border-purple-custom transition duration-300">
-                    <div class="bg-purple-100 text-purple-custom rounded-full px-3 py-1 inline-block text-xs font-bold mb-4">LIVE</div>
-                    <h4 class="text-xl font-bold text-gray-800 mb-4">Live Classes</h4>
-                    <p class="text-gray-600 mb-6">Practice in real-time with expert teachers.</p>
-                    <a href="#" class="flex items-center justify-between text-purple-custom font-medium hover:underline">
-                        Next session in 15m <i class="fas fa-arrow-right"></i>
+                <!-- Modality 1 -->
+                <div class="bg-white rounded-3xl shadow-sm p-8 border border-slate-200 hover:shadow-lg transition-all flex flex-col justify-between">
+                    <div>
+                        <span class="bg-purple-100 text-purple-700 text-xs font-bold px-3 py-1 rounded-full uppercase">Live Session</span>
+                        <h4 class="text-xl font-extrabold text-slate-900 mt-4 mb-3">Live Classes</h4>
+                        <p class="text-slate-600 text-sm mb-6">Interact in real-time with expert teachers and motivated peers.</p>
+                    </div>
+                    <a href="#pricing" class="flex items-center justify-between text-purple-600 font-bold text-sm hover:underline pt-4 border-t border-slate-100">
+                        <span>Next session in 15m</span>
+                        <i class="fas fa-arrow-right"></i>
                     </a>
                 </div>
-                <!-- Modality 2: Flexible Schedules -->
-                <div class="bg-purple-custom text-white rounded-xl shadow-md p-6">
-                    <div class="text-3xl mb-4"><i class="far fa-calendar-alt"></i></div>
-                    <h4 class="text-xl font-bold mb-4">Flexible Schedules</h4>
-                    <p class="mb-6">Choose the times that best suit your routine.</p>
-                    <a href="#" class="flex items-center justify-between font-medium hover:underline text-white">
-                        Availability 24/7 <i class="fas fa-arrow-right"></i>
+                <!-- Modality 2 -->
+                <div class="bg-purple-600 text-white rounded-3xl shadow-xl p-8 flex flex-col justify-between relative overflow-hidden">
+                    <div class="absolute -right-10 -bottom-10 w-40 h-40 bg-purple-500/30 rounded-full blur-2xl"></div>
+                    <div>
+                        <span class="bg-white/20 text-white text-xs font-bold px-3 py-1 rounded-full uppercase">24 / 7 Access</span>
+                        <h4 class="text-xl font-extrabold text-white mt-4 mb-3">Flexible Schedules</h4>
+                        <p class="text-purple-100 text-sm mb-6">Pick times that match your busy routine anywhere on earth.</p>
+                    </div>
+                    <a href="#pricing" class="flex items-center justify-between text-white font-bold text-sm hover:underline pt-4 border-t border-purple-500/50">
+                        <span>Always Available</span>
+                        <i class="fas fa-arrow-right"></i>
                     </a>
                 </div>
-                <!-- Modality 3: Speaking Club -->
-                <div class="bg-white rounded-xl shadow-md p-6 border border-gray-200 hover:border-purple-custom transition duration-300">
-                    <div class="bg-gray-200 text-gray-700 rounded-full px-3 py-1 inline-block text-xs font-bold mb-4">CLUB</div>
-                    <h4 class="text-xl font-bold text-gray-800 mb-4">Speaking Club</h4>
-                    <p class="text-gray-600 mb-6">Guided conversations to gain confidence when speaking.</p>
-                    <a href="#" class="flex items-center justify-between text-purple-custom font-medium hover:underline">
-                        Small Groups <i class="fas fa-arrow-right"></i>
+                <!-- Modality 3 -->
+                <div class="bg-white rounded-3xl shadow-sm p-8 border border-slate-200 hover:shadow-lg transition-all flex flex-col justify-between">
+                    <div>
+                        <span class="bg-slate-100 text-slate-700 text-xs font-bold px-3 py-1 rounded-full uppercase">Speaking Club</span>
+                        <h4 class="text-xl font-extrabold text-slate-900 mt-4 mb-3">Speaking Club</h4>
+                        <p class="text-slate-600 text-sm mb-6">Guided conversational breakouts to build rock-solid confidence.</p>
+                    </div>
+                    <a href="#pricing" class="flex items-center justify-between text-purple-600 font-bold text-sm hover:underline pt-4 border-t border-slate-100">
+                        <span>Small Groups</span>
+                        <i class="fas fa-arrow-right"></i>
                     </a>
                 </div>
-                <!-- Modality 4: Personal Tutor -->
-                <div class="bg-white rounded-xl shadow-md p-6 border border-gray-200 hover:border-purple-custom transition duration-300">
-                    <div class="bg-gray-200 text-gray-700 rounded-full px-3 py-1 inline-block text-xs font-bold mb-4">TUTOR</div>
-                    <h4 class="text-xl font-bold text-gray-800 mb-4">Personal Tutor</h4>
-                    <p class="text-gray-600 mb-6">Receive feedback and guidance according to your goals.</p>
-                    <a href="#" class="flex items-center justify-between text-purple-custom font-medium hover:underline">
-                        1-on-1 Available <i class="fas fa-arrow-right"></i>
+                <!-- Modality 4 -->
+                <div class="bg-white rounded-3xl shadow-sm p-8 border border-slate-200 hover:shadow-lg transition-all flex flex-col justify-between">
+                    <div>
+                        <span class="bg-amber-100 text-amber-800 text-xs font-bold px-3 py-1 rounded-full uppercase">1-on-1 Expert</span>
+                        <h4 class="text-xl font-extrabold text-slate-900 mt-4 mb-3">Personal Tutor</h4>
+                        <p class="text-slate-600 text-sm mb-6">Tailored feedback and custom lesson plans for rapid advancement.</p>
+                    </div>
+                    <a href="#pricing" class="flex items-center justify-between text-purple-600 font-bold text-sm hover:underline pt-4 border-t border-slate-100">
+                        <span>Available Now</span>
+                        <i class="fas fa-arrow-right"></i>
                     </a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Student Testimonials Section (Vertical Videos) -->
-    <section id="testimonials" class="py-16 bg-white">
+    <section id="testimonials" class="py-20 bg-white">
         <div class="container mx-auto px-4 lg:px-8">
-            <div class="flex flex-col md:flex-row justify-between items-end mb-12">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-4">
                 <div>
-                    <h2 class="text-lg font-bold text-purple-custom uppercase tracking-wider mb-2">SUCCESS STORIES</h2>
-                    <h3 class="text-3xl lg:text-4xl font-extrabold text-gray-900">This Is How Our Students <span class="text-purple-custom">Speak Spanish</span></h3>
+                    <h2 class="text-sm font-bold text-purple-600 uppercase tracking-widest mb-3">Success Stories</h2>
+                    <h3 class="text-3xl lg:text-4xl font-extrabold text-slate-900">How Our Students Speak Spanish</h3>
                 </div>
-                <p class="text-gray-600 mt-4 md:mt-0 max-w-md text-right">Listen to real students who have achieved fluency with our program.</p>
+                <p class="text-slate-600 max-w-md text-base">Listen to real students who achieved true fluency and confidence with Hi5Profe.</p>
             </div>
+
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                 <!-- Video 1 -->
-                <div class="relative aspect-video-vertical bg-black rounded-xl overflow-hidden shadow-lg cursor-pointer group">
-                    <img src="https://picsum.photos/seed/student-1/450/800" alt="Student Testimonial 1" class="w-full h-full object-cover opacity-60 group-hover:opacity-40 transition duration-300">
-                    <div class="absolute inset-0 flex flex-col justify-between p-4 text-white bg-gradient-to-t from-black/80 to-transparent">
-                        <div class="mt-4">
-                            <span class="bg-purple-custom text-xs font-bold px-2 py-1 rounded">B2 LEVEL</span>
-                            <h4 class="text-lg font-bold mt-2">Sarah from New York</h4>
+                <div class="relative aspect-video-vertical bg-slate-900 rounded-3xl overflow-hidden shadow-xl cursor-pointer group">
+                    <img src="https://picsum.photos/seed/student-sarah/450/800" alt="Sarah Testimonial" class="w-full h-full object-cover opacity-70 group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent flex flex-col justify-between p-6 text-white">
+                        <div class="flex justify-between items-center">
+                            <span class="bg-purple-600 text-xs font-extrabold px-3 py-1 rounded-full">B2 LEVEL</span>
+                            <span class="text-xs text-slate-300 font-medium"><i class="fas fa-video mr-1"></i> 0:45</span>
                         </div>
-                        <div class="flex items-center justify-center flex-grow">
-                            <i class="fas fa-play-circle text-5xl opacity-80 group-hover:opacity-100 transition-transform duration-300 hover:scale-110"></i>
+                        <div class="text-center">
+                            <div class="w-14 h-14 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
+                                <i class="fas fa-play text-lg ml-0.5"></i>
+                            </div>
+                            <h4 class="font-bold text-lg">Sarah from New York</h4>
                         </div>
-                        <div class="text-right text-sm font-medium">"I can finally order food in Madrid!"</div>
+                        <p class="text-xs text-slate-200 italic bg-white/10 backdrop-blur-md p-3 rounded-2xl border border-white/10">"I can finally order food and chat comfortably in Madrid!"</p>
                     </div>
                 </div>
                 <!-- Video 2 -->
-                <div class="relative aspect-video-vertical bg-black rounded-xl overflow-hidden shadow-lg cursor-pointer group">
-                    <img src="https://picsum.photos/seed/student-2/450/800" alt="Student Testimonial 2" class="w-full h-full object-cover opacity-60 group-hover:opacity-40 transition duration-300">
-                    <div class="absolute inset-0 flex flex-col justify-between p-4 text-white bg-gradient-to-t from-black/80 to-transparent">
-                        <div class="mt-4">
-                            <span class="bg-purple-custom text-xs font-bold px-2 py-1 rounded">C1 LEVEL</span>
-                            <h4 class="text-lg font-bold mt-2">David from London</h4>
+                <div class="relative aspect-video-vertical bg-slate-900 rounded-3xl overflow-hidden shadow-xl cursor-pointer group">
+                    <img src="https://picsum.photos/seed/student-david/450/800" alt="David Testimonial" class="w-full h-full object-cover opacity-70 group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent flex flex-col justify-between p-6 text-white">
+                        <div class="flex justify-between items-center">
+                            <span class="bg-purple-600 text-xs font-extrabold px-3 py-1 rounded-full">C1 LEVEL</span>
+                            <span class="text-xs text-slate-300 font-medium"><i class="fas fa-video mr-1"></i> 0:52</span>
                         </div>
-                        <div class="flex items-center justify-center flex-grow">
-                            <i class="fas fa-play-circle text-5xl opacity-80 group-hover:opacity-100 transition-transform duration-300 hover:scale-110"></i>
+                        <div class="text-center">
+                            <div class="w-14 h-14 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
+                                <i class="fas fa-play text-lg ml-0.5"></i>
+                            </div>
+                            <h4 class="font-bold text-lg">David from London</h4>
                         </div>
-                        <div class="text-right text-sm font-medium">"Speaking to my colleagues in Bogota."</div>
+                        <p class="text-xs text-slate-200 italic bg-white/10 backdrop-blur-md p-3 rounded-2xl border border-white/10">"Speaking easily with my international colleagues in Bogota."</p>
                     </div>
                 </div>
                 <!-- Video 3 -->
-                <div class="relative aspect-video-vertical bg-black rounded-xl overflow-hidden shadow-lg cursor-pointer group">
-                    <img src="https://picsum.photos/seed/student-3/450/800" alt="Student Testimonial 3" class="w-full h-full object-cover opacity-60 group-hover:opacity-40 transition duration-300">
-                    <div class="absolute inset-0 flex flex-col justify-between p-4 text-white bg-gradient-to-t from-black/80 to-transparent">
-                        <div class="mt-4">
-                            <span class="bg-purple-custom text-xs font-bold px-2 py-1 rounded">B1 LEVEL</span>
-                            <h4 class="text-lg font-bold mt-2">Emma from Sydney</h4>
+                <div class="relative aspect-video-vertical bg-slate-900 rounded-3xl overflow-hidden shadow-xl cursor-pointer group">
+                    <img src="https://picsum.photos/seed/student-emma/450/800" alt="Emma Testimonial" class="w-full h-full object-cover opacity-70 group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent flex flex-col justify-between p-6 text-white">
+                        <div class="flex justify-between items-center">
+                            <span class="bg-purple-600 text-xs font-extrabold px-3 py-1 rounded-full">B1 LEVEL</span>
+                            <span class="text-xs text-slate-300 font-medium"><i class="fas fa-video mr-1"></i> 0:38</span>
                         </div>
-                        <div class="flex items-center justify-center flex-grow">
-                            <i class="fas fa-play-circle text-5xl opacity-80 group-hover:opacity-100 transition-transform duration-300 hover:scale-110"></i>
+                        <div class="text-center">
+                            <div class="w-14 h-14 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
+                                <i class="fas fa-play text-lg ml-0.5"></i>
+                            </div>
+                            <h4 class="font-bold text-lg">Emma from Sydney</h4>
                         </div>
-                        <div class="text-right text-sm font-medium">"My trip to Mexico was amazing."</div>
+                        <p class="text-xs text-slate-200 italic bg-white/10 backdrop-blur-md p-3 rounded-2xl border border-white/10">"My dream trip to Mexico was truly unforgettable!"</p>
                     </div>
                 </div>
                 <!-- Video 4 -->
-                <div class="relative aspect-video-vertical bg-black rounded-xl overflow-hidden shadow-lg cursor-pointer group">
-                    <img src="https://picsum.photos/seed/student-4/450/800" alt="Student Testimonial 4" class="w-full h-full object-cover opacity-60 group-hover:opacity-40 transition duration-300">
-                    <div class="absolute inset-0 flex flex-col justify-between p-4 text-white bg-gradient-to-t from-black/80 to-transparent">
-                        <div class="mt-4">
-                            <span class="bg-purple-custom text-xs font-bold px-2 py-1 rounded">C2 LEVEL</span>
-                            <h4 class="text-lg font-bold mt-2">Michael from Toronto</h4>
+                <div class="relative aspect-video-vertical bg-slate-900 rounded-3xl overflow-hidden shadow-xl cursor-pointer group">
+                    <img src="https://picsum.photos/seed/student-michael/450/800" alt="Michael Testimonial" class="w-full h-full object-cover opacity-70 group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent flex flex-col justify-between p-6 text-white">
+                        <div class="flex justify-between items-center">
+                            <span class="bg-purple-600 text-xs font-extrabold px-3 py-1 rounded-full">C2 LEVEL</span>
+                            <span class="text-xs text-slate-300 font-medium"><i class="fas fa-video mr-1"></i> 1:05</span>
                         </div>
-                        <div class="flex items-center justify-center flex-grow">
-                            <i class="fas fa-play-circle text-5xl opacity-80 group-hover:opacity-100 transition-transform duration-300 hover:scale-110"></i>
+                        <div class="text-center">
+                            <div class="w-14 h-14 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
+                                <i class="fas fa-play text-lg ml-0.5"></i>
+                            </div>
+                            <h4 class="font-bold text-lg">Michael from Toronto</h4>
                         </div>
-                        <div class="text-right text-sm font-medium">"I moved to Buenos Aires effortlessly."</div>
+                        <p class="text-xs text-slate-200 italic bg-white/10 backdrop-blur-md p-3 rounded-2xl border border-white/10">"I relocated to Buenos Aires smoothly without language barriers."</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Pricing Section -->
-    <section id="pricing" class="py-16 bg-gray-50">
+    <section id="pricing" class="py-20 bg-slate-50">
         <div class="container mx-auto px-4 lg:px-8">
-            <div class="text-center mb-12">
-                <h2 class="text-lg font-bold text-purple-custom uppercase tracking-wider mb-2">ACCESSIBLE PLANS</h2>
-                <h3 class="text-3xl lg:text-4xl font-extrabold text-gray-900">Invest in Your Future Today</h3>
-                <p class="text-gray-600 mt-4 max-w-2xl mx-auto">Choose the ideal plan to achieve your professional and personal goals.</p>
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <h2 class="text-sm font-bold text-purple-600 uppercase tracking-widest mb-3">Accessible Plans</h2>
+                <h3 class="text-3xl lg:text-4xl font-extrabold text-slate-900">Invest in Your Future Today</h3>
+                <p class="text-slate-600 mt-3 text-base">Select the ideal tier to achieve your personal and career objectives.</p>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto items-center">
                 <!-- Basic Plan -->
-                <div class="bg-white rounded-2xl shadow-lg p-8 border border-gray-200">
-                    <h4 class="text-2xl font-bold text-gray-800 mb-4">Basic Plan</h4>
-                    <p class="text-gray-600 mb-6">Ideal for taking your first steps.</p>
-                    <div class="text-4xl font-extrabold text-gray-900 mb-6">$0 <span class="text-lg font-medium text-gray-500">/ forever</span></div>
-                    <ul class="mb-8 space-y-4 text-gray-700">
-                        <li class="flex items-center"><i class="fas fa-check text-purple-custom mr-3"></i> 3 daily lessons</li>
-                        <li class="flex items-center"><i class="fas fa-check text-purple-custom mr-3"></i> Vocabulary exercises</li>
-                        <li class="flex items-center text-gray-400"><i class="fas fa-times mr-3"></i> Live classes</li>
-                        <li class="flex items-center text-gray-400"><i class="fas fa-times mr-3"></i> Speaking Club</li>
+                <div class="bg-white rounded-3xl shadow-sm p-8 border border-slate-200">
+                    <h4 class="text-2xl font-extrabold text-slate-900 mb-2">Basic Plan</h4>
+                    <p class="text-slate-600 text-sm mb-6 h-10">Ideal for taking your first steps into Spanish.</p>
+                    <div class="text-4xl font-extrabold text-slate-900 mb-6">$0 <span class="text-sm font-medium text-slate-500">/ forever</span></div>
+                    <ul class="space-y-4 text-sm text-slate-700 mb-8">
+                        <li class="flex items-center gap-3"><i class="fas fa-check text-purple-600"></i> 3 daily interactive lessons</li>
+                        <li class="flex items-center gap-3"><i class="fas fa-check text-purple-600"></i> Core vocabulary exercises</li>
+                        <li class="flex items-center gap-3 text-slate-400"><i class="fas fa-times"></i> Live group classes</li>
+                        <li class="flex items-center gap-3 text-slate-400"><i class="fas fa-times"></i> Speaking Club access</li>
                     </ul>
-                    <a href="#" class="block w-full py-3 px-6 text-center border-2 border-purple-custom text-purple-custom font-bold rounded-full hover:bg-purple-custom hover:text-white transition duration-300">Start Free</a>
+                    <a href="#" class="block w-full py-4 text-center border-2 border-purple-600 text-purple-600 font-bold rounded-2xl hover:bg-purple-600 hover:text-white transition-all text-sm">Start Free</a>
                 </div>
+
                 <!-- Boost Pro Plan -->
-                <div class="bg-gray-900 text-white rounded-2xl shadow-xl p-8 transform md:scale-105 relative z-10 border-2 border-purple-500">
-                    <div class="absolute top-0 right-0 bg-purple-500 text-white text-xs font-bold px-3 py-1 rounded-bl-lg rounded-tr-lg">POPULAR</div>
-                    <h4 class="text-2xl font-bold mb-4">Boost Pro Plan</h4>
-                    <p class="text-gray-300 mb-6">Everything you need to speak fluently.</p>
-                    <div class="text-4xl font-extrabold mb-6">$250 <span class="text-lg font-medium text-gray-400">/ month</span></div>
-                    <ul class="mb-8 space-y-4">
-                        <li class="flex items-center"><i class="fas fa-check text-purple-500 mr-3"></i> Unlimited access to interactive resources</li>
-                        <li class="flex items-center"><i class="fas fa-check text-purple-500 mr-3"></i> Live classes (small groups)</li>
-                        <li class="flex items-center"><i class="fas fa-check text-purple-500 mr-3"></i> Speaking Club</li>
-                        <li class="flex items-center"><i class="fas fa-check text-purple-500 mr-3"></i> Official B2 Certificate</li>
+                <div class="bg-slate-900 text-white rounded-3xl shadow-2xl p-8 relative md:-translate-y-4 border-2 border-purple-500">
+                    <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-purple-600 to-pink-600 text-white text-xs font-extrabold px-4 py-1.5 rounded-full uppercase tracking-wider shadow-lg">Most Popular</div>
+                    <h4 class="text-2xl font-extrabold mb-2 mt-2">Boost Pro Plan</h4>
+                    <p class="text-slate-300 text-sm mb-6 h-10">Everything you need to speak fluently and confidently.</p>
+                    <div class="text-4xl font-extrabold mb-6">$250 <span class="text-sm font-medium text-slate-400">/ month</span></div>
+                    <ul class="space-y-4 text-sm text-slate-200 mb-8">
+                        <li class="flex items-start gap-3"><i class="fas fa-check text-purple-400 mt-1"></i> <span>Unlimited interactive resources</span></li>
+                        <li class="flex items-start gap-3"><i class="fas fa-check text-purple-400 mt-1"></i> <span>Live classes (small groups)</span></li>
+                        <li class="flex items-start gap-3"><i class="fas fa-check text-purple-400 mt-1"></i> <span>Full Speaking Club membership</span></li>
+                        <li class="flex items-start gap-3"><i class="fas fa-check text-purple-400 mt-1"></i> <span>Official B2 Level Certificate</span></li>
                     </ul>
-                    <a href="#" class="block w-full py-3 px-6 text-center bg-purple-custom text-white font-bold rounded-full hover:opacity-90 transition duration-300">Get Pro</a>
+                    <a href="#" class="block w-full py-4 text-center bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold rounded-2xl shadow-xl shadow-purple-900/50 hover:opacity-95 transition-all text-sm">Get Pro Access</a>
                 </div>
-                <!-- VIP/Teams Plan -->
-                <div class="bg-yellow-100 rounded-2xl shadow-lg p-8 border border-yellow-200">
-                    <h4 class="text-2xl font-bold text-gray-800 mb-4">VIP / Teams Plan</h4>
-                    <p class="text-gray-600 mb-6">For professionals and companies.</p>
-                    <div class="text-4xl font-extrabold text-gray-900 mb-6">$490 <span class="text-lg font-medium text-gray-500">/ month</span></div>
-                    <ul class="mb-8 space-y-4 text-gray-700">
-                        <li class="flex items-center"><i class="fas fa-check text-yellow-600 mr-3"></i> Everything in the Pro plan</li>
-                        <li class="flex items-center"><i class="fas fa-check text-yellow-600 mr-3"></i> 1-on-1 Exclusive Tutor</li>
-                        <li class="flex items-center"><i class="fas fa-check text-yellow-600 mr-3"></i> Advanced Business Spanish</li>
-                        <li class="flex items-center"><i class="fas fa-check text-yellow-600 mr-3"></i> Priority Support</li>
+
+                <!-- VIP / Teams Plan -->
+                <div class="bg-white rounded-3xl shadow-sm p-8 border border-slate-200">
+                    <h4 class="text-2xl font-extrabold text-slate-900 mb-2">VIP / Teams</h4>
+                    <p class="text-slate-600 text-sm mb-6 h-10">For serious professionals & companies.</p>
+                    <div class="text-4xl font-extrabold text-slate-900 mb-6">$490 <span class="text-sm font-medium text-slate-500">/ month</span></div>
+                    <ul class="space-y-4 text-sm text-slate-700 mb-8">
+                        <li class="flex items-start gap-3"><i class="fas fa-check text-amber-500 mt-1"></i> <span>Everything in the Pro plan</span></li>
+                        <li class="flex items-start gap-3"><i class="fas fa-check text-amber-500 mt-1"></i> <span>1-on-1 Exclusive Private Tutor</span></li>
+                        <li class="flex items-start gap-3"><i class="fas fa-check text-amber-500 mt-1"></i> <span>Advanced Business Spanish</span></li>
+                        <li class="flex items-start gap-3"><i class="fas fa-check text-amber-500 mt-1"></i> <span>Priority 24/7 Support</span></li>
                     </ul>
-                    <a href="#" class="block w-full py-3 px-6 text-center bg-gray-900 text-white font-bold rounded-full hover:bg-gray-800 transition duration-300">Start VIP</a>
+                    <a href="#" class="block w-full py-4 text-center bg-slate-900 text-white font-bold rounded-2xl hover:bg-slate-800 transition-all text-sm">Start VIP</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="bg-gray-900 text-gray-300 py-12">
-        <div class="container mx-auto px-4 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div class="mb-8 md:mb-0">
-                <a href="#" class="flex items-center text-2xl font-bold text-white mb-4">
-                    <span class="mr-2 text-purple-custom flex items-center">
-                        <img src="manito.svg" alt="Hi5Profe Logo" class="h-8 w-auto filter invert brightness-0">
-                    </span> Hi5Profe
+    <footer class="bg-slate-950 text-slate-400 py-16 border-t border-slate-800">
+        <div class="container mx-auto px-4 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
+            <div>
+                <a href="#" class="flex items-center gap-3 mb-4 group">
+                    <img src="logomania.svg" alt="Hi5Profe Logo" class="h-9 w-auto opacity-90 group-hover:opacity-100 transition-opacity rounded-lg">
+                    <span class="text-2xl font-extrabold text-white">Hi5<span class="text-purple-400">Profe</span></span>
                 </a>
-                <p class="text-sm">The best way to learn Spanish online. Flexible, effective, and fun.</p>
+                <p class="text-sm leading-relaxed text-slate-400">The premier online destination to learn Spanish effectively, naturally, and enjoyably.</p>
             </div>
             <div>
-                <h4 class="text-lg font-bold text-white mb-4">Company</h4>
-                <ul class="space-y-2">
-                    <li><a href="#" class="hover:text-purple-custom">About Us</a></li>
-                    <li><a href="#" class="hover:text-purple-custom">Careers</a></li>
-                    <li><a href="#" class="hover:text-purple-custom">Blog</a></li>
-                    <li><a href="#" class="hover:text-purple-custom">Press</a></li>
+                <h4 class="text-white font-bold text-base mb-4">Company</h4>
+                <ul class="space-y-2.5 text-sm">
+                    <li><a href="#" class="hover:text-purple-400 transition-colors">About Us</a></li>
+                    <li><a href="#" class="hover:text-purple-400 transition-colors">Careers</a></li>
+                    <li><a href="#" class="hover:text-purple-400 transition-colors">Blog</a></li>
+                    <li><a href="#" class="hover:text-purple-400 transition-colors">Press</a></li>
                 </ul>
             </div>
             <div>
-                <h4 class="text-lg font-bold text-white mb-4">Resources</h4>
-                <ul class="space-y-2">
-                    <li><a href="#" class="hover:text-purple-custom">Help Center</a></li>
-                    <li><a href="#" class="hover:text-purple-custom">Community</a></li>
-                    <li><a href="#" class="hover:text-purple-custom">Webinars</a></li>
-                    <li><a href="#" class="hover:text-purple-custom">Guides</a></li>
+                <h4 class="text-white font-bold text-base mb-4">Resources</h4>
+                <ul class="space-y-2.5 text-sm">
+                    <li><a href="#" class="hover:text-purple-400 transition-colors">Help Center</a></li>
+                    <li><a href="#" class="hover:text-purple-400 transition-colors">Community</a></li>
+                    <li><a href="#" class="hover:text-purple-400 transition-colors">Webinars</a></li>
+                    <li><a href="#" class="hover:text-purple-400 transition-colors">Guides</a></li>
                 </ul>
             </div>
             <div>
-                <h4 class="text-lg font-bold text-white mb-4">Contact</h4>
-                <ul class="space-y-2">
-                    <li><a href="#" class="hover:text-purple-custom">support@hi5profe.com</a></li>
-                    <li><a href="https://wa.me/message/LUZTCXXHNJS7J1" target="_blank" class="hover:text-purple-custom">+51 936932398</a></li>
-                    <li class="flex space-x-4 mt-4">
-                        <a href="#" class="text-2xl hover:text-purple-custom"><i class="fab fa-facebook"></i></a>
-                        <a href="#" class="text-2xl hover:text-purple-custom"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="text-2xl hover:text-purple-custom"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="text-2xl hover:text-purple-custom"><i class="fab fa-linkedin"></i></a>
+                <h4 class="text-white font-bold text-base mb-4">Contact</h4>
+                <ul class="space-y-2.5 text-sm">
+                    <li><a href="mailto:support@hi5profe.com" class="hover:text-purple-400 transition-colors">support@hi5profe.com</a></li>
+                    <li><a href="https://wa.me/message/LUZTCXXHNJS7J1" target="_blank" class="hover:text-purple-400 transition-colors">+51 936932398</a></li>
+                    <li class="flex space-x-4 pt-2">
+                        <a href="#" class="w-10 h-10 rounded-xl bg-slate-900 flex items-center justify-center text-white hover:bg-purple-600 transition-colors"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-xl bg-slate-900 flex items-center justify-center text-white hover:bg-purple-600 transition-colors"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-xl bg-slate-900 flex items-center justify-center text-white hover:bg-purple-600 transition-colors"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-xl bg-slate-900 flex items-center justify-center text-white hover:bg-purple-600 transition-colors"><i class="fab fa-linkedin-in"></i></a>
                     </li>
                 </ul>
             </div>
         </div>
-        <div class="container mx-auto px-4 lg:px-8 mt-12 pt-8 border-t border-gray-800 text-sm text-center md:text-left flex flex-col md:flex-row justify-between items-center">
-            <p>&copy; 2023 Hi5Profe. All rights reserved.</p>
-            <div class="flex space-x-6 mt-4 md:mt-0">
-                <a href="#" class="hover:text-purple-custom">Privacy Policy</a>
-                <a href="#" class="hover:text-purple-custom">Terms of Service</a>
+        <div class="container mx-auto px-4 lg:px-8 pt-8 border-t border-slate-900 text-xs flex flex-col sm:flex-row justify-between items-center gap-4">
+            <p>&copy; 2026 Hi5Profe. All rights reserved.</p>
+            <div class="flex space-x-6">
+                <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
+                <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
             </div>
         </div>
     </footer>
 
-    <!-- Floating WhatsApp Button -->
-    <a href="https://wa.me/message/LUZTCXXHNJS7J1" target="_blank" rel="noopener noreferrer" class="fixed bottom-6 right-6 z-50 bg-[#25D366] text-white rounded-full w-14 h-14 flex items-center justify-center shadow-lg hover:scale-110 hover:bg-[#1EBE5D] transition-transform duration-300" aria-label="Contact us on WhatsApp">
+    <a href="https://wa.me/message/LUZTCXXHNJS7J1" target="_blank" rel="noopener noreferrer" class="fixed bottom-6 right-6 z-50 bg-[#25D366] text-white rounded-full w-14 h-14 flex items-center justify-center shadow-2xl hover:scale-110 hover:bg-[#1ebe5d] transition-transform duration-300" aria-label="Contact us on WhatsApp">
         <i class="fab fa-whatsapp text-3xl"></i>
     </a>
 
