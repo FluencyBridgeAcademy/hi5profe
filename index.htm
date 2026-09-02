@@ -49,28 +49,31 @@
 
         .base-line {
             fill: none;
-            stroke: rgba(160, 175, 200, 0.2); /* Rastro sutil de la curva */
-            stroke-width: 1px;
+            stroke: rgba(160, 175, 200, 0.35); /* Rastro base un poco más visible */
+            stroke-width: 2px; /* Rastro más grueso */
+            vector-effect: non-scaling-stroke; /* Evita que se encoja en celulares */
         }
 
         .traveling-line {
             fill: none;
             stroke: url(#silver-gradient); /* Color plateado con gradiente */
-            stroke-width: 2.5px;
+            stroke-width: 7px; /* Mucho más grueso y notable */
             stroke-linecap: round;
-            /* Crea el efecto de "cometa": 200px de luz y 4000px de vacío */
-            stroke-dasharray: 200 4000; 
-            /* Sombra sutil para que brille contra el fondo blanco */
-            filter: drop-shadow(0 0 6px rgba(100, 120, 180, 0.5)) drop-shadow(0 0 12px rgba(255, 255, 255, 0.9));
+            /* Cometa más largo y con MENOR espacio vacío para verse más seguido en móviles */
+            stroke-dasharray: 400 2400; 
+            /* Resplandor intensificado para un brillo elegante y fuerte */
+            filter: drop-shadow(0 0 12px rgba(100, 120, 180, 0.8)) drop-shadow(0 0 25px rgba(255, 255, 255, 1));
+            vector-effect: non-scaling-stroke; /* Mantiene el grosor intacto en móviles */
         }
 
         .line-1 { animation: drawLine 14s linear infinite; }
         .line-2 { animation: drawLine 19s linear infinite; animation-delay: -6s; } /* Tiempos desfasados para que no coincidan */
+        .line-3 { animation: drawLine 16s linear infinite; animation-delay: -11s; } /* Nueva línea para móviles */
 
         @keyframes drawLine {
-            /* Desplaza el trazo desde fuera de la pantalla izquierda hasta salir por la derecha */
-            0% { stroke-dashoffset: 4200; }
-            100% { stroke-dashoffset: -200; }
+            /* Ajustado para el nuevo tamaño del dasharray */
+            0% { stroke-dashoffset: 2800; }
+            100% { stroke-dashoffset: -400; }
         }
 
         @keyframes fadeUp {
@@ -341,6 +344,10 @@
             <!-- Curva 2: De abajo izquierda cruzando hacia arriba derecha -->
             <path class="base-line" d="M -200, 900 C 500, 1100 850, 200 1500, 700 C 1850, 900 2000, 800 2200, 900" />
             <path class="traveling-line line-2" d="M -200, 900 C 500, 1100 850, 200 1500, 700 C 1850, 900 2000, 800 2200, 900" />
+            
+            <!-- Curva 3 NUEVA: Trazo diagonal/vertical diseñado especialmente para lucir bien en pantallas de celular (verticales) -->
+            <path class="base-line" d="M 600, -200 C 1100, 300 700, 800 1300, 1300" />
+            <path class="traveling-line line-3" d="M 600, -200 C 1100, 300 700, 800 1300, 1300" />
         </svg>
     </div>
 
