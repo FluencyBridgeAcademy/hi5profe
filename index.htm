@@ -52,9 +52,23 @@
         /* --- NUEVO: Animación de Entrada y Vibración --- */
         .card-wrapper {
             opacity: 0;
-            /* La variable --anim-delay se define en el HTML para escalonar la entrada */
+            transform: translateY(80px) scale(0.9);
+        }
+
+        /* Clase añadida por JavaScript al entrar en pantalla */
+        .card-wrapper.scroll-visible {
             animation: appearAndVibrate 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
             animation-delay: var(--anim-delay, 0s);
+        }
+
+        /* Clase añadida por JavaScript al salir de pantalla */
+        .card-wrapper.scroll-hidden {
+            animation: disappearAndFade 0.6s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+        }
+
+        @keyframes disappearAndFade {
+            0% { opacity: 1; transform: translateY(0) scale(1); }
+            100% { opacity: 0; transform: translateY(80px) scale(0.9); }
         }
 
         @keyframes appearAndVibrate {
@@ -108,7 +122,10 @@
             z-index: 10;
             pointer-events: none;
             opacity: 0;
-            /* Se dispara AUTOMÁTICAMENTE sincronizado con la vibración usando el mismo delay + 0.75s */
+        }
+
+        /* Se dispara AUTOMÁTICAMENTE cuando la tarjeta es visible por el scroll */
+        .card-wrapper.scroll-visible .glass-card::before {
             animation: relampago 2s ease-out calc(var(--anim-delay, 0s) + 0.75s) 1 forwards;
         }
 
@@ -141,6 +158,28 @@
         .glass-card > * {
             position: relative;
             z-index: 20;
+        }
+
+        /* NUEVO: Borde Brillante por Proximidad (Reveal Effect) */
+        .glass-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            padding: 2px; /* Grosor del borde luminoso */
+            /* Resplandor que sigue las coordenadas (mouse-x y mouse-y) inyectadas por JavaScript */
+            background: radial-gradient(350px circle at var(--mouse-x, 0) var(--mouse-y, 0), rgba(37, 99, 235, 1) 0%, rgba(124, 58, 237, 0.7) 40%, transparent 100%);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            pointer-events: none;
+            z-index: 30;
+        }
+
+        .glass-card:hover::after, .glass-card:active::after {
+            opacity: 1;
         }
 
         .icon-circle {
@@ -350,6 +389,41 @@
     </div>
 
     <script>
+        // --- NUEVO: Efecto Borde Brillante por Proximidad ---
+        document.querySelectorAll('.glass-card').forEach(card => {
+            card.addEventListener('mousemove', e => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left; // Coordenada X dentro de la tarjeta
+                const y = e.clientY - rect.top;  // Coordenada Y dentro de la tarjeta
+                
+                // Pasa las coordenadas a las variables CSS personalizadas
+                card.style.setProperty('--mouse-x', `${x}px`);
+                card.style.setProperty('--mouse-y', `${y}px`);
+            });
+        });
+
+        // --- NUEVO: Observador de Scroll para animar Entradas y Salidas ---
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.remove('scroll-hidden');
+                    // Forzar un 'reflow' para que la animación se reinicie si scrolleas muy rápido
+                    void entry.target.offsetWidth; 
+                    entry.target.classList.add('scroll-visible');
+                } else {
+                    entry.target.classList.remove('scroll-visible');
+                    entry.target.classList.add('scroll-hidden');
+                }
+            });
+        }, { 
+            threshold: 0.15 // Se activa cuando el 15% de la tarjeta es visible
+        });
+
+        // Iniciar la observación en nuestras tarjetas
+        document.querySelectorAll('.card-wrapper').forEach(wrapper => {
+            observer.observe(wrapper);
+        });
+
         function playSoftTone() {
             try {
                 const ctx = new (window.AudioContext || window.webkitAudioContext)();
