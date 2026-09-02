@@ -395,18 +395,9 @@
                 
                 setTimeout(() => {
                     const nextRoute = lang === 'English' ? 'aprendoingles.html' : 'spanish.html';
-                    console.log('Navegando a: ' + nextRoute);
                     
-                    const notif = document.createElement('div');
-                    notif.style.cssText = "position:fixed; top:20px; right:20px; background:white; padding:15px 25px; border-radius:10px; box-shadow:0 10px 25px rgba(0,0,0,0.1); z-index:999; font-weight:bold; border-left: 4px solid #2563EB; animation: fadeUp 0.3s ease-out;";
-                    notif.innerText = `Navegación simulada hacia: ${nextRoute}`;
-                    document.body.appendChild(notif);
-                    
-                    setTimeout(() => {
-                        notif.style.opacity = '0';
-                        notif.style.transition = 'opacity 0.3s ease';
-                        setTimeout(() => notif.remove(), 300);
-                    }, 3000);
+                    // Navegación real hacia tus páginas en GitHub
+                    window.location.href = nextRoute;
                     
                 }, 400);
             }, 800); 
