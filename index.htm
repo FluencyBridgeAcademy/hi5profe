@@ -35,6 +35,44 @@
             pointer-events: none;
         }
 
+        /* --- NUEVO: Líneas Elegantes de Fondo (Silver Line Effect) --- */
+        .bg-lines-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1; /* Se mantiene detrás de todo */
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .base-line {
+            fill: none;
+            stroke: rgba(160, 175, 200, 0.2); /* Rastro sutil de la curva */
+            stroke-width: 1px;
+        }
+
+        .traveling-line {
+            fill: none;
+            stroke: url(#silver-gradient); /* Color plateado con gradiente */
+            stroke-width: 2.5px;
+            stroke-linecap: round;
+            /* Crea el efecto de "cometa": 200px de luz y 4000px de vacío */
+            stroke-dasharray: 200 4000; 
+            /* Sombra sutil para que brille contra el fondo blanco */
+            filter: drop-shadow(0 0 6px rgba(100, 120, 180, 0.5)) drop-shadow(0 0 12px rgba(255, 255, 255, 0.9));
+        }
+
+        .line-1 { animation: drawLine 14s linear infinite; }
+        .line-2 { animation: drawLine 19s linear infinite; animation-delay: -6s; } /* Tiempos desfasados para que no coincidan */
+
+        @keyframes drawLine {
+            /* Desplaza el trazo desde fuera de la pantalla izquierda hasta salir por la derecha */
+            0% { stroke-dashoffset: 4200; }
+            100% { stroke-dashoffset: -200; }
+        }
+
         @keyframes fadeUp {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
@@ -283,6 +321,28 @@
 <body class="relative">
 
     <div class="bg-gradient-mesh"></div>
+    
+    <!-- NUEVO: Contenedor SVG de las líneas en movimiento -->
+    <div class="bg-lines-container">
+        <svg viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice" style="width: 100%; height: 100%;">
+            <defs>
+                <!-- Gradiente plateado para el destello -->
+                <linearGradient id="silver-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#94a3b8" />
+                    <stop offset="50%" stop-color="#ffffff" />
+                    <stop offset="100%" stop-color="#cbd5e1" />
+                </linearGradient>
+            </defs>
+            
+            <!-- Curva 1: De arriba izquierda a abajo derecha -->
+            <path class="base-line" d="M -200, 300 C 400, 100 900, 900 1400, 500 C 1800, 200 2000, 300 2200, 400" />
+            <path class="traveling-line line-1" d="M -200, 300 C 400, 100 900, 900 1400, 500 C 1800, 200 2000, 300 2200, 400" />
+            
+            <!-- Curva 2: De abajo izquierda cruzando hacia arriba derecha -->
+            <path class="base-line" d="M -200, 900 C 500, 1100 850, 200 1500, 700 C 1850, 900 2000, 800 2200, 900" />
+            <path class="traveling-line line-2" d="M -200, 900 C 500, 1100 850, 200 1500, 700 C 1850, 900 2000, 800 2200, 900" />
+        </svg>
+    </div>
 
     <nav class="w-full py-6 px-8 md:px-16 flex justify-between items-center z-50">
         <div class="flex items-center gap-3 cursor-pointer group fade-in-up">
