@@ -1,566 +1,493 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hi5profe - Premium Language Learning</title>
+    <title>Hi5profe - Bienvenido / Welcome | Elige tu camino</title>
 
-<!-- Favicon principal para navegadores modernos (vectorial) -->
-<link rel="icon" type="image/svg+xml" href="logomania.svg">
-
-<!-- Alternativa PNG para navegadores antiguos -->
-<link rel="icon" type="image/png" sizes="48x48" href="logomania.png">
-
-<!-- Icono para dispositivos Apple iOS -->
-<link rel="apple-touch-icon" sizes="180x180" href="logomania.png">
-
-<!-- Fuentes y Tailwind CSS -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-<script src="https://cdn.tailwindcss.com"></script>
-
-   
+    <!-- Google Fonts: Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            purple: '#7C3AED',
+                            violet: '#8B5CF6',
+                            magenta: '#EC4899',
+                            pink: '#F43F5E',
+                            cyan: '#06B6D4',
+                            emerald: '#10B981',
+                            amber: '#F59E0B',
+                            dark: '#0F172A'
+                        }
+                    },
+                    boxShadow: {
+                        'glow-purple': '0 16px 35px -8px rgba(124, 58, 237, 0.35)',
+                        'glow-pink': '0 16px 35px -8px rgba(236, 72, 153, 0.35)',
+                        'card-soft': '0 20px 45px -12px rgba(15, 23, 42, 0.08), 0 0 0 1px rgba(124, 58, 237, 0.06)',
+                        'card-hover': '0 25px 55px -10px rgba(124, 58, 237, 0.16), 0 0 0 2px rgba(139, 92, 246, 0.3)',
+                    }
+                }
+            }
+        }
+    </script>
+
     <style>
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #FAFAFA;
-            color: #1A1A1A;
-            -webkit-font-smoothing: antialiased;
+            background-color: #FFFFFF;
+            color: #0F172A;
             overflow-x: hidden;
-            margin: 0;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
+            -webkit-font-smoothing: antialiased;
         }
 
-        .bg-gradient-mesh {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: -1;
-            background-color: #FAFAFA;
-            background-image: 
-                radial-gradient(at 0% 0%, hsla(253,16%,7%,0.03) 0, transparent 50%), 
-                radial-gradient(at 50% 0%, hsla(225,39%,30%,0.04) 0, transparent 50%), 
-                radial-gradient(at 100% 0%, hsla(339,49%,30%,0.03) 0, transparent 50%);
-            pointer-events: none;
-        }
-
-        /* --- NUEVO: Líneas Elegantes de Fondo (Silver Line Effect) --- */
-        .bg-lines-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: -1; /* Se mantiene detrás de todo */
-            pointer-events: none;
-            overflow: hidden;
-        }
-
-        .base-line {
-            fill: none;
-            stroke: rgba(160, 175, 200, 0.35); /* Rastro base un poco más visible */
-            stroke-width: 2px; /* Rastro más grueso */
-            vector-effect: non-scaling-stroke; /* Evita que se encoja en celulares */
-        }
-
-        .traveling-line {
-            fill: none;
-            stroke: url(#silver-gradient); /* Color plateado con gradiente */
-            stroke-width: 7px; /* Mucho más grueso y notable */
-            stroke-linecap: round;
-            /* Cometa más largo y con MENOR espacio vacío para verse más seguido en móviles */
-            stroke-dasharray: 400 2400; 
-            /* Resplandor intensificado para un brillo elegante y fuerte */
-            filter: drop-shadow(0 0 12px rgba(100, 120, 180, 0.8)) drop-shadow(0 0 25px rgba(255, 255, 255, 1));
-            vector-effect: non-scaling-stroke; /* Mantiene el grosor intacto en móviles */
-        }
-
-        .line-1 { animation: drawLine 14s linear infinite; }
-        .line-2 { animation: drawLine 19s linear infinite; animation-delay: -6s; } /* Tiempos desfasados para que no coincidan */
-        .line-3 { animation: drawLine 16s linear infinite; animation-delay: -11s; } /* Nueva línea para móviles */
-
-        @keyframes drawLine {
-            /* Ajustado para el nuevo tamaño del dasharray */
-            0% { stroke-dashoffset: 2800; }
-            100% { stroke-dashoffset: -400; }
-        }
-
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .fade-in-up {
-            opacity: 0;
-            animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-
-        .delay-100 { animation-delay: 0.1s; }
-        .delay-200 { animation-delay: 0.2s; }
-        .delay-300 { animation-delay: 0.3s; }
-
-        /* --- NUEVO: Animación de Entrada y Vibración --- */
-        .card-wrapper {
-            opacity: 0;
-            transform: translateY(80px) scale(0.9);
-        }
-
-        /* Clase añadida por JavaScript al entrar en pantalla */
-        .card-wrapper.scroll-visible {
-            animation: appearAndVibrate 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-            animation-delay: var(--anim-delay, 0s);
-        }
-
-        /* Clase añadida por JavaScript al salir de pantalla */
-        .card-wrapper.scroll-hidden {
-            animation: disappearAndFade 0.6s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-        }
-
-        @keyframes disappearAndFade {
-            0% { opacity: 1; transform: translateY(0) scale(1); }
-            100% { opacity: 0; transform: translateY(80px) scale(0.9); }
-        }
-
-        @keyframes appearAndVibrate {
-            0% { opacity: 0; transform: translateY(80px) scale(0.9); }
-            40% { opacity: 1; transform: translateY(-5px) scale(1.02); }
-            55% { transform: translateY(0) scale(1); }
-            /* Comienza la vibración elegante (Wobble) */
-            65% { transform: scale(1.015) rotate(1.5deg); }
-            75% { transform: scale(0.99) rotate(-1deg); }
-            85% { transform: scale(1.005) rotate(0.5deg); }
-            95% { transform: scale(1) rotate(-0.2deg); }
-            100% { opacity: 1; transform: scale(1) rotate(0); }
-        }
-
-        /* Estilo Neumórfico 3D y Efecto Relámpago */
-        .glass-card {
-            background: linear-gradient(145deg, #ffffff, #f5f5f7);
-            border-radius: 2.5rem;
-            /* Relieve 3D elegante (Neumorfismo profundo) */
-            box-shadow: 
-                15px 15px 40px rgba(0, 0, 0, 0.07),
-                -15px -15px 35px rgba(255, 255, 255, 1),
-                inset 2px 2px 5px rgba(255, 255, 255, 0.9),
-                inset -2px -2px 10px rgba(0, 0, 0, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.6);
-            transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
-            position: relative;
-            overflow: hidden;
-            transform-style: preserve-3d;
-        }
-        
-        /* Efecto Relámpago / Chispa */
-        .glass-card::before {
-            content: '';
+        /* Ambient Glow Blobs matching screenshot style */
+        .ambient-glow {
             position: absolute;
-            top: 0;
-            left: -150%;
-            width: 150%;
-            height: 100%;
-            background: linear-gradient(
-                90deg, 
-                transparent 0%, 
-                rgba(255,255,255,0.1) 30%, 
-                rgba(255,255,255,0.7) 45%, 
-                rgba(255,255,255,1) 50%, 
-                rgba(255,255,255,0.7) 55%, 
-                rgba(255,255,255,0.1) 70%, 
-                transparent 100%
-            );
-            transform: skewX(-25deg);
-            z-index: 10;
             pointer-events: none;
-            opacity: 0;
+            z-index: 0;
+            border-radius: 50%;
+            filter: blur(120px);
         }
 
-        /* Se dispara AUTOMÁTICAMENTE cuando la tarjeta es visible por el scroll */
-        .card-wrapper.scroll-visible .glass-card::before {
-            animation: relampago 2s ease-out calc(var(--anim-delay, 0s) + 0.75s) 1 forwards;
+        .glow-top {
+            top: -120px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 850px;
+            height: 480px;
+            background: radial-gradient(circle, rgba(236, 72, 153, 0.12) 0%, rgba(139, 92, 246, 0.14) 40%, rgba(6, 182, 212, 0.08) 70%, transparent 80%);
         }
 
-        @keyframes relampago {
-            0% { left: -150%; opacity: 0; }
-            5% { opacity: 1; }
-            15% { left: 150%; opacity: 0; }
-            18% { left: -150%; opacity: 0; }
-            22% { opacity: 0.8; }
-            30% { left: 150%; opacity: 0; }
-            100% { left: 150%; opacity: 0; }
+        .glow-left {
+            top: 40%;
+            left: -150px;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(124, 58, 237, 0.12) 0%, rgba(236, 72, 153, 0.06) 50%, transparent 75%);
         }
 
-        .glass-card:hover, .glass-card:active {
-            transform: translateY(-12px) scale(1.03);
-            box-shadow: 
-                25px 30px 60px rgba(0, 0, 0, 0.1),
-                -20px -20px 45px rgba(255, 255, 255, 1),
-                inset 1px 1px 3px rgba(255, 255, 255, 1);
-            background: linear-gradient(145deg, #ffffff, #fafafa);
-            border-color: #ffffff;
-            z-index: 20;
-            outline: none;
+        .glow-right {
+            top: 45%;
+            right: -150px;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(6, 182, 212, 0.12) 0%, rgba(16, 185, 129, 0.07) 50%, transparent 75%);
         }
 
-        .glass-card:hover::before, .glass-card:active::before {
-            animation: relampago 2.5s ease-out infinite;
+        /* Buttons with brand gradient */
+        .btn-gradient-purple {
+            background: linear-gradient(135deg, #8B5CF6 0%, #D946EF 50%, #EC4899 100%);
+            box-shadow: 0 12px 28px -6px rgba(192, 38, 211, 0.42);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        
-        .glass-card > * {
-            position: relative;
-            z-index: 20;
-        }
-
-        /* NUEVO: Borde Brillante por Proximidad (Reveal Effect) */
-        .glass-card::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border-radius: inherit;
-            padding: 2px; /* Grosor del borde luminoso */
-            /* Resplandor que sigue las coordenadas (mouse-x y mouse-y) inyectadas por JavaScript */
-            background: radial-gradient(350px circle at var(--mouse-x, 0) var(--mouse-y, 0), rgba(37, 99, 235, 1) 0%, rgba(124, 58, 237, 0.7) 40%, transparent 100%);
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            opacity: 0;
-            transition: opacity 0.4s ease;
-            pointer-events: none;
-            z-index: 30;
+        .btn-gradient-purple:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 16px 34px -4px rgba(192, 38, 211, 0.55);
+            filter: brightness(1.05);
         }
 
-        .glass-card:hover::after, .glass-card:active::after {
-            opacity: 1;
+        .btn-gradient-amber {
+            background: linear-gradient(135deg, #F59E0B 0%, #F97316 50%, #EF4444 100%);
+            box-shadow: 0 12px 28px -6px rgba(249, 115, 22, 0.42);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .btn-gradient-amber:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 16px 34px -4px rgba(249, 115, 22, 0.55);
+            filter: brightness(1.05);
         }
 
-        .icon-circle {
-            box-shadow: 
-                10px 10px 20px rgba(0,0,0,0.06),
-                -10px -10px 20px rgba(255,255,255,1),
-                inset 3px 3px 6px rgba(0,0,0,0.02),
-                inset -3px -3px 6px rgba(255,255,255,0.8);
-            border: 2px solid #ffffff;
-            transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
-            background: #ffffff;
-        }
-        
-        .glass-card:hover .icon-circle, .glass-card:active .icon-circle {
-            transform: scale(1.15) rotate(8deg);
-            box-shadow: 
-                15px 15px 25px rgba(0,0,0,0.09),
-                -10px -10px 20px rgba(255,255,255,1);
-        }
-
-        .text-gradient {
-            background-clip: text;
+        /* Text gradient hero */
+        .text-gradient-hero {
+            background: linear-gradient(135deg, #8B5CF6 0%, #D946EF 55%, #EC4899 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-image: linear-gradient(135deg, #2563EB, #7C3AED);
         }
 
-        @keyframes scroll-left {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); } 
+        /* Card 3D elevate */
+        .gateway-card {
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .gateway-card:hover {
+            transform: translateY(-8px);
         }
 
-        .scrolling-text-container {
-            overflow: hidden;
-            white-space: nowrap;
-            width: 100%;
-            mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-            -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+        /* WhatsApp Button pulse */
+        .whatsapp-btn {
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+            animation: pulse-green 2.5s infinite;
+        }
+        @keyframes pulse-green {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.6); }
+            70% { box-shadow: 0 0 0 18px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
         }
 
-        .scrolling-text-inner {
-            display: inline-block;
-            animation: scroll-left 15s linear infinite; 
+        /* Subtle audio wave bounce */
+        .wave-bar {
+            animation: waveMotion 0.9s ease-in-out infinite alternate;
         }
-
-        .scrolling-text-item {
-            display: inline-block;
-            padding-right: 4rem; 
-        }
-
-        #toast-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(255,255,255,0.7);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            z-index: 100;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.4s ease;
-        }
-
-        #toast-overlay.active {
-            opacity: 1;
-            pointer-events: all;
-        }
-
-        .toast-box {
-            background: white;
-            padding: 3rem 4rem;
-            border-radius: 2rem;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
-            border: 1px solid rgba(0,0,0,0.05);
-            transform: scale(0.95) translateY(20px);
-            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-            text-align: center;
-        }
-
-        #toast-overlay.active .toast-box {
-            transform: scale(1) translateY(0);
-        }
-        
-        .spinner {
-            width: 40px;
-            height: 40px;
-            border: 3px solid rgba(0,0,0,0.1);
-            border-radius: 50%;
-            border-top-color: #2563EB;
-            animation: spin 1s ease-in-out infinite;
-            margin: 0 auto 1.5rem auto;
-        }
-        
-        @keyframes spin {
-            to { transform: rotate(360deg); }
+        @keyframes waveMotion {
+            0% { height: 4px; }
+            100% { height: 20px; }
         }
     </style>
 </head>
-<body class="relative">
+<body class="relative flex flex-col min-h-screen bg-white">
 
-    <div class="bg-gradient-mesh"></div>
-    
-    <!-- NUEVO: Contenedor SVG de las líneas en movimiento -->
-    <div class="bg-lines-container">
-        <svg viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice" style="width: 100%; height: 100%;">
-            <defs>
-                <!-- Gradiente plateado para el destello -->
-                <linearGradient id="silver-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stop-color="#94a3b8" />
-                    <stop offset="50%" stop-color="#ffffff" />
-                    <stop offset="100%" stop-color="#cbd5e1" />
-                </linearGradient>
-            </defs>
-            
-            <!-- Curva 1: De arriba izquierda a abajo derecha -->
-            <path class="base-line" d="M -200, 300 C 400, 100 900, 900 1400, 500 C 1800, 200 2000, 300 2200, 400" />
-            <path class="traveling-line line-1" d="M -200, 300 C 400, 100 900, 900 1400, 500 C 1800, 200 2000, 300 2200, 400" />
-            
-            <!-- Curva 2: De abajo izquierda cruzando hacia arriba derecha -->
-            <path class="base-line" d="M -200, 900 C 500, 1100 850, 200 1500, 700 C 1850, 900 2000, 800 2200, 900" />
-            <path class="traveling-line line-2" d="M -200, 900 C 500, 1100 850, 200 1500, 700 C 1850, 900 2000, 800 2200, 900" />
-            
-            <!-- Curva 3 NUEVA: Trazo diagonal/vertical diseñado especialmente para lucir bien en pantallas de celular (verticales) -->
-            <path class="base-line" d="M 600, -200 C 1100, 300 700, 800 1300, 1300" />
-            <path class="traveling-line line-3" d="M 600, -200 C 1100, 300 700, 800 1300, 1300" />
-        </svg>
-    </div>
+    <!-- Ambient background glows -->
+    <div class="glow-top ambient-glow"></div>
+    <div class="glow-left ambient-glow"></div>
+    <div class="glow-right ambient-glow"></div>
 
-    <nav class="w-full py-6 px-8 md:px-16 flex justify-between items-center z-50">
-        <div class="flex items-center gap-3 cursor-pointer group fade-in-up">
-            <div class="w-12 h-12 flex items-center justify-center transition-transform duration-300 group-hover:scale-110 drop-shadow-sm">
-                <img src="logomania.svg" alt="Hi5profe Logo" class="w-full h-full object-contain">
+    <!-- Header bar -->
+    <header class="relative z-30 w-full max-w-7xl mx-auto px-6 py-6 flex items-center justify-between">
+        <!-- Logo Hi5profe matching screenshot typography & icon -->
+        <a href="#" class="flex items-center gap-3 group">
+            <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-purple-600 via-fuchsia-500 to-pink-500 flex items-center justify-center text-white font-black text-xl shadow-lg shadow-purple-500/30 group-hover:scale-105 transition-transform">
+                Hi5
             </div>
-            <span class="text-2xl font-extrabold tracking-tight text-gray-900">
-                Hi5profe
-            </span>
-        </div>
-    </nav>
+            <div class="flex flex-col">
+                <span class="text-2xl font-black tracking-tight text-gray-950 leading-none">
+                    Hi5<span class="text-gray-900">profe</span>
+                </span>
+                <span class="text-[10px] font-bold text-purple-600 tracking-wider uppercase mt-0.5">
+                    Academia de Idiomas
+                </span>
+            </div>
+        </a>
 
-    <main class="flex-grow flex flex-col items-center justify-center w-full px-6 py-12 z-10 max-w-5xl mx-auto">
+        <!-- Portal Info Pill -->
+        <div class="hidden sm:flex items-center gap-2 px-4 py-1.5 rounded-full bg-purple-50 border border-purple-100 text-xs font-bold text-purple-700">
+            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+            <span>Plataforma Activa 2026</span>
+        </div>
+
+        <!-- Quick contact button -->
+        <a href="https://wa.me/?text=Hola%20Hi5profe!%20Deseo%20informaci%C3%B3n%20sobre%20los%20cursos" 
+           target="_blank" 
+           rel="noopener noreferrer"
+           class="px-5 py-2.5 rounded-full bg-gray-50 hover:bg-gray-100 border border-gray-200 text-gray-800 text-xs sm:text-sm font-bold transition-all shadow-sm flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+            <span>Contacto</span>
+        </a>
+    </header>
+
+    <main class="relative z-20 flex-grow flex flex-col items-center justify-center max-w-6xl mx-auto px-6 py-6 md:py-10 w-full">
         
-        <header class="text-center mb-16 w-full">
-            <span class="inline-block py-1.5 px-4 rounded-full bg-blue-50/80 border border-blue-100 text-blue-600 text-xs font-bold tracking-wide mb-6 uppercase shadow-sm fade-in-up delay-100">
-                Bienvenido a una nueva era
-            </span>
+        <!-- Header Text Section -->
+        <div class="text-center max-w-3xl mx-auto mb-12">
             
-            <div class="scrolling-text-container fade-in-up delay-200 mb-6">
-                <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight text-gray-900 leading-tight scrolling-text-inner">
-                    <span class="scrolling-text-item">Domina idiomas con <span class="text-gradient">fluidez natural.</span></span>
-                    <span class="scrolling-text-item">Master languages with <span class="text-gradient">natural fluency.</span></span>
-                    
-                    <span class="scrolling-text-item">Domina idiomas con <span class="text-gradient">fluidez natural.</span></span>
-                    <span class="scrolling-text-item">Master languages with <span class="text-gradient">natural fluency.</span></span>
+            <!-- Multi-colored Hi5profe letters matching screenshot colors -->
+            <div class="mb-4 inline-block select-none">
+                <h1 class="text-5xl sm:text-6xl md:text-7xl font-black tracking-tight leading-none">
+                    <span class="text-[#7C3AED]">H</span><span class="text-[#8B5CF6]">i</span><span class="text-[#06B6D4]">5</span><span class="text-[#10B981]">p</span><span class="text-[#F59E0B]">r</span><span class="text-[#EF4444]">o</span><span class="text-[#EC4899]">f</span><span class="text-[#F43F5E]">e</span>
                 </h1>
             </div>
 
-            <p class="text-lg md:text-xl font-medium max-w-2xl mx-auto text-gray-500 leading-relaxed fade-in-up delay-300">
-                Una experiencia de aprendizaje inmersiva, diseñada para que hables desde el primer día. Elige tu objetivo.
-            </p>
-        </header>
+            <h2 class="text-3xl sm:text-5xl font-black text-gray-950 tracking-tight leading-tight mb-2">
+                Aprende un nuevo idioma.
+            </h2>
+            <h2 class="text-3xl sm:text-5xl font-black text-gradient-hero tracking-tight leading-tight mb-5">
+                Impulsa tu futuro.
+            </h2>
 
-        <div class="grid md:grid-cols-2 gap-8 w-full px-4">
+            <p class="text-gray-600 text-base sm:text-lg font-medium leading-relaxed max-w-2xl mx-auto mb-3">
+                Bienvenido al portal oficial de <strong class="text-gray-900 font-bold">Hi5profe</strong>. Selecciona tu ruta de aprendizaje para ingresar directamente a tu aula interactiva:
+            </p>
+
+            <span class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-gray-100 text-gray-600 text-xs font-bold uppercase tracking-wider">
+                👇 Elige tu curso a continuación
+            </span>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8 w-full max-w-4xl mx-auto mb-12">
             
-            <!-- Spanish Card - Wrapper con delay de 0.2s -->
-            <div class="card-wrapper w-full h-full" style="--anim-delay: 0.2s;">
-                <button class="glass-card w-full h-full p-10 flex flex-col items-center text-center group" onclick="selectPath('Spanish')">
-                    
-                    <div class="absolute top-6 left-6 text-[10px] font-bold tracking-widest text-gray-400 uppercase">
-                        For English Speakers
+            <!-- OPTION 1: APRENDER INGLÉS (Destino: aprendoingles.html) -->
+            <div class="gateway-card bg-white rounded-3xl p-8 sm:p-10 border-2 border-purple-100 hover:border-purple-500 shadow-card-soft hover:shadow-card-hover flex flex-col justify-between relative overflow-hidden group">
+                
+                <!-- Background ambient accent inside card -->
+                <div class="absolute -top-20 -right-20 w-44 h-44 rounded-full bg-purple-100/50 pointer-events-none blur-2xl group-hover:bg-purple-200/60 transition-colors"></div>
+
+                <div>
+                    <!-- Card Top: Tag + Flag badge -->
+                    <div class="flex items-center justify-between mb-6">
+                        <span class="px-3.5 py-1.5 rounded-full bg-purple-100 text-purple-700 text-xs font-extrabold uppercase tracking-wide">
+                            Para Hispanohablantes
+                        </span>
+                        <!-- Flag circle badge -->
+                        <div class="w-12 h-12 rounded-2xl bg-purple-50 border border-purple-200/70 flex items-center justify-center text-2xl shadow-sm group-hover:scale-110 transition-transform">
+                            🇬🇧
+                        </div>
                     </div>
-                    
-                    <div class="icon-circle w-24 h-24 rounded-full flex items-center justify-center mb-6 mt-4 overflow-hidden relative z-10">
-                        <img src="espana.svg" alt="Spain" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/100x100/fef08a/000?text=ES'">
-                    </div>
-                    
-                    <h2 class="text-3xl font-bold mb-3 text-gray-900 tracking-tight">Learn Spanish</h2>
-                    <p class="text-gray-500 text-sm mb-8 leading-relaxed px-4 font-medium">
-                        Master real-world vocabulary and native conversational skills through immersion.
+
+                    <!-- Title & Subheading -->
+                    <h3 class="text-2xl sm:text-3xl font-black text-gray-950 mb-2 group-hover:text-purple-600 transition-colors">
+                        Aprender Inglés
+                    </h3>
+                    <p class="text-sm sm:text-base text-gray-600 font-medium leading-relaxed mb-6">
+                        Diseñado especialmente para hablar con soltura, perder la vergüenza y entender inglés nativo desde la primera lección.
                     </p>
-                    
-                    <div class="mt-auto flex items-center gap-2 text-blue-600 font-bold group-hover:gap-4 transition-all duration-300">
-                        <span>Start Journey</span>
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4M21 12H3" />
+
+                    <!-- Feature checkmarks -->
+                    <ul class="space-y-3 mb-8 text-xs sm:text-sm font-semibold text-gray-700">
+                        <li class="flex items-center gap-2.5">
+                            <div class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-xs font-black">✓</div>
+                            <span>Escucha activa y pronunciación guiada</span>
+                        </li>
+                        <li class="flex items-center gap-2.5">
+                            <div class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-xs font-black">✓</div>
+                            <span>Inglés real para trabajo y viajes</span>
+                        </li>
+                        <li class="flex items-center gap-2.5">
+                            <div class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-xs font-black">✓</div>
+                            <span>Ejercicios prácticos con retroalimentación</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Interactive Audio preview & CTA Action Button -->
+                <div class="pt-4 border-t border-gray-100 flex flex-col gap-3">
+                    <button onclick="previewAudio('en')" class="text-xs font-bold text-purple-600 hover:text-purple-800 flex items-center gap-1.5 self-start transition-colors py-1">
+                        <svg class="w-4 h-4 fill-purple-600" viewBox="0 0 24 24">
+                            <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
                         </svg>
-                    </div>
-                </button>
+                        <span id="audio-label-en">Escuchar muestra en inglés</span>
+                    </button>
+
+                    <button onclick="goToPath('aprendoingles.html', 'Aprender Inglés', '🇬🇧')" class="btn-gradient-purple w-full py-4 px-6 rounded-2xl text-white font-black text-base shadow-glow-purple flex items-center justify-center gap-3 group/btn">
+                        <span>Entrar a Aprender Inglés</span>
+                        <span class="group-hover/btn:translate-x-1 transition-transform">&rarr;</span>
+                    </button>
+                </div>
+
             </div>
 
-            <!-- English Card - Wrapper con delay de 0.4s -->
-            <div class="card-wrapper w-full h-full" style="--anim-delay: 0.4s;">
-                <button class="glass-card w-full h-full p-10 flex flex-col items-center text-center group" onclick="selectPath('English')">
-                    
-                    <div class="absolute top-6 left-6 text-[10px] font-bold tracking-widest text-gray-400 uppercase">
-                        Para Hispanohablantes
+            <!-- OPTION 2: LEARN SPANISH (Destino: spanish.html) -->
+            <div class="gateway-card bg-white rounded-3xl p-8 sm:p-10 border-2 border-amber-100 hover:border-amber-500 shadow-card-soft hover:shadow-card-hover flex flex-col justify-between relative overflow-hidden group">
+                
+                <!-- Background ambient accent inside card -->
+                <div class="absolute -top-20 -right-20 w-44 h-44 rounded-full bg-amber-100/50 pointer-events-none blur-2xl group-hover:bg-amber-200/60 transition-colors"></div>
+
+                <div>
+                    <!-- Card Top: Tag + Flag badge -->
+                    <div class="flex items-center justify-between mb-6">
+                        <span class="px-3.5 py-1.5 rounded-full bg-amber-100 text-amber-800 text-xs font-extrabold uppercase tracking-wide">
+                            For English Speakers
+                        </span>
+                        <!-- Flag circle badge -->
+                        <div class="w-12 h-12 rounded-2xl bg-amber-50 border border-amber-200/70 flex items-center justify-center text-2xl shadow-sm group-hover:scale-110 transition-transform">
+                            🇪🇸
+                        </div>
                     </div>
-                    
-                    <div class="icon-circle w-24 h-24 rounded-full flex items-center justify-center mb-6 mt-4 overflow-hidden relative z-10">
-                        <img src="english.svg" alt="English" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/100x100/bae6fd/000?text=EN'">
-                    </div>
-                    
-                    <h2 class="text-3xl font-bold mb-3 text-gray-900 tracking-tight">Aprender Inglés</h2>
-                    <p class="text-gray-500 text-sm mb-8 leading-relaxed px-4 font-medium">
-                        Mejora tu fluidez y pronunciación abriendo nuevas oportunidades globales hoy.
+
+                    <!-- Title & Subheading -->
+                    <h3 class="text-2xl sm:text-3xl font-black text-gray-950 mb-2 group-hover:text-amber-600 transition-colors">
+                        Learn Spanish
+                    </h3>
+                    <p class="text-sm sm:text-base text-gray-600 font-medium leading-relaxed mb-6">
+                        Zero to conversational confidence. Master natural Spanish, local slang, and speak like a native through immersion.
                     </p>
-                    
-                    <div class="mt-auto flex items-center gap-2 text-purple-600 font-bold group-hover:gap-4 transition-all duration-300">
-                        <span>Empezar Ruta</span>
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4M21 12H3" />
+
+                    <!-- Feature checkmarks -->
+                    <ul class="space-y-3 mb-8 text-xs sm:text-sm font-semibold text-gray-700">
+                        <li class="flex items-center gap-2.5">
+                            <div class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-xs font-black">✓</div>
+                            <span>Conversational Spanish from lesson one</span>
+                        </li>
+                        <li class="flex items-center gap-2.5">
+                            <div class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-xs font-black">✓</div>
+                            <span>Latin American & Spain cultural phrases</span>
+                        </li>
+                        <li class="flex items-center gap-2.5">
+                            <div class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-xs font-black">✓</div>
+                            <span>Interactive listening & active voice tasks</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Interactive Audio preview & CTA Action Button -->
+                <div class="pt-4 border-t border-gray-100 flex flex-col gap-3">
+                    <button onclick="previewAudio('es')" class="text-xs font-bold text-amber-700 hover:text-amber-900 flex items-center gap-1.5 self-start transition-colors py-1">
+                        <svg class="w-4 h-4 fill-amber-600" viewBox="0 0 24 24">
+                            <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
                         </svg>
-                    </div>
-                </button>
+                        <span id="audio-label-es">Listen to Spanish preview</span>
+                    </button>
+
+                    <button onclick="goToPath('spanish.html', 'Learn Spanish', '🇪🇸')" class="btn-gradient-amber w-full py-4 px-6 rounded-2xl text-white font-black text-base shadow-glow-pink flex items-center justify-center gap-3 group/btn">
+                        <span>Start Learning Spanish</span>
+                        <span class="group-hover/btn:translate-x-1 transition-transform">&rarr;</span>
+                    </button>
+                </div>
+
             </div>
 
         </div>
+
+        <!-- Social Proof Bar (ISA, LEO, FIR, LUP, JUA matching screenshot colors) -->
+        <div class="flex flex-wrap items-center justify-center gap-5 p-4 rounded-2xl bg-gray-50/80 border border-gray-200/70 max-w-xl mx-auto mb-6">
+            <!-- Avatar Circles matching screenshot -->
+            <div class="flex items-center -space-x-2.5">
+                <div class="w-9 h-9 rounded-full bg-[#7C3AED] text-white text-[11px] font-black flex items-center justify-center border-2 border-white shadow-sm">ISA</div>
+                <div class="w-9 h-9 rounded-full bg-[#EC4899] text-white text-[11px] font-black flex items-center justify-center border-2 border-white shadow-sm">LEO</div>
+                <div class="w-9 h-9 rounded-full bg-[#F59E0B] text-white text-[11px] font-black flex items-center justify-center border-2 border-white shadow-sm">FIR</div>
+                <div class="w-9 h-9 rounded-full bg-[#10B981] text-white text-[11px] font-black flex items-center justify-center border-2 border-white shadow-sm">LUP</div>
+                <div class="w-9 h-9 rounded-full bg-[#06B6D4] text-white text-[11px] font-black flex items-center justify-center border-2 border-white shadow-sm">JUA</div>
+            </div>
+
+            <!-- Star Rating & Counter -->
+            <div class="flex flex-col text-left">
+                <div class="flex items-center gap-1.5">
+                    <div class="flex text-amber-400 text-sm">
+                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                    </div>
+                    <span class="text-sm font-extrabold text-gray-900">4.9/5</span>
+                </div>
+                <span class="text-xs font-semibold text-gray-500">
+                    Basado en +2,000 estudiantes activos
+                </span>
+            </div>
+        </div>
+
     </main>
 
-    <footer class="w-full bg-transparent p-8 mt-auto fade-in-up delay-300">
-        <div class="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-gray-400 font-medium">
+    <!-- Transition Modal Screen -->
+    <div id="loading-overlay" class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300 p-6">
+        <div class="bg-white rounded-3xl p-8 sm:p-10 max-w-md w-full shadow-2xl border border-purple-100 text-center transform scale-95 transition-transform duration-300" id="loading-card">
+            
+            <div id="target-flag" class="w-20 h-20 mx-auto rounded-3xl bg-purple-50 flex items-center justify-center text-4xl mb-5 shadow-inner">
+                🚀
+            </div>
+
+            <h4 id="target-title" class="text-2xl font-black text-gray-900 mb-2">
+                Abriendo tu aula...
+            </h4>
+            <p id="target-desc" class="text-sm text-gray-500 font-medium mb-6">
+                Preparando el material interactivo de Hi5profe
+            </p>
+
+            <!-- Progress bar -->
+            <div class="w-full bg-gray-100 h-2.5 rounded-full overflow-hidden">
+                <div id="progress-bar" class="h-full bg-gradient-to-r from-purple-600 via-fuchsia-500 to-pink-500 w-0 transition-all duration-700 ease-out"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating WhatsApp Action Button (matching reference) -->
+    <a href="https://wa.me/?text=Hola%20Hi5profe!%20Deseo%20conocer%20m%C3%A1s%20sobre%20los%20cursos" 
+       target="_blank" 
+       rel="noopener noreferrer"
+       title="Contáctanos por WhatsApp"
+       class="whatsapp-btn fixed bottom-6 right-6 z-40 w-14 h-14 bg-[#25D366] hover:bg-[#20bd5a] text-white rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110">
+        <svg class="w-7 h-7 fill-white" viewBox="0 0 24 24">
+            <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.699c.971.531 1.771.815 2.796.815 3.179 0 5.766-2.587 5.767-5.766.001-3.18-2.586-5.767-5.767-5.767zm9.969 5.767c0 5.518-4.482 10-10 10-1.745 0-3.385-.45-4.818-1.238l-7.182 1.882 1.916-6.996c-.896-1.503-1.416-3.253-1.416-5.122 0-5.518 4.482-10 10-10 5.518 0 10 4.482 10 10z"/>
+        </svg>
+    </a>
+
+    <!-- Footer -->
+    <footer class="relative z-20 w-full border-t border-gray-100 bg-white/80 backdrop-blur-md py-6 mt-8">
+        <div class="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-semibold text-gray-500">
             <p>&copy; 2026 Hi5profe. Todos los derechos reservados.</p>
-            <div class="flex gap-6">
-                <a href="#" class="hover:text-gray-900 transition-colors">Privacidad</a>
-                <a href="#" class="hover:text-gray-900 transition-colors">Términos</a>
+            <div class="flex items-center gap-6">
+                <span>Inglés &bull; Español</span>
+                <span>Metodología Inmersiva</span>
             </div>
         </div>
     </footer>
 
-    <div id="toast-overlay">
-        <div class="toast-box">
-            <div class="spinner"></div>
-            <h3 id="toast-title" class="text-2xl font-bold mb-2 text-gray-900 tracking-tight">Preparando...</h3>
-            <p id="toast-desc" class="text-sm text-gray-500 font-medium">Configurando tu experiencia ideal</p>
-        </div>
-    </div>
-
     <script>
-        // --- NUEVO: Efecto Borde Brillante por Proximidad ---
-        document.querySelectorAll('.glass-card').forEach(card => {
-            card.addEventListener('mousemove', e => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left; // Coordenada X dentro de la tarjeta
-                const y = e.clientY - rect.top;  // Coordenada Y dentro de la tarjeta
-                
-                // Pasa las coordenadas a las variables CSS personalizadas
-                card.style.setProperty('--mouse-x', `${x}px`);
-                card.style.setProperty('--mouse-y', `${y}px`);
-            });
-        });
-
-        // --- NUEVO: Observador de Scroll para animar Entradas y Salidas ---
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.remove('scroll-hidden');
-                    // Forzar un 'reflow' para que la animación se reinicie si scrolleas muy rápido
-                    void entry.target.offsetWidth; 
-                    entry.target.classList.add('scroll-visible');
-                } else {
-                    entry.target.classList.remove('scroll-visible');
-                    entry.target.classList.add('scroll-hidden');
-                }
-            });
-        }, { 
-            threshold: 0.15 // Se activa cuando el 15% de la tarjeta es visible
-        });
-
-        // Iniciar la observación en nuestras tarjetas
-        document.querySelectorAll('.card-wrapper').forEach(wrapper => {
-            observer.observe(wrapper);
-        });
-
-        function playSoftTone() {
+        // Web Audio chime feedback
+        function playChime(freq1 = 523.25, freq2 = 783.99) {
             try {
-                const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                const AudioContext = window.AudioContext || window.webkitAudioContext;
+                if (!AudioContext) return;
+                const ctx = new AudioContext();
                 const osc = ctx.createOscillator();
                 const gain = ctx.createGain();
-                
-                osc.type = 'sine'; 
-                osc.frequency.setValueAtTime(600, ctx.currentTime);
-                osc.frequency.exponentialRampToValueAtTime(1200, ctx.currentTime + 0.1);
-                
-                gain.gain.setValueAtTime(0, ctx.currentTime);
-                gain.gain.linearRampToValueAtTime(0.05, ctx.currentTime + 0.05); 
-                gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.3);
-                
+
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(freq1, ctx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(freq2, ctx.currentTime + 0.15);
+
+                gain.gain.setValueAtTime(0.08, ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.35);
+
                 osc.connect(gain);
                 gain.connect(ctx.destination);
                 osc.start();
-                osc.stop(ctx.currentTime + 0.3);
-            } catch(e) {
-                console.log("Audio no soportado");
+                osc.stop(ctx.currentTime + 0.36);
+            } catch (e) {}
+        }
+
+        // Preview voice using browser speech synthesis
+        function previewAudio(lang) {
+            playChime(600, 900);
+            if (!('speechSynthesis' in window)) return;
+            
+            window.speechSynthesis.cancel();
+            
+            if (lang === 'en') {
+                const label = document.getElementById('audio-label-en');
+                const original = label.innerText;
+                label.innerText = 'Reproduciendo audio... 🔊';
+                
+                const msg = new SpeechSynthesisUtterance("Welcome to Hi5profe! Let's start speaking English with confidence today.");
+                msg.lang = 'en-US';
+                msg.rate = 1.0;
+                msg.onend = () => { label.innerText = original; };
+                msg.onerror = () => { label.innerText = original; };
+                window.speechSynthesis.speak(msg);
+            } else {
+                const label = document.getElementById('audio-label-es');
+                const original = label.innerText;
+                label.innerText = 'Playing preview... 🔊';
+                
+                const msg = new SpeechSynthesisUtterance("¡Hola y bienvenido a Hi5profe! Aprende español natural de manera divertida y práctica.");
+                msg.lang = 'es-ES';
+                msg.rate = 1.0;
+                msg.onend = () => { label.innerText = original; };
+                msg.onerror = () => { label.innerText = original; };
+                window.speechSynthesis.speak(msg);
             }
         }
 
-        function selectPath(lang) {
-            playSoftTone();
-            
-            const overlay = document.getElementById('toast-overlay');
-            const title = document.getElementById('toast-title');
-            const desc = document.getElementById('toast-desc');
-            
-            if (lang === 'Spanish') {
-                title.innerText = 'Preparando espacio...';
-                desc.innerText = 'Cargando tu entorno en Español';
-            } else {
-                title.innerText = 'Setting up space...';
-                desc.innerText = 'Loading your English environment';
-            }
-            
-            overlay.classList.add('active');
-            
+        // Navigate with transition effect to respective destination HTML file
+        function goToPath(url, title, flag) {
+            playChime(587.33, 880);
+
+            const overlay = document.getElementById('loading-overlay');
+            const card = document.getElementById('loading-card');
+            const flagEl = document.getElementById('target-flag');
+            const titleEl = document.getElementById('target-title');
+            const progressBar = document.getElementById('progress-bar');
+
+            flagEl.innerText = flag;
+            titleEl.innerText = `Ingresando a ${title}...`;
+
+            overlay.classList.remove('opacity-0', 'pointer-events-none');
+            card.classList.remove('scale-95');
+            card.classList.add('scale-100');
+
             setTimeout(() => {
-                overlay.classList.remove('active');
-                
-                setTimeout(() => {
-                    const nextRoute = lang === 'English' ? 'aprendoingles.html' : 'spanish.html';
-                    
-                    // Navegación real hacia tus páginas en GitHub
-                    window.location.href = nextRoute;
-                    
-                }, 400);
-            }, 800); 
+                progressBar.style.width = '100%';
+            }, 100);
+
+            setTimeout(() => {
+                window.location.href = url;
+            }, 850);
         }
     </script>
 </body>
