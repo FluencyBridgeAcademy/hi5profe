@@ -123,15 +123,6 @@
         .gateway-card:hover {
             transform: translateY(-8px);
         }
-
-        /* Subtle audio wave bounce */
-        .wave-bar {
-            animation: waveMotion 0.9s ease-in-out infinite alternate;
-        }
-        @keyframes waveMotion {
-            0% { height: 4px; }
-            100% { height: 20px; }
-        }
     </style>
 </head>
 <body class="relative flex flex-col min-h-screen bg-white">
@@ -145,7 +136,7 @@
     <header class="relative z-30 w-full max-w-7xl mx-auto px-6 py-6 flex items-center justify-between">
         <!-- Logo Hi5profe matching screenshot typography & icon -->
         <a href="#" class="flex items-center gap-3 group">
-            <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-purple-600 via-fuchsia-500 to-pink-500 flex items-center justify-center text-white font-black text-xl shadow-lg shadow-purple-500/30 group-hover:scale-105 transition-transform">
+            <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-purple-600 via-fuchsia-500 to-pink-500 flex items-center justify-center text-white font-black text-xl shadow-lg shadow-purple-500/30">
                 Hi5
             </div>
             <div class="flex flex-col">
@@ -182,7 +173,7 @@
             <!-- Multi-colored Hi5profe letters matching screenshot colors -->
             <div class="mb-4 inline-block select-none">
                 <h1 class="text-5xl sm:text-6xl md:text-7xl font-black tracking-tight leading-none">
-                    <span class="text-[#7C3AED]">H</span><span class="text-[#8B5CF6]">i</span><span class="text-[#06B6D4]">5</span><span class="text-[#10B981]">p</span><span class="text-[#F59E0B]">r</span><span class="text-[#EF4444]">o</span><span class="text-[#EC4899]">f</span><span class="text-[#F43F5E]">e</span>
+                    <span class="text-[#7C3AED]">H</span><span class="text-[#8B5CF6]">i</span><span class="text-[#06B6D4]">5</span><span class="text-[#10B981]">p</span><span class="text-[#F59E0B]">r</span><span class="text-[#EC4899]">o</span><span class="text-[#EF4444]">f</span><span class="text-[#F97316]">e</span>
                 </h1>
             </div>
 
@@ -205,7 +196,7 @@
         <div class="grid md:grid-cols-2 gap-8 w-full max-w-4xl mx-auto mb-12">
             
             <!-- OPTION 1: APRENDER INGLÉS (Destino: aprendoingles.html) -->
-            <div class="gateway-card bg-white rounded-3xl p-8 sm:p-10 border-2 border-purple-100 hover:border-purple-500 shadow-card-soft hover:shadow-card-hover flex flex-col justify-between relative overflow-hidden group">
+            <div class="gateway-card bg-white rounded-3xl p-8 sm:p-10 border-2 border-purple-100 hover:border-purple-500 shadow-card-soft hover:shadow-card-hover flex flex-col justify-between relative group">
                 
                 <!-- Background ambient accent inside card -->
                 <div class="absolute -top-20 -right-20 w-44 h-44 rounded-full bg-purple-100/50 pointer-events-none blur-2xl group-hover:bg-purple-200/60 transition-colors"></div>
@@ -247,16 +238,9 @@
                     </ul>
                 </div>
 
-                <!-- Interactive Audio preview & CTA Action Button -->
+                <!-- CTA Action Button -->
                 <div class="pt-4 border-t border-gray-100 flex flex-col gap-3">
-                    <button type="button" onclick="previewAudio('en')" class="text-xs font-bold text-purple-600 hover:text-purple-800 flex items-center gap-1.5 self-start transition-colors py-1 cursor-pointer">
-                        <svg class="w-4 h-4 fill-purple-600" viewBox="0 0 24 24">
-                            <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
-                        </svg>
-                        <span id="audio-label-en">Escuchar muestra en inglés</span>
-                    </button>
-
-                    <a href="aprendoingles.html" onclick="goToPath(event, 'aprendoingles.html', 'Aprender Inglés', '🇬🇧')" class="btn-gradient-purple w-full py-4 px-6 rounded-2xl text-white font-black text-base shadow-glow-purple flex items-center justify-center gap-3 group/btn cursor-pointer select-none">
+                    <a href="aprendoingles.html" onclick="goToPath(event, 'aprendoingles.html', 'Aprender Inglés', '🇬🇧')" class="btn-gradient-purple w-full py-4 px-6 rounded-2xl text-white font-black text-base sm:text-lg flex items-center justify-center gap-3 group/btn">
                         <span>Entrar a Aprender Inglés</span>
                         <span class="group-hover/btn:translate-x-1 transition-transform">&rarr;</span>
                     </a>
@@ -265,7 +249,7 @@
             </div>
 
             <!-- OPTION 2: LEARN SPANISH (Destino: spanish.html) -->
-            <div class="gateway-card bg-white rounded-3xl p-8 sm:p-10 border-2 border-amber-100 hover:border-amber-500 shadow-card-soft hover:shadow-card-hover flex flex-col justify-between relative overflow-hidden group">
+            <div class="gateway-card bg-white rounded-3xl p-8 sm:p-10 border-2 border-amber-100 hover:border-amber-500 shadow-card-soft hover:shadow-card-hover flex flex-col justify-between relative group">
                 
                 <!-- Background ambient accent inside card -->
                 <div class="absolute -top-20 -right-20 w-44 h-44 rounded-full bg-amber-100/50 pointer-events-none blur-2xl group-hover:bg-amber-200/60 transition-colors"></div>
@@ -307,16 +291,9 @@
                     </ul>
                 </div>
 
-                <!-- Interactive Audio preview & CTA Action Button -->
+                <!-- CTA Action Button -->
                 <div class="pt-4 border-t border-gray-100 flex flex-col gap-3">
-                    <button type="button" onclick="previewAudio('es')" class="text-xs font-bold text-amber-700 hover:text-amber-900 flex items-center gap-1.5 self-start transition-colors py-1 cursor-pointer">
-                        <svg class="w-4 h-4 fill-amber-600" viewBox="0 0 24 24">
-                            <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
-                        </svg>
-                        <span id="audio-label-es">Listen to Spanish preview</span>
-                    </button>
-
-                    <a href="spanish.html" onclick="goToPath(event, 'spanish.html', 'Learn Spanish', '🇪🇸')" class="btn-gradient-amber w-full py-4 px-6 rounded-2xl text-white font-black text-base shadow-glow-pink flex items-center justify-center gap-3 group/btn cursor-pointer select-none">
+                    <a href="spanish.html" onclick="goToPath(event, 'spanish.html', 'Learn Spanish', '🇪🇸')" class="btn-gradient-amber w-full py-4 px-6 rounded-2xl text-white font-black text-base sm:text-lg flex items-center justify-center gap-3 group/btn">
                         <span>Start Learning Spanish</span>
                         <span class="group-hover/btn:translate-x-1 transition-transform">&rarr;</span>
                     </a>
@@ -403,17 +380,6 @@
                 card.classList.remove('scale-100');
                 progressBar.style.width = '0%';
             }
-
-            // Cancel any background text-to-speech that was playing
-            if ('speechSynthesis' in window) {
-                window.speechSynthesis.cancel();
-            }
-
-            // Reset voice preview button labels
-            const enLabel = document.getElementById('audio-label-en');
-            if (enLabel) enLabel.innerText = 'Escuchar muestra en inglés';
-            const esLabel = document.getElementById('audio-label-es');
-            if (esLabel) esLabel.innerText = 'Listen to Spanish preview';
         }
 
         // Handle page restorations from browser history (Back button / BFCache)
@@ -455,48 +421,6 @@
                 osc.start();
                 osc.stop(ctx.currentTime + 0.36);
             } catch (e) {}
-        }
-
-        // Preview voice using browser speech synthesis with safety timeouts
-        function previewAudio(lang) {
-            playChime(600, 900);
-            if (!('speechSynthesis' in window)) return;
-            
-            window.speechSynthesis.cancel();
-            
-            if (lang === 'en') {
-                const label = document.getElementById('audio-label-en');
-                const defaultText = 'Escuchar muestra en inglés';
-                label.innerText = 'Reproduciendo audio... 🔊';
-                
-                const msg = new SpeechSynthesisUtterance("Welcome to Hi5profe! Let's start speaking English with confidence today.");
-                msg.lang = 'en-US';
-                msg.rate = 1.0;
-                
-                const resetText = () => { label.innerText = defaultText; };
-                msg.onend = resetText;
-                msg.onerror = resetText;
-
-                // Safety fallback timeout in case browser TTS event doesn't fire
-                setTimeout(resetText, 6000);
-                window.speechSynthesis.speak(msg);
-            } else {
-                const label = document.getElementById('audio-label-es');
-                const defaultText = 'Listen to Spanish preview';
-                label.innerText = 'Playing preview... 🔊';
-                
-                const msg = new SpeechSynthesisUtterance("¡Hola y bienvenido a Hi5profe! Aprende español natural de manera divertida y práctica.");
-                msg.lang = 'es-ES';
-                msg.rate = 1.0;
-                
-                const resetText = () => { label.innerText = defaultText; };
-                msg.onend = resetText;
-                msg.onerror = resetText;
-
-                // Safety fallback timeout
-                setTimeout(resetText, 6000);
-                window.speechSynthesis.speak(msg);
-            }
         }
 
         // Navigate with transition effect and full history/back-button support
