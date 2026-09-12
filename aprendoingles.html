@@ -140,7 +140,13 @@
 
         function getFocusableElements(container) {
             return Array.from(container.querySelectorAll('a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])'))
-                .filter(el => !el.hasAttribute('hidden') && el.offsetParent !== null);
+                .filter(el => {
+                    if (el.hasAttribute('hidden')) {
+                        return false;
+                    }
+                    const style = window.getComputedStyle(el);
+                    return style.visibility !== 'hidden' && style.display !== 'none' && el.getClientRects().length > 0;
+                });
         }
 
         function openWhatsAppWindow(encodedMessage, successMessage, modalId) {
@@ -307,9 +313,8 @@
             modal.setAttribute('aria-hidden', 'false');
             activeModalId = modalId;
             document.body.classList.add('overflow-hidden');
-            modal.focus();
             const focusTarget = modal.querySelector('input, select, textarea, button[type="submit"]') || modal.querySelector('.modal-panel') || modal;
-            requestAnimationFrame(() => focusTarget.focus());
+            focusTarget.focus();
         }
 
         function closeModal(modalId) {
