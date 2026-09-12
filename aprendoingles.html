@@ -150,9 +150,8 @@
         }
 
         function openWhatsAppWindow(encodedMessage, successMessage, modalId) {
-            const popup = window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`, '_blank');
+            const popup = window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`, '_blank', 'noopener,noreferrer');
             if (popup) {
-                popup.opener = null;
                 closeModal(modalId);
                 showToast(successMessage);
                 return true;
@@ -311,7 +310,7 @@
             modal.setAttribute('aria-hidden', 'false');
             activeModalId = modalId;
             document.body.classList.add('overflow-hidden');
-            const focusTarget = modal.querySelector('input, select, textarea, button[type="submit"]') || modal.querySelector('.modal-panel') || modal;
+            const focusTarget = modal.querySelector('.modal-panel') || modal;
             focusTarget.focus();
         }
 
