@@ -255,6 +255,15 @@
         // Modals Management
         function openModal(modalId, planName = 'Prueba Gratuita', triggerEl = document.activeElement) {
             closeMobileMenu();
+            const hadActiveModal = Boolean(activeModalId);
+            const switchingModal = hadActiveModal && activeModalId !== modalId;
+            if (switchingModal) {
+                const previousModal = document.getElementById(activeModalId);
+                if (previousModal) {
+                    previousModal.classList.add('hidden');
+                    previousModal.setAttribute('aria-hidden', 'true');
+                }
+            }
             document.querySelectorAll('.modal-overlay').forEach((modalEl) => {
                 if (modalEl.id !== modalId) {
                     modalEl.classList.add('hidden');
@@ -262,7 +271,7 @@
                 }
             });
             currentPlanType = planName;
-            if (!activeModalId) {
+            if (!hadActiveModal) {
                 lastFocusedTrigger = triggerEl;
             }
             const titleEl = document.getElementById('signupModalTitle');
@@ -293,10 +302,8 @@
             modal.setAttribute('aria-hidden', 'false');
             activeModalId = modalId;
             document.body.classList.add('overflow-hidden');
-            const focusTarget = modal.querySelector('input, select, button');
-            if (focusTarget) {
-                focusTarget.focus();
-            }
+            const focusTarget = modal.querySelector('input, select, textarea, button[type="submit"]') || modal;
+            focusTarget.focus();
         }
 
         function closeModal(modalId) {
