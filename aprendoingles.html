@@ -75,10 +75,14 @@
         /* Dynamic scroll entrance/exit animation bidirectional */
         .scroll-animate {
             transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+            opacity: 1;
+            transform: none;
+        }
+        .js .scroll-animate {
             opacity: 0;
             transform: translateY(40px) scale(0.97);
         }
-        .scroll-animate.active {
+        .js .scroll-animate.active {
             opacity: 1;
             transform: translateY(0) scale(1);
         }
@@ -104,46 +108,117 @@
         .delay-1 { animation-delay: 0.2s; }
         .delay-2 { animation-delay: 0.4s; }
         .delay-3 { animation-delay: 0.6s; }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+            .btn-motor-pulse,
+            .phosphor-breathe,
+            .animate-bounce-z,
+            .animate-float-gentle,
+            .animate-video-marquee,
+            .animate-ping {
+                animation: none !important;
+            }
+            .scroll-animate {
+                transition: none !important;
+                transform: none !important;
+            }
+            .js .scroll-animate {
+                opacity: 1 !important;
+                transform: none !important;
+            }
+        }
     </style>
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const observerOptions = {
-                root: null,
-                rootMargin: '0px',
-                threshold: 0.15
-            };
+        document.documentElement.classList.add('js');
+        const WHATSAPP_NUMBER = '51936932398';
+        let currentPlanType = 'Prueba Gratuita';
+        let activeModalId = null;
+        let lastFocusedTrigger = null;
 
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('active');
-                    } else {
-                        entry.target.classList.remove('active');
+        document.addEventListener("DOMContentLoaded", function() {
+            const animatedElements = document.querySelectorAll('.scroll-animate');
+            if ('IntersectionObserver' in window) {
+                const observerOptions = {
+                    root: null,
+                    rootMargin: '0px',
+                    threshold: 0.15
+                };
+
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('active');
+                        } else {
+                            entry.target.classList.remove('active');
+                        }
+                    });
+                }, observerOptions);
+
+                animatedElements.forEach(el => {
+                    observer.observe(el);
+                });
+            } else {
+                animatedElements.forEach(el => el.classList.add('active'));
+            }
+
+            const floatingWhatsAppButton = document.getElementById('floatingWhatsappBtn');
+            if (floatingWhatsAppButton) {
+                floatingWhatsAppButton.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('Hola, quiero más información sobre Hi5profe')}`;
+            }
+
+            document.querySelectorAll('.modal-overlay').forEach((modal) => {
+                modal.addEventListener('click', (event) => {
+                    if (event.target === modal) {
+                        closeModal(modal.id);
                     }
                 });
-            }, observerOptions);
+            });
 
-            document.querySelectorAll('.scroll-animate').forEach(el => {
-                observer.observe(el);
+            document.addEventListener('keydown', (event) => {
+                if (event.key === 'Escape' && activeModalId) {
+                    closeModal(activeModalId);
+                }
             });
         });
 
         // Mobile Menu Toggle
+        function closeMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            const icon = document.getElementById('menuIcon');
+            const mobileMenuButton = document.getElementById('mobileMenuButton');
+            menu.classList.add('hidden');
+            icon.className = 'fa-solid fa-bars text-xl';
+            if (mobileMenuButton) {
+                mobileMenuButton.setAttribute('aria-expanded', 'false');
+            }
+        }
+
         function toggleMobileMenu() {
             const menu = document.getElementById('mobileMenu');
             const icon = document.getElementById('menuIcon');
+            const mobileMenuButton = document.getElementById('mobileMenuButton');
             menu.classList.toggle('hidden');
             if(menu.classList.contains('hidden')) {
                 icon.className = 'fa-solid fa-bars text-xl';
+                if (mobileMenuButton) {
+                    mobileMenuButton.setAttribute('aria-expanded', 'false');
+                }
             } else {
                 icon.className = 'fa-solid fa-xmark text-xl';
+                if (mobileMenuButton) {
+                    mobileMenuButton.setAttribute('aria-expanded', 'true');
+                }
             }
         }
 
         // Modals Management
-        let currentPlanType = 'Prueba Gratuita';
-        function openModal(modalId, planName = 'Prueba Gratuita') {
+        function openModal(modalId, planName = 'Prueba Gratuita', triggerEl = document.activeElement) {
+            closeMobileMenu();
             currentPlanType = planName;
+            lastFocusedTrigger = triggerEl;
             const titleEl = document.getElementById('signupModalTitle');
             const submitBtn = document.getElementById('signupSubmitBtn');
             if(titleEl) {
@@ -167,11 +242,26 @@
                     }
                 }
             }
-            document.getElementById(modalId).classList.remove('hidden');
+            const modal = document.getElementById(modalId);
+            modal.classList.remove('hidden');
+            modal.setAttribute('aria-hidden', 'false');
+            activeModalId = modalId;
+            document.body.classList.add('overflow-hidden');
+            const focusTarget = modal.querySelector('input, select, button');
+            if (focusTarget) {
+                focusTarget.focus();
+            }
         }
 
         function closeModal(modalId) {
-            document.getElementById(modalId).classList.add('hidden');
+            const modal = document.getElementById(modalId);
+            modal.classList.add('hidden');
+            modal.setAttribute('aria-hidden', 'true');
+            activeModalId = null;
+            document.body.classList.remove('overflow-hidden');
+            if (lastFocusedTrigger && typeof lastFocusedTrigger.focus === 'function') {
+                lastFocusedTrigger.focus();
+            }
         }
 
         // Toast Message Notification
@@ -195,14 +285,15 @@
 
             let message = '';
             if(currentPlanType === 'PRO') {
-                message = `Hola! Quiero comenzar clases en la versión PRO.%0A%0A*Mis datos:*%0A- *Nombre completo:* ${encodeURIComponent(name)}%0A- *Edad:* ${encodeURIComponent(age)}%0A- *Nivel de inglés:* ${encodeURIComponent(level)}%0A- *País:* ${encodeURIComponent(country)}`;
+                message = `Hola! Quiero comenzar clases en la versión PRO.\n\n*Plan seleccionado:* ${currentPlanType}\n\n*Mis datos:*\n- *Nombre completo:* ${name}\n- *Edad:* ${age}\n- *Nivel de inglés:* ${level}\n- *País:* ${country}`;
             } else if(currentPlanType === 'VIP') {
-                message = `Hola! Quiero iniciar en el Plan VIP / Teams.%0A%0A*Mis datos:*%0A- *Nombre completo:* ${encodeURIComponent(name)}%0A- *Edad:* ${encodeURIComponent(age)}%0A- *Nivel de inglés:* ${encodeURIComponent(level)}%0A- *País:* ${encodeURIComponent(country)}`;
+                message = `Hola! Quiero iniciar en el Plan VIP / Teams.\n\n*Plan seleccionado:* ${currentPlanType}\n\n*Mis datos:*\n- *Nombre completo:* ${name}\n- *Edad:* ${age}\n- *Nivel de inglés:* ${level}\n- *País:* ${country}`;
             } else {
-                message = `Hola! Quiero registrarme a Hi5profe.%0A%0A*Mis datos:*%0A- *Nombre completo:* ${encodeURIComponent(name)}%0A- *Edad:* ${encodeURIComponent(age)}%0A- *Nivel de inglés:* ${encodeURIComponent(level)}%0A- *País:* ${encodeURIComponent(country)}`;
+                message = `Hola! Quiero registrarme a Hi5profe.\n\n*Plan seleccionado:* ${currentPlanType}\n\n*Mis datos:*\n- *Nombre completo:* ${name}\n- *Edad:* ${age}\n- *Nivel de inglés:* ${level}\n- *País:* ${country}`;
             }
-            
-            window.open(`https://wa.me/51936932398?text=${message}`, '_blank');
+
+            const encodedMessage = encodeURIComponent(message);
+            window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`, '_blank', 'noopener,noreferrer');
             closeModal('signupModal');
             showToast('¡Redirigiendo a WhatsApp con tus datos!');
         }
@@ -213,9 +304,10 @@
             const name = document.getElementById('liveName').value;
             const level = document.getElementById('liveLevel').value;
 
-            const message = `Hola, quiero unirme a los streams clases en vivo.%0A%0A*Mis datos:*%0A- *Nombre completo:* ${encodeURIComponent(name)}%0A- *Nivel de inglés:* ${encodeURIComponent(level)}`;
-            
-            window.open(`https://wa.me/51936932398?text=${message}`, '_blank');
+            const message = `Hola, quiero unirme a los streams clases en vivo.\n\n*Mis datos:*\n- *Nombre completo:* ${name}\n- *Nivel de inglés:* ${level}`;
+            const encodedMessage = encodeURIComponent(message);
+
+            window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`, '_blank', 'noopener,noreferrer');
             closeModal('liveClassModal');
             showToast('¡Redirigiendo a WhatsApp para las clases en vivo!');
         }
@@ -228,9 +320,10 @@
             const shift = document.getElementById('schedShift').value;
             const frequency = document.getElementById('schedFrequency').value;
 
-            const message = `Hola! Me interesa configurar mis Horarios Flexibles en Hi5profe.%0A%0A*Mis datos:*%0A- *Nombre completo:* ${encodeURIComponent(name)}%0A- *País:* ${encodeURIComponent(country)}%0A- *Turno preferido:* ${encodeURIComponent(shift)}%0A- *Frecuencia de clases:* ${encodeURIComponent(frequency)}`;
-            
-            window.open(`https://wa.me/51936932398?text=${message}`, '_blank');
+            const message = `Hola! Me interesa configurar mis Horarios Flexibles en Hi5profe.\n\n*Mis datos:*\n- *Nombre completo:* ${name}\n- *País:* ${country}\n- *Turno preferido:* ${shift}\n- *Frecuencia de clases:* ${frequency}`;
+            const encodedMessage = encodeURIComponent(message);
+
+            window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`, '_blank', 'noopener,noreferrer');
             closeModal('flexibleScheduleModal');
             showToast('¡Redirigiendo a WhatsApp con tus datos de horario!');
         }
@@ -244,8 +337,8 @@
     </div>
 
     <!-- Floating WhatsApp Button (Bottom Right) -->
-    <a href="https://wa.me/51936932398?text=Hola,%20quiero%20más%20información%20sobre%20Hi5profe" target="_blank" class="fixed bottom-6 right-6 z-50 w-12 h-12 bg-emerald-500 hover:bg-emerald-600 text-white rounded-full flex items-center justify-center shadow-xl transition-all duration-300 transform hover:scale-110 btn-motor-pulse">
-        <i class="fa-brands fa-whatsapp text-2xl"></i>
+    <a id="floatingWhatsappBtn" href="https://wa.me/51936932398?text=Hola,%20quiero%20más%20información%20sobre%20Hi5profe" target="_blank" rel="noopener noreferrer" aria-label="Abrir WhatsApp para solicitar información" title="Escríbenos por WhatsApp" class="fixed bottom-6 right-6 z-50 w-12 h-12 bg-emerald-500 hover:bg-emerald-600 text-white rounded-full flex items-center justify-center shadow-xl transition-all duration-300 transform hover:scale-110 btn-motor-pulse">
+        <i class="fa-brands fa-whatsapp text-2xl" aria-hidden="true"></i>
     </a>
 
     <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-100">
@@ -270,20 +363,20 @@
             </div>
 
             <!-- Mobile Menu Button -->
-            <button onclick="toggleMobileMenu()" class="md:hidden text-slate-700 p-2 focus:outline-none">
+            <button id="mobileMenuButton" onclick="toggleMobileMenu()" aria-label="Abrir o cerrar menú móvil" aria-controls="mobileMenu" aria-expanded="false" class="md:hidden text-slate-700 p-2 focus:outline-none">
                 <i id="menuIcon" class="fa-solid fa-bars text-xl"></i>
             </button>
         </div>
 
         <!-- Mobile Menu Dropdown -->
         <div id="mobileMenu" class="hidden md:hidden bg-white border-b border-slate-100 px-6 py-5 space-y-4 shadow-xl">
-            <a href="#inicio" onclick="toggleMobileMenu()" class="block font-medium text-purple-600">Inicio</a>
-            <a href="#cursos" onclick="toggleMobileMenu()" class="block font-medium text-slate-700">Cursos</a>
-            <a href="#recursos" onclick="toggleMobileMenu()" class="block font-medium text-slate-700">Recursos</a>
-            <a href="#precios" onclick="toggleMobileMenu()" class="block font-medium text-slate-700">Precios</a>
-            <a href="#contacto" onclick="toggleMobileMenu()" class="block font-medium text-slate-700">Contacto</a>
+            <a href="#inicio" onclick="closeMobileMenu()" class="block font-medium text-purple-600">Inicio</a>
+            <a href="#cursos" onclick="closeMobileMenu()" class="block font-medium text-slate-700">Cursos</a>
+            <a href="#recursos" onclick="closeMobileMenu()" class="block font-medium text-slate-700">Recursos</a>
+            <a href="#precios" onclick="closeMobileMenu()" class="block font-medium text-slate-700">Precios</a>
+            <a href="#contacto" onclick="closeMobileMenu()" class="block font-medium text-slate-700">Contacto</a>
             <div class="pt-4 border-t border-slate-100 flex flex-col space-y-3">
-                <button onclick="openModal('signupModal', 'Prueba Gratuita'); toggleMobileMenu();" class="w-full text-center py-2.5 font-semibold text-white bg-gradient-to-r from-purple-600 to-pink-500 rounded-full shadow-md">Únete ahora</button>
+                <button onclick="openModal('signupModal', 'Prueba Gratuita')" class="w-full text-center py-2.5 font-semibold text-white bg-gradient-to-r from-purple-600 to-pink-500 rounded-full shadow-md">Únete ahora</button>
             </div>
         </div>
     </header>
@@ -323,11 +416,11 @@
 
                 <div class="flex items-center space-x-4 pt-4 border-t border-slate-100">
                   <div class="flex -space-x-2 overflow-hidden">
-                    <img src="isa.svg" alt="ISA" class="inline-block h-10 w-10 rounded-full ring-2 ring-white object-cover">
-                    <img src="leo.svg" alt="LEO" class="inline-block h-10 w-10 rounded-full ring-2 ring-white object-cover">
-                    <img src="julio.svg" alt="JULIO" class="inline-block h-10 w-10 rounded-full ring-2 ring-white object-cover">
-                    <img src="juan.svg" alt="JUAN" class="inline-block h-10 w-10 rounded-full ring-2 ring-white object-cover">
-                    <img src="homa.svg" alt="HOMA" class="inline-block h-10 w-10 rounded-full ring-2 ring-white object-cover">
+                    <img src="isa.svg" alt="ISA" loading="lazy" class="inline-block h-10 w-10 rounded-full ring-2 ring-white object-cover">
+                    <img src="leo.svg" alt="LEO" loading="lazy" class="inline-block h-10 w-10 rounded-full ring-2 ring-white object-cover">
+                    <img src="julio.svg" alt="JULIO" loading="lazy" class="inline-block h-10 w-10 rounded-full ring-2 ring-white object-cover">
+                    <img src="juan.svg" alt="JUAN" loading="lazy" class="inline-block h-10 w-10 rounded-full ring-2 ring-white object-cover">
+                    <img src="homa.svg" alt="HOMA" loading="lazy" class="inline-block h-10 w-10 rounded-full ring-2 ring-white object-cover">
                     </div>
                     <div>
                         <div class="flex items-center space-x-1 text-amber-400 text-sm">
@@ -444,8 +537,8 @@
                     <p class="text-xs text-slate-500 mt-1 leading-relaxed">Practica en tiempo real con profesores expertos.</p>
                 </div>
                 <div class="pt-6 mt-6 border-t border-slate-100 flex items-center justify-between">
-                    <span class="text-xs font-extrabold text-purple-600">Próxima sesión en 15m</span>
-                    <button onclick="openModal('liveClassModal')" class="w-10 h-10 rounded-full bg-purple-50 text-purple-600 flex items-center justify-center hover:bg-purple-600 hover:text-white transition shadow-sm">
+                    <span class="text-xs font-extrabold text-purple-600">Próxima sesión disponible</span>
+                    <button onclick="openModal('liveClassModal')" aria-label="Abrir formulario de clases en vivo" class="w-10 h-10 rounded-full bg-purple-50 text-purple-600 flex items-center justify-center hover:bg-purple-600 hover:text-white transition shadow-sm">
                         <i class="fa-solid fa-arrow-right text-sm"></i>
                     </button>
                 </div>
@@ -464,7 +557,7 @@
                 </div>
                 <div class="pt-6 mt-6 border-t border-slate-100 flex items-center justify-between">
                     <span class="text-xs font-extrabold text-blue-600">Personalizable</span>
-                    <button onclick="openModal('flexibleScheduleModal')" class="w-10 h-10 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center hover:bg-blue-600 hover:text-white transition shadow-sm">
+                    <button onclick="openModal('flexibleScheduleModal')" aria-label="Abrir formulario de horarios flexibles" class="w-10 h-10 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center hover:bg-blue-600 hover:text-white transition shadow-sm">
                         <i class="fa-solid fa-arrow-right text-sm"></i>
                     </button>
                 </div>
@@ -481,7 +574,7 @@
                 </div>
                 <div class="pt-6 mt-6 border-t border-slate-100 flex items-center justify-between">
                     <span class="text-xs font-extrabold text-pink-600">Grupos reducidos</span>
-                    <button onclick="openModal('signupModal', 'Prueba Gratuita')" class="w-10 h-10 rounded-full bg-pink-50 text-pink-600 flex items-center justify-center hover:bg-pink-600 hover:text-white transition shadow-sm">
+                    <button onclick="openModal('signupModal', 'Prueba Gratuita')" aria-label="Abrir registro para Speaking Club" class="w-10 h-10 rounded-full bg-pink-50 text-pink-600 flex items-center justify-center hover:bg-pink-600 hover:text-white transition shadow-sm">
                         <i class="fa-solid fa-arrow-right text-sm"></i>
                     </button>
                 </div>
@@ -498,7 +591,7 @@
                 </div>
                 <div class="pt-6 mt-6 border-t border-slate-100 flex items-center justify-between">
                     <span class="text-xs font-extrabold text-amber-600">1 a 1 disponible</span>
-                    <button onclick="openModal('signupModal', 'Prueba Gratuita')" class="w-10 h-10 rounded-full bg-amber-50 text-amber-600 flex items-center justify-center hover:bg-amber-600 hover:text-white transition shadow-sm">
+                    <button onclick="openModal('signupModal', 'Prueba Gratuita')" aria-label="Abrir registro para tutor personalizado" class="w-10 h-10 rounded-full bg-amber-50 text-amber-600 flex items-center justify-center hover:bg-amber-600 hover:text-white transition shadow-sm">
                         <i class="fa-solid fa-arrow-right text-sm"></i>
                     </button>
                 </div>
@@ -541,11 +634,11 @@
                     <!-- Video Card 1 (Carlos Ortega) -->
                     <div class="w-64 sm:w-72 bg-slate-900 rounded-3xl overflow-hidden shadow-xl border border-slate-800 flex-shrink-0 group flex flex-col">
                         <div class="aspect-[9/16] relative overflow-hidden bg-slate-950">
-                            <div class="absolute inset-0 z-10 bg-transparent" onmouseover="this.style.pointerEvents='none'"></div>
                             <iframe 
                                 src="https://www.youtube.com/embed/ja5EoCiIJAg?rel=0&modestbranding=1" 
                                 title="Testimonio Carlos Ortega" 
                                 frameborder="0" 
+                                loading="lazy"
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
                                 referrerpolicy="strict-origin-when-cross-origin" 
                                 allowfullscreen
@@ -565,11 +658,11 @@
                     <!-- Video Card 2 -->
                     <div class="w-64 sm:w-72 bg-slate-900 rounded-3xl overflow-hidden shadow-xl border border-slate-800 flex-shrink-0 group flex flex-col">
                         <div class="aspect-[9/16] relative overflow-hidden bg-slate-950">
-                            <div class="absolute inset-0 z-10 bg-transparent" onmouseover="this.style.pointerEvents='none'"></div>
                             <iframe 
                                 src="https://www.youtube.com/embed/lTSrYjf5a6c?rel=0&modestbranding=1" 
                                 title="Testimonio Ana G." 
                                 frameborder="0" 
+                                loading="lazy"
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
                                 referrerpolicy="strict-origin-when-cross-origin" 
                                 allowfullscreen
@@ -589,11 +682,11 @@
                     <!-- Video Card 3 -->
                     <div class="w-64 sm:w-72 bg-slate-900 rounded-3xl overflow-hidden shadow-xl border border-slate-800 flex-shrink-0 group flex flex-col">
                         <div class="aspect-[9/16] relative overflow-hidden bg-slate-950">
-                            <div class="absolute inset-0 z-10 bg-transparent" onmouseover="this.style.pointerEvents='none'"></div>
                             <iframe 
                                 src="https://www.youtube.com/embed/irPCGL-VixI?rel=0&modestbranding=1" 
                                 title="Testimonio Diga de la Cruz" 
                                 frameborder="0" 
+                                loading="lazy"
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
                                 referrerpolicy="strict-origin-when-cross-origin" 
                                 allowfullscreen
@@ -613,11 +706,11 @@
                     <!-- Duplicate set for infinite smooth marquee looping -->
                     <div class="w-64 sm:w-72 bg-slate-900 rounded-3xl overflow-hidden shadow-xl border border-slate-800 flex-shrink-0 group flex flex-col">
                         <div class="aspect-[9/16] relative overflow-hidden bg-slate-950">
-                            <div class="absolute inset-0 z-10 bg-transparent" onmouseover="this.style.pointerEvents='none'"></div>
                             <iframe 
                                 src="https://www.youtube.com/embed/ja5EoCiIJAg?rel=0&modestbranding=1" 
                                 title="Testimonio Carlos Ortega" 
                                 frameborder="0" 
+                                loading="lazy"
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
                                 referrerpolicy="strict-origin-when-cross-origin" 
                                 allowfullscreen
@@ -636,11 +729,11 @@
 
                     <div class="w-64 sm:w-72 bg-slate-900 rounded-3xl overflow-hidden shadow-xl border border-slate-800 flex-shrink-0 group flex flex-col">
                         <div class="aspect-[9/16] relative overflow-hidden bg-slate-950">
-                            <div class="absolute inset-0 z-10 bg-transparent" onmouseover="this.style.pointerEvents='none'"></div>
                             <iframe 
                                 src="https://www.youtube.com/embed/lTSrYjf5a6c?rel=0&modestbranding=1" 
                                 title="Testimonio Ana G." 
                                 frameborder="0" 
+                                loading="lazy"
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
                                 referrerpolicy="strict-origin-when-cross-origin" 
                                 allowfullscreen
@@ -659,11 +752,11 @@
 
                     <div class="w-64 sm:w-72 bg-slate-900 rounded-3xl overflow-hidden shadow-xl border border-slate-800 flex-shrink-0 group flex flex-col">
                         <div class="aspect-[9/16] relative overflow-hidden bg-slate-950">
-                            <div class="absolute inset-0 z-10 bg-transparent" onmouseover="this.style.pointerEvents='none'"></div>
                             <iframe 
                                 src="https://www.youtube.com/embed/irPCGL-VixI?rel=0&modestbranding=1" 
                                 title="Testimonio Diga de la Cruz" 
                                 frameborder="0" 
+                                loading="lazy"
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
                                 referrerpolicy="strict-origin-when-cross-origin" 
                                 allowfullscreen
@@ -829,9 +922,9 @@
     </footer>
 
     <!-- MODAL 1: REGISTRO / PRUEBA GRATIS / PRO -->
-    <div id="signupModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-md p-4">
+    <div id="signupModal" class="modal-overlay hidden fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-md p-4" role="dialog" aria-modal="true" aria-labelledby="signupModalTitle" aria-hidden="true">
         <div class="bg-slate-950 border border-slate-800 rounded-3xl p-6 sm:p-8 max-w-md w-full shadow-2xl relative text-white">
-            <button onclick="closeModal('signupModal')" class="absolute top-5 right-5 text-slate-400 hover:text-white transition">
+            <button onclick="closeModal('signupModal')" aria-label="Cerrar formulario de registro" class="absolute top-5 right-5 text-slate-400 hover:text-white transition">
                 <i class="fa-solid fa-xmark text-lg"></i>
             </button>
 
@@ -842,15 +935,15 @@
 
             <form onsubmit="handleWhatsAppSignup(event)" class="space-y-4">
                 <div>
-                    <label class="block text-xs font-bold text-slate-300 uppercase mb-1">Nombre completo</label>
+                    <label for="waName" class="block text-xs font-bold text-slate-300 uppercase mb-1">Nombre completo</label>
                     <input type="text" id="waName" required placeholder="Ej. Carlos Pérez" class="w-full px-4 py-3 rounded-xl border border-slate-700 text-sm focus:outline-none focus:border-purple-500 bg-slate-900 text-white placeholder-slate-500">
                 </div>
                 <div>
-                    <label class="block text-xs font-bold text-slate-300 uppercase mb-1">Edad</label>
-                    <input type="number" id="waAge" required placeholder="Ej. 25" class="w-full px-4 py-3 rounded-xl border border-slate-700 text-sm focus:outline-none focus:border-purple-500 bg-slate-900 text-white placeholder-slate-500">
+                    <label for="waAge" class="block text-xs font-bold text-slate-300 uppercase mb-1">Edad</label>
+                    <input type="number" id="waAge" min="5" max="120" required placeholder="Ej. 25" class="w-full px-4 py-3 rounded-xl border border-slate-700 text-sm focus:outline-none focus:border-purple-500 bg-slate-900 text-white placeholder-slate-500">
                 </div>
                 <div>
-                    <label class="block text-xs font-bold text-slate-300 uppercase mb-1">Nivel de inglés</label>
+                    <label for="waLevel" class="block text-xs font-bold text-slate-300 uppercase mb-1">Nivel de inglés</label>
                     <select id="waLevel" required class="w-full px-4 py-3 rounded-xl border border-slate-700 text-sm focus:outline-none focus:border-purple-500 bg-slate-900 text-white">
                         <option value="" disabled selected class="text-slate-500">Selecciona tu nivel</option>
                         <option value="Básico">Básico</option>
@@ -859,7 +952,7 @@
                     </select>
                 </div>
                 <div>
-                    <label class="block text-xs font-bold text-slate-300 uppercase mb-1">País</label>
+                    <label for="waCountry" class="block text-xs font-bold text-slate-300 uppercase mb-1">País</label>
                     <input type="text" id="waCountry" required placeholder="Ej. Perú, México, Colombia..." class="w-full px-4 py-3 rounded-xl border border-slate-700 text-sm focus:outline-none focus:border-purple-500 bg-slate-900 text-white placeholder-slate-500">
                 </div>
                 <button type="submit" id="signupSubmitBtn" class="w-full py-4 bg-gradient-to-r from-purple-600 to-pink-500 text-white font-bold rounded-2xl shadow-xl shadow-purple-500/30 hover:opacity-95 transition text-base btn-motor-pulse mt-2">
@@ -870,9 +963,9 @@
     </div>
 
     <!-- MODAL 2: CLASES EN VIVO -->
-    <div id="liveClassModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4">
+    <div id="liveClassModal" class="modal-overlay hidden fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4" role="dialog" aria-modal="true" aria-labelledby="liveClassModalTitle" aria-hidden="true">
         <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-md w-full shadow-2xl relative">
-            <button onclick="closeModal('liveClassModal')" class="absolute top-5 right-5 text-slate-400 hover:text-slate-600">
+            <button onclick="closeModal('liveClassModal')" aria-label="Cerrar modal de clase en vivo" class="absolute top-5 right-5 text-slate-400 hover:text-slate-600">
                 <i class="fa-solid fa-xmark text-lg"></i>
             </button>
 
@@ -880,17 +973,17 @@
                 <div class="w-14 h-14 rounded-2xl bg-purple-100 text-purple-600 flex items-center justify-center mx-auto mb-3 text-2xl">
                     <i class="fa-solid fa-tower-broadcast"></i>
                 </div>
-                <h3 class="text-xl font-extrabold text-slate-900">Clase en Vivo Disponible</h3>
+                <h3 id="liveClassModalTitle" class="text-xl font-extrabold text-slate-900">Clase en Vivo Disponible</h3>
                 <p class="text-xs text-slate-500 mt-1">Únete ahora con tu profesor asignado y comienza a practicar tu pronunciación en tiempo real.</p>
             </div>
 
             <form onsubmit="handleLiveClassWhatsApp(event)" class="space-y-4">
                 <div>
-                    <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Nombre completo</label>
+                    <label for="liveName" class="block text-xs font-bold text-slate-700 uppercase mb-1">Nombre completo</label>
                     <input type="text" id="liveName" required placeholder="Ej. Ana Gómez" class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-purple-600 bg-slate-50">
                 </div>
                 <div>
-                    <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Nivel de inglés</label>
+                    <label for="liveLevel" class="block text-xs font-bold text-slate-700 uppercase mb-1">Nivel de inglés</label>
                     <select id="liveLevel" required class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-purple-600 bg-slate-50">
                         <option value="" disabled selected>Selecciona tu nivel</option>
                         <option value="Básico">Básico</option>
@@ -906,9 +999,9 @@
     </div>
 
     <!-- MODAL 3: HORARIOS FLEXIBLES -->
-    <div id="flexibleScheduleModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4">
+    <div id="flexibleScheduleModal" class="modal-overlay hidden fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4" role="dialog" aria-modal="true" aria-labelledby="flexibleScheduleModalTitle" aria-hidden="true">
         <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-md w-full shadow-2xl relative">
-            <button onclick="closeModal('flexibleScheduleModal')" class="absolute top-5 right-5 text-slate-400 hover:text-slate-600">
+            <button onclick="closeModal('flexibleScheduleModal')" aria-label="Cerrar modal de horarios flexibles" class="absolute top-5 right-5 text-slate-400 hover:text-slate-600">
                 <i class="fa-solid fa-xmark text-lg"></i>
             </button>
 
@@ -916,21 +1009,21 @@
                 <div class="w-14 h-14 rounded-2xl bg-blue-100 text-blue-600 flex items-center justify-center mx-auto mb-3 text-2xl">
                     <i class="fa-solid fa-calendar-days"></i>
                 </div>
-                <h3 class="text-xl font-extrabold text-slate-900">Configura tus Horarios Flexibles</h3>
+                <h3 id="flexibleScheduleModalTitle" class="text-xl font-extrabold text-slate-900">Configura tus Horarios Flexibles</h3>
                 <p class="text-xs text-slate-500 mt-1">Elige tu disponibilidad para coordinar tus clases directamente por WhatsApp.</p>
             </div>
 
             <form onsubmit="handleFlexibleScheduleWhatsApp(event)" class="space-y-4">
                 <div>
-                    <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Nombre completo</label>
+                    <label for="schedName" class="block text-xs font-bold text-slate-700 uppercase mb-1">Nombre completo</label>
                     <input type="text" id="schedName" required placeholder="Ej. Luis Torres" class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-purple-600 bg-slate-50">
                 </div>
                 <div>
-                    <label class="block text-xs font-bold text-slate-700 uppercase mb-1">País</label>
+                    <label for="schedCountry" class="block text-xs font-bold text-slate-700 uppercase mb-1">País</label>
                     <input type="text" id="schedCountry" required placeholder="Ej. Perú, Argentina..." class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-purple-600 bg-slate-50">
                 </div>
                 <div>
-                    <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Turno preferido</label>
+                    <label for="schedShift" class="block text-xs font-bold text-slate-700 uppercase mb-1">Turno preferido</label>
                     <select id="schedShift" required class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-purple-600 bg-slate-50">
                         <option value="" disabled selected>Selecciona tu turno</option>
                         <option value="Mañana">Mañana</option>
@@ -939,7 +1032,7 @@
                     </select>
                 </div>
                 <div>
-                    <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Frecuencia de clases</label>
+                    <label for="schedFrequency" class="block text-xs font-bold text-slate-700 uppercase mb-1">Frecuencia de clases</label>
                     <select id="schedFrequency" required class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-purple-600 bg-slate-50">
                         <option value="" disabled selected>Selecciona frecuencia</option>
                         <option value="Diario">Diario</option>
