@@ -65,19 +65,32 @@
         .video-phone-frame {
             box-shadow: 0 25px 60px -15px rgba(124, 58, 237, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.1);
         }
+
+        .sr-only-focusable:not(:focus):not(:focus-within) {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
     </style>
 </head>
 <body class="bg-slate-50 font-sans text-slate-800 antialiased selection:bg-purple-500 selection:text-white relative">
+    <a href="#hero" class="sr-only-focusable">Skip to content</a>
 
-    <header class="bg-white/90 backdrop-blur-md py-4 shadow-sm fixed w-full z-40 top-0 transition-all">
+    <header class="bg-white/90 backdrop-blur-md py-4 shadow-sm fixed w-full z-40 top-0 transition-all" role="banner">
         <div class="container mx-auto flex justify-between items-center px-4 lg:px-8">
-            <a href="#" class="flex items-center gap-3 group">
+            <a href="#" class="flex items-center gap-3 group" aria-label="Hi5Profe home">
                 <div class="h-10 w-10 bg-purple-600 rounded-xl flex items-center justify-center text-white font-extrabold text-lg shadow-md group-hover:scale-105 transition-transform">Hi5</div>
                 <div class="text-2xl font-extrabold tracking-tight flex items-center">
                     <span class="text-slate-900">Hi5</span><span class="text-purple-600">Profe</span>
                 </div>
             </a>
-            <nav class="hidden md:flex space-x-8 text-slate-600 font-semibold text-sm">
+            <nav class="hidden md:flex space-x-8 text-slate-600 font-semibold text-sm" aria-label="Primary navigation">
                 <a href="#hero" class="hover:text-purple-600 transition-colors">Home</a>
                 <a href="#features" class="hover:text-purple-600 transition-colors">Features</a>
                 <a href="#modalities" class="hover:text-purple-600 transition-colors">Modalities</a>
@@ -85,14 +98,13 @@
             </nav>
             <div class="flex items-center space-x-3">
                 <a href="#pricing" class="bg-purple-600 text-white font-bold py-2.5 px-5 sm:px-6 rounded-xl shadow-lg shadow-purple-600/30 hover:bg-purple-700 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300">Start Free</a>
-                <button id="mobileMenuBtn" class="md:hidden p-2 text-slate-700 hover:text-purple-600 focus:outline-none" aria-label="Toggle navigation menu">
-                    <i class="fas fa-bars text-xl"></i>
+                <button id="mobileMenuBtn" class="md:hidden p-2 text-slate-700 hover:text-purple-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 rounded-lg" aria-label="Toggle navigation menu" aria-controls="mobileMenu" aria-expanded="false">
+                    <i class="fas fa-bars text-xl" aria-hidden="true"></i>
                 </button>
             </div>
         </div>
 
-        <!-- Mobile Dropdown Menu -->
-        <div id="mobileMenu" class="hidden md:hidden bg-white border-b border-slate-200 px-6 py-4 space-y-3 font-semibold text-sm text-slate-600 shadow-lg">
+        <div id="mobileMenu" class="hidden md:hidden bg-white border-b border-slate-200 px-6 py-4 space-y-3 font-semibold text-sm text-slate-600 shadow-lg" aria-label="Mobile navigation">
             <a href="#hero" class="block hover:text-purple-600 py-1" onclick="toggleMobileMenu()">Home</a>
             <a href="#features" class="block hover:text-purple-600 py-1" onclick="toggleMobileMenu()">Features</a>
             <a href="#modalities" class="block hover:text-purple-600 py-1" onclick="toggleMobileMenu()">Modalities</a>
@@ -100,14 +112,13 @@
         </div>
     </header>
 
+    <main>
     <section id="hero" class="pt-28 pb-16 md:pt-36 md:pb-24 bg-gradient-to-b from-purple-50/70 via-white to-white overflow-hidden">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col lg:flex-row items-center justify-between gap-10 lg:gap-12">
-                <!-- Left Column: Text & Action Buttons -->
                 <div class="w-full lg:w-7/12 text-center lg:text-left">
-                    <!-- Badge -->
-                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-100/90 text-purple-700 font-bold text-xs uppercase tracking-wider mb-6 shadow-sm">
-                        <span class="w-2 h-2 rounded-full bg-purple-600 animate-pulse"></span>
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-100/90 text-purple-700 font-bold text-xs uppercase tracking-wider mb-6 shadow-sm" aria-label="Promotional badge">
+                        <span class="w-2 h-2 rounded-full bg-purple-600 animate-pulse" aria-hidden="true"></span>
                         The Ultimate Spanish Learning Platform
                     </div>
                     
@@ -120,32 +131,30 @@
                         At Hi5Profe, you get everything you need to speak Spanish with complete confidence: interactive lessons, live practice, smart tools, and 1-on-1 expert support.
                     </p>
 
-                    <!-- Exact Buttons matching the shared reference with optimized responsiveness -->
                     <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3.5 sm:gap-4 mb-8">
                         <a href="#pricing" class="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white font-bold py-4 px-8 rounded-2xl shadow-lg shadow-purple-600/30 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300">
                             <span>Start Free Now</span>
-                            <i class="fas fa-arrow-right text-sm"></i>
+                            <i class="fas fa-arrow-right text-sm" aria-hidden="true"></i>
                         </a>
 
-                        <button type="button" onclick="playHeroVideoWithSound()" class="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-white text-slate-800 hover:text-purple-700 font-bold py-4 px-8 rounded-2xl shadow-lg border border-slate-200 hover:border-purple-200 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300">
-                            <span class="w-8 h-8 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center shadow-inner">
+                        <button type="button" onclick="playHeroVideoWithSound()" class="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-white text-slate-800 hover:text-purple-700 font-bold py-4 px-8 rounded-2xl shadow-lg border border-slate-200 hover:border-purple-200 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300" aria-controls="heroVideo" aria-label="See how it works">
+                            <span class="w-8 h-8 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center shadow-inner" aria-hidden="true">
                                 <i class="fas fa-play text-xs ml-0.5"></i>
                             </span>
                             <span>See How It Works</span>
                         </button>
                     </div>
 
-                    <!-- Social Proof & Ratings (Responsive on iPhone, iPad, PC) -->
-                    <div class="pt-6 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
-                      <div class="flex -space-x-3">
-                        <img src="celine.svg" alt="Celine — estudiante" class="w-10 h-10 rounded-full border-2 border-white" loading="lazy" decoding="async">
-                        <img src="juan.svg"   alt="Juan — estudiante"   class="w-10 h-10 rounded-full border-2 border-white" loading="lazy" decoding="async">
-                        <img src="firu.svg"   alt="Firu — estudiante"   class="w-10 h-10 rounded-full border-2 border-white" loading="lazy" decoding="async">
-                        <img src="bray.svg"   alt="Bray — estudiante"   class="w-10 h-10 rounded-full border-2 border-white" loading="lazy" decoding="async">
+                    <div class="pt-6 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4" aria-label="Social proof">
+                      <div class="flex -space-x-3" aria-hidden="true">
+                        <img src="celine.svg" alt="" class="w-10 h-10 rounded-full border-2 border-white" loading="lazy" decoding="async">
+                        <img src="juan.svg" alt="" class="w-10 h-10 rounded-full border-2 border-white" loading="lazy" decoding="async">
+                        <img src="firu.svg" alt="" class="w-10 h-10 rounded-full border-2 border-white" loading="lazy" decoding="async">
+                        <img src="bray.svg" alt="" class="w-10 h-10 rounded-full border-2 border-white" loading="lazy" decoding="async">
                         </div>
                         <div class="text-center sm:text-left">
-                            <div class="flex items-center justify-center sm:justify-start gap-1 text-amber-400 text-sm">
-                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                            <div class="flex items-center justify-center sm:justify-start gap-1 text-amber-400 text-sm" aria-label="Rated 4.9 out of 5.0">
+                                <i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star-half-alt" aria-hidden="true"></i>
                                 <span class="text-slate-800 font-bold ml-1.5">4.9 / 5.0</span>
                             </div>
                             <p class="text-xs text-slate-500 font-medium mt-0.5">Trusted by over 2,000+ active global students</p>
@@ -153,16 +162,13 @@
                     </div>
                 </div>
 
-                <!-- Right Column (or below on iPhones/tablets): Universal Responsive Video Mockup Frame -->
                 <div class="w-full lg:w-5/12 flex justify-center items-center mt-4 lg:mt-0">
                     <div class="relative w-full max-w-[290px] sm:max-w-[320px] md:max-w-[340px] aspect-[9/16] bg-slate-950 rounded-[2.5rem] p-3 shadow-2xl border-[6px] border-slate-900 video-phone-frame">
-                        <!-- iPhone Speaker & Notch Simulator -->
-                        <div class="absolute top-4 left-1/2 -translate-x-1/2 w-28 h-4 bg-slate-900 rounded-full z-20 flex items-center justify-center">
+                        <div class="absolute top-4 left-1/2 -translate-x-1/2 w-28 h-4 bg-slate-900 rounded-full z-20 flex items-center justify-center" aria-hidden="true">
                             <div class="w-10 h-1 bg-slate-800 rounded-full"></div>
                             <div class="w-2.5 h-2.5 bg-slate-950 rounded-full ml-3 border border-slate-800"></div>
                         </div>
 
-                        <!-- Video Container with 9:16 vertical ratio and iOS/Android playsinline support -->
                         <div class="relative w-full h-full rounded-[2rem] overflow-hidden bg-black">
                             <iframe 
                                 id="heroVideo" 
@@ -174,20 +180,19 @@
                                 playsinline>
                             </iframe>
 
-                            <!-- Floating Sound & Badge Overlays -->
                             <div class="absolute inset-0 bg-transparent flex flex-col justify-between p-4 text-white pointer-events-none z-10">
                                 <div class="flex justify-between items-center pt-5">
                                     <span class="bg-purple-600/90 backdrop-blur-md text-[10px] uppercase font-extrabold px-2.5 py-1 rounded-full tracking-wider shadow">
-                                        <i class="fab fa-youtube mr-1"></i> Hi5Profe
+                                        <i class="fab fa-youtube mr-1" aria-hidden="true"></i> Hi5Profe
                                     </span>
                                     <button onclick="toggleAudio()" class="w-9 h-9 rounded-full bg-slate-950/75 backdrop-blur-md flex items-center justify-center pointer-events-auto hover:bg-purple-600 transition-colors" aria-label="Toggle audio">
-                                        <i id="audioIcon" class="fas fa-volume-mute text-xs"></i>
+                                        <i id="audioIcon" class="fas fa-volume-mute text-xs" aria-hidden="true"></i>
                                     </button>
                                 </div>
 
                                 <div class="space-y-2 pointer-events-auto">
-                                    <button onclick="toggleAudio()" class="w-full bg-slate-950/80 backdrop-blur-md py-2.5 px-3.5 rounded-xl text-center text-xs font-bold border border-white/20 shadow-lg hover:bg-slate-900 transition-colors">
-                                        <i class="fas fa-volume-high text-[11px]"></i>
+                                    <button onclick="toggleAudio()" class="w-full bg-slate-950/80 backdrop-blur-md py-2.5 px-3.5 rounded-xl text-center text-xs font-bold border border-white/20 shadow-lg hover:bg-slate-900 transition-colors" aria-label="Toggle video sound">
+                                        <i class="fas fa-volume-high text-[11px]" aria-hidden="true"></i>
                                         <span id="soundButtonText">Tap to listen with sound</span>
                                     </button>
                                 </div>
@@ -199,42 +204,38 @@
         </div>
     </section>
 
-    <section id="features" class="py-20 bg-white">
+    <section id="features" class="py-20 bg-white" aria-labelledby="features-title">
         <div class="container mx-auto px-4 lg:px-8">
             <div class="text-center max-w-2xl mx-auto mb-16">
-                <h2 class="text-sm font-bold text-purple-600 uppercase tracking-widest mb-3">Why Choose Hi5Profe</h2>
+                <h2 id="features-title" class="text-sm font-bold text-purple-600 uppercase tracking-widest mb-3">Why Choose Hi5Profe</h2>
                 <h3 class="text-3xl lg:text-4xl font-extrabold text-slate-900">Designed for Real Fluency</h3>
                 <p class="text-slate-600 mt-3 text-base">Everything you need, built into an intuitive, seamless learning journey.</p>
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <!-- Feature 1 -->
                 <div class="bg-slate-50/80 rounded-3xl p-8 border border-slate-100 hover:border-purple-200 hover:bg-white hover:shadow-xl transition-all duration-300 group">
-                    <div class="w-14 h-14 bg-purple-100 text-purple-600 rounded-2xl flex items-center justify-center mb-6 text-2xl group-hover:bg-purple-600 group-hover:text-white transition-colors">
+                    <div class="w-14 h-14 bg-purple-100 text-purple-600 rounded-2xl flex items-center justify-center mb-6 text-2xl group-hover:bg-purple-600 group-hover:text-white transition-colors" aria-hidden="true">
                         <i class="fas fa-laptop-code"></i>
                     </div>
                     <h4 class="text-xl font-bold text-slate-900 mb-3">Interactive Courses</h4>
                     <p class="text-slate-600 text-sm leading-relaxed">Dynamic, bite-sized lessons tailored precisely to your current level and goals.</p>
                 </div>
-                <!-- Feature 2 -->
                 <div class="bg-slate-50/80 rounded-3xl p-8 border border-slate-100 hover:border-pink-200 hover:bg-white hover:shadow-xl transition-all duration-300 group">
-                    <div class="w-14 h-14 bg-pink-100 text-pink-600 rounded-2xl flex items-center justify-center mb-6 text-2xl group-hover:bg-pink-600 group-hover:text-white transition-colors">
+                    <div class="w-14 h-14 bg-pink-100 text-pink-600 rounded-2xl flex items-center justify-center mb-6 text-2xl group-hover:bg-pink-600 group-hover:text-white transition-colors" aria-hidden="true">
                         <i class="fas fa-comments"></i>
                     </div>
                     <h4 class="text-xl font-bold text-slate-900 mb-3">Practice Speaking</h4>
                     <p class="text-slate-600 text-sm leading-relaxed">Boost pronunciation, overcome fear, and master conversational fluency naturally.</p>
                 </div>
-                <!-- Feature 3 -->
                 <div class="bg-slate-50/80 rounded-3xl p-8 border border-slate-100 hover:border-emerald-200 hover:bg-white hover:shadow-xl transition-all duration-300 group">
-                    <div class="w-14 h-14 bg-emerald-100 text-emerald-600 rounded-2xl flex items-center justify-center mb-6 text-2xl group-hover:bg-emerald-600 group-hover:text-white transition-colors">
+                    <div class="w-14 h-14 bg-emerald-100 text-emerald-600 rounded-2xl flex items-center justify-center mb-6 text-2xl group-hover:bg-emerald-600 group-hover:text-white transition-colors" aria-hidden="true">
                         <i class="fas fa-chart-line"></i>
                     </div>
                     <h4 class="text-xl font-bold text-slate-900 mb-3">Personal Tracking</h4>
                     <p class="text-slate-600 text-sm leading-relaxed">Monitor daily streaks, target objectives, and watch your vocabulary expand day by day.</p>
                 </div>
-                <!-- Feature 4 -->
                 <div class="bg-slate-50/80 rounded-3xl p-8 border border-slate-100 hover:border-amber-200 hover:bg-white hover:shadow-xl transition-all duration-300 group">
-                    <div class="w-14 h-14 bg-amber-100 text-amber-600 rounded-2xl flex items-center justify-center mb-6 text-2xl group-hover:bg-amber-500 group-hover:text-white transition-colors">
+                    <div class="w-14 h-14 bg-amber-100 text-amber-600 rounded-2xl flex items-center justify-center mb-6 text-2xl group-hover:bg-amber-500 group-hover:text-white transition-colors" aria-hidden="true">
                         <i class="fas fa-clock"></i>
                     </div>
                     <h4 class="text-xl font-bold text-slate-900 mb-3">Learn at Your Pace</h4>
@@ -244,16 +245,15 @@
         </div>
     </section>
 
-    <section id="modalities" class="py-20 bg-slate-50">
+    <section id="modalities" class="py-20 bg-slate-50" aria-labelledby="modalities-title">
         <div class="container mx-auto px-4 lg:px-8">
             <div class="text-center max-w-2xl mx-auto mb-16">
                 <h2 class="text-sm font-bold text-purple-600 uppercase tracking-widest mb-3">Learning Modalities</h2>
-                <h3 class="text-3xl lg:text-4xl font-extrabold text-slate-900">Take Online Classes Your Way</h3>
+                <h3 id="modalities-title" class="text-3xl lg:text-4xl font-extrabold text-slate-900">Take Online Classes Your Way</h3>
                 <p class="text-slate-600 mt-3 text-base">Choose from flexible group sessions or intensive 1-on-1 guidance with expert native tutors.</p>
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <!-- Modality 1 -->
                 <div class="bg-white rounded-3xl shadow-sm p-8 border border-slate-200 hover:shadow-lg transition-all flex flex-col justify-between">
                     <div>
                         <span class="bg-purple-100 text-purple-700 text-xs font-bold px-3 py-1 rounded-full uppercase">Live Session</span>
@@ -262,12 +262,11 @@
                     </div>
                     <a href="#pricing" class="flex items-center justify-between text-purple-600 font-bold text-sm hover:underline pt-4 border-t border-slate-100">
                         <span>Next session in 15m</span>
-                        <i class="fas fa-arrow-right"></i>
+                        <i class="fas fa-arrow-right" aria-hidden="true"></i>
                     </a>
                 </div>
-                <!-- Modality 2 -->
                 <div class="bg-purple-600 text-white rounded-3xl shadow-xl p-8 flex flex-col justify-between relative overflow-hidden">
-                    <div class="absolute -right-10 -bottom-10 w-40 h-40 bg-purple-500/30 rounded-full blur-2xl"></div>
+                    <div class="absolute -right-10 -bottom-10 w-40 h-40 bg-purple-500/30 rounded-full blur-2xl" aria-hidden="true"></div>
                     <div class="relative z-10">
                         <span class="bg-white/20 text-white text-xs font-bold px-3 py-1 rounded-full uppercase">24 / 7 Access</span>
                         <h4 class="text-xl font-extrabold text-white mt-4 mb-3">Flexible Schedules</h4>
@@ -275,10 +274,9 @@
                     </div>
                     <a href="#pricing" class="relative z-10 flex items-center justify-between text-white font-bold text-sm hover:underline pt-4 border-t border-purple-500/50">
                         <span>Always Available</span>
-                        <i class="fas fa-arrow-right"></i>
+                        <i class="fas fa-arrow-right" aria-hidden="true"></i>
                     </a>
                 </div>
-                <!-- Modality 3 -->
                 <div class="bg-white rounded-3xl shadow-sm p-8 border border-slate-200 hover:shadow-lg transition-all flex flex-col justify-between">
                     <div>
                         <span class="bg-slate-100 text-slate-700 text-xs font-bold px-3 py-1 rounded-full uppercase">Speaking Club</span>
@@ -287,10 +285,9 @@
                     </div>
                     <a href="#pricing" class="flex items-center justify-between text-purple-600 font-bold text-sm hover:underline pt-4 border-t border-slate-100">
                         <span>Small Groups</span>
-                        <i class="fas fa-arrow-right"></i>
+                        <i class="fas fa-arrow-right" aria-hidden="true"></i>
                     </a>
                 </div>
-                <!-- Modality 4 -->
                 <div class="bg-white rounded-3xl shadow-sm p-8 border border-slate-200 hover:shadow-lg transition-all flex flex-col justify-between">
                     <div>
                         <span class="bg-amber-100 text-amber-800 text-xs font-bold px-3 py-1 rounded-full uppercase">1-on-1 Expert</span>
@@ -299,72 +296,70 @@
                     </div>
                     <a href="#pricing" class="flex items-center justify-between text-purple-600 font-bold text-sm hover:underline pt-4 border-t border-slate-100">
                         <span>Available Now</span>
-                        <i class="fas fa-arrow-right"></i>
+                        <i class="fas fa-arrow-right" aria-hidden="true"></i>
                     </a>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="pricing" class="py-20 bg-slate-50">
+    <section id="pricing" class="py-20 bg-slate-50" aria-labelledby="pricing-title">
         <div class="container mx-auto px-4 lg:px-8">
             <div class="text-center max-w-2xl mx-auto mb-16">
                 <h2 class="text-sm font-bold text-purple-600 uppercase tracking-widest mb-3">Accessible Plans</h2>
-                <h3 class="text-3xl lg:text-4xl font-extrabold text-slate-900">Invest in Your Future Today</h3>
+                <h3 id="pricing-title" class="text-3xl lg:text-4xl font-extrabold text-slate-900">Invest in Your Future Today</h3>
                 <p class="text-slate-600 mt-3 text-base">Select the ideal tier to achieve your personal and career objectives.</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto items-center">
-                <!-- Basic Plan -->
                 <div class="bg-white rounded-3xl shadow-sm p-8 border border-slate-200">
                     <h4 class="text-2xl font-extrabold text-slate-900 mb-2">Basic Plan</h4>
                     <p class="text-slate-600 text-sm mb-6 h-10">Ideal for taking your first steps into Spanish.</p>
                     <div class="text-4xl font-extrabold text-slate-900 mb-6">$0 <span class="text-sm font-medium text-slate-500">/ forever</span></div>
                     <ul class="space-y-4 text-sm text-slate-700 mb-8">
-                        <li class="flex items-center gap-3"><i class="fas fa-check text-purple-600"></i> 3 daily interactive lessons</li>
-                        <li class="flex items-center gap-3"><i class="fas fa-check text-purple-600"></i> Core vocabulary exercises</li>
-                        <li class="flex items-center gap-3 text-slate-400"><i class="fas fa-times"></i> Live group classes</li>
-                        <li class="flex items-center gap-3 text-slate-400"><i class="fas fa-times"></i> Speaking Club access</li>
+                        <li class="flex items-center gap-3"><i class="fas fa-check text-purple-600" aria-hidden="true"></i> 3 daily interactive lessons</li>
+                        <li class="flex items-center gap-3"><i class="fas fa-check text-purple-600" aria-hidden="true"></i> Core vocabulary exercises</li>
+                        <li class="flex items-center gap-3 text-slate-400"><i class="fas fa-times" aria-hidden="true"></i> Live group classes</li>
+                        <li class="flex items-center gap-3 text-slate-400"><i class="fas fa-times" aria-hidden="true"></i> Speaking Club access</li>
                     </ul>
                     <a href="https://wa.me/message/LUZTCXXHNJS7J1" target="_blank" rel="noopener noreferrer" class="block w-full py-4 text-center border-2 border-purple-600 text-purple-600 font-bold rounded-2xl hover:bg-purple-50 transition-colors">Get Started</a>
                 </div>
 
-                <!-- Boost Pro Plan -->
                 <div class="bg-slate-900 text-white rounded-3xl shadow-2xl p-8 relative md:-translate-y-4 border-2 border-purple-500">
                     <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-purple-600 to-pink-600 text-white text-xs font-extrabold px-4 py-1.5 rounded-full uppercase tracking-widest">Most Popular</div>
                     <h4 class="text-2xl font-extrabold mb-2 mt-2">Boost Pro Plan</h4>
                     <p class="text-slate-300 text-sm mb-6 h-10">Everything you need to speak fluently and confidently.</p>
                     <div class="text-4xl font-extrabold mb-6">$250 <span class="text-sm font-medium text-slate-400">/ month</span></div>
                     <ul class="space-y-4 text-sm text-slate-200 mb-8">
-                        <li class="flex items-start gap-3"><i class="fas fa-check text-purple-400 mt-1"></i> <span>Unlimited interactive resources</span></li>
-                        <li class="flex items-start gap-3"><i class="fas fa-check text-purple-400 mt-1"></i> <span>Live classes (small groups)</span></li>
-                        <li class="flex items-start gap-3"><i class="fas fa-check text-purple-400 mt-1"></i> <span>Full Speaking Club membership</span></li>
-                        <li class="flex items-start gap-3"><i class="fas fa-check text-purple-400 mt-1"></i> <span>Official B2 Level Certificate</span></li>
+                        <li class="flex items-start gap-3"><i class="fas fa-check text-purple-400 mt-1" aria-hidden="true"></i> <span>Unlimited interactive resources</span></li>
+                        <li class="flex items-start gap-3"><i class="fas fa-check text-purple-400 mt-1" aria-hidden="true"></i> <span>Live classes (small groups)</span></li>
+                        <li class="flex items-start gap-3"><i class="fas fa-check text-purple-400 mt-1" aria-hidden="true"></i> <span>Full Speaking Club membership</span></li>
+                        <li class="flex items-start gap-3"><i class="fas fa-check text-purple-400 mt-1" aria-hidden="true"></i> <span>Official B2 Level Certificate</span></li>
                     </ul>
                     <a href="https://wa.me/message/LUZTCXXHNJS7J1" target="_blank" rel="noopener noreferrer" class="block w-full py-4 text-center bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold rounded-2xl shadow-lg hover:shadow-xl transition-all">Choose Boost Pro</a>
                 </div>
 
-                <!-- VIP / Teams Plan -->
                 <div class="bg-white rounded-3xl shadow-sm p-8 border border-slate-200">
                     <h4 class="text-2xl font-extrabold text-slate-900 mb-2">VIP / Teams</h4>
                     <p class="text-slate-600 text-sm mb-6 h-10">For serious professionals & companies.</p>
                     <div class="text-4xl font-extrabold text-slate-900 mb-6">$490 <span class="text-sm font-medium text-slate-500">/ month</span></div>
                     <ul class="space-y-4 text-sm text-slate-700 mb-8">
-                        <li class="flex items-start gap-3"><i class="fas fa-check text-amber-500 mt-1"></i> <span>Everything in the Pro plan</span></li>
-                        <li class="flex items-start gap-3"><i class="fas fa-check text-amber-500 mt-1"></i> <span>1-on-1 Exclusive Private Tutor</span></li>
-                        <li class="flex items-start gap-3"><i class="fas fa-check text-amber-500 mt-1"></i> <span>Advanced Business Spanish</span></li>
-                        <li class="flex items-start gap-3"><i class="fas fa-check text-amber-500 mt-1"></i> <span>Priority 24/7 Support</span></li>
+                        <li class="flex items-start gap-3"><i class="fas fa-check text-amber-500 mt-1" aria-hidden="true"></i> <span>Everything in the Pro plan</span></li>
+                        <li class="flex items-start gap-3"><i class="fas fa-check text-amber-500 mt-1" aria-hidden="true"></i> <span>1-on-1 Exclusive Private Tutor</span></li>
+                        <li class="flex items-start gap-3"><i class="fas fa-check text-amber-500 mt-1" aria-hidden="true"></i> <span>Advanced Business Spanish</span></li>
+                        <li class="flex items-start gap-3"><i class="fas fa-check text-amber-500 mt-1" aria-hidden="true"></i> <span>Priority 24/7 Support</span></li>
                     </ul>
                     <a href="https://wa.me/message/LUZTCXXHNJS7J1" target="_blank" rel="noopener noreferrer" class="block w-full py-4 text-center bg-slate-900 text-white font-bold rounded-2xl hover:bg-slate-800 transition-all">Contact Sales</a>
                 </div>
             </div>
         </div>
     </section>
+    </main>
 
-    <footer class="bg-slate-950 text-slate-400 py-16 border-t border-slate-800">
+    <footer class="bg-slate-950 text-slate-400 py-16 border-t border-slate-800" role="contentinfo">
         <div class="container mx-auto px-4 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
             <div>
-                <a href="#" class="flex items-center gap-3 mb-4 group">
+                <a href="#" class="flex items-center gap-3 mb-4 group" aria-label="Hi5Profe home">
                     <div class="h-8 w-8 bg-purple-600 rounded-lg flex items-center justify-center text-white font-bold text-sm">Hi5</div>
                     <span class="text-2xl font-extrabold text-white">Hi5<span class="text-purple-400">Profe</span></span>
                 </a>
@@ -394,10 +389,10 @@
                     <li><a href="mailto:contact@hi5profe.com" class="hover:text-purple-400 transition-colors">contact@hi5profe.com</a></li>
                     <li><a href="https://wa.me/message/LUZTCXXHNJS7J1" target="_blank" rel="noopener noreferrer" class="hover:text-purple-400 transition-colors">+51 936932398</a></li>
                     <li class="flex space-x-4 pt-2">
-                        <a href="#" class="w-10 h-10 rounded-xl bg-slate-900 flex items-center justify-center text-white hover:bg-purple-600 transition-colors" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="w-10 h-10 rounded-xl bg-slate-900 flex items-center justify-center text-white hover:bg-purple-600 transition-colors" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="w-10 h-10 rounded-xl bg-slate-900 flex items-center justify-center text-white hover:bg-purple-600 transition-colors" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="w-10 h-10 rounded-xl bg-slate-900 flex items-center justify-center text-white hover:bg-purple-600 transition-colors" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-xl bg-slate-900 flex items-center justify-center text-white hover:bg-purple-600 transition-colors" aria-label="Facebook"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-xl bg-slate-900 flex items-center justify-center text-white hover:bg-purple-600 transition-colors" aria-label="Twitter"><i class="fab fa-twitter" aria-hidden="true"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-xl bg-slate-900 flex items-center justify-center text-white hover:bg-purple-600 transition-colors" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-xl bg-slate-900 flex items-center justify-center text-white hover:bg-purple-600 transition-colors" aria-label="LinkedIn"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
                     </li>
                 </ul>
             </div>
@@ -411,9 +406,8 @@
         </div>
     </footer>
 
-    <!-- Floating WhatsApp Action -->
     <a href="https://wa.me/message/LUZTCXXHNJS7J1" target="_blank" rel="noopener noreferrer" class="fixed bottom-6 right-6 z-40 bg-[#25D366] text-white rounded-full w-14 h-14 flex items-center justify-center shadow-2xl hover:scale-110 hover:bg-[#1ebe5d] transition-transform duration-300" aria-label="Contact us on WhatsApp">
-        <i class="fab fa-whatsapp text-3xl"></i>
+        <i class="fab fa-whatsapp text-3xl" aria-hidden="true"></i>
     </a>
 
     <script>
@@ -441,7 +435,6 @@
             iframe.src = url.toString();
         }
 
-        // Dedicated handler for the "See How It Works" button
         function playHeroVideoWithSound() {
             const heroVideo = document.getElementById('heroVideo');
             if (heroVideo) {
@@ -464,7 +457,9 @@
 
         function toggleMobileMenu() {
             const menu = document.getElementById('mobileMenu');
+            const btn = document.getElementById('mobileMenuBtn');
             if (menu) menu.classList.toggle('hidden');
+            if (btn) btn.setAttribute('aria-expanded', String(!menu?.classList.contains('hidden')));
         }
 
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
