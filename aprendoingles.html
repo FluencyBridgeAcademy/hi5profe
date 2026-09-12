@@ -117,7 +117,6 @@
             .phosphor-breathe,
             .animate-bounce-z,
             .animate-float-gentle,
-            .animate-video-marquee,
             .animate-ping {
                 animation: none !important;
             }
@@ -683,28 +682,14 @@
                     </div>
                     <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Así hablan nuestros estudiantes en solo <span class="bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">3 meses</span></h3>
                 </div>
-                <p class="text-sm text-slate-500 mt-4 md:mt-0 max-w-sm border-l-2 border-purple-100 pl-4 py-1">Mira el progreso real de nuestra comunidad. Desliza para escuchar sus resultados.</p>
+                <p class="text-sm text-slate-500 mt-4 md:mt-0 max-w-sm border-l-2 border-purple-100 pl-4 py-1">Mira el progreso real de nuestra comunidad y escucha sus resultados.</p>
             </div>
 
-            <!-- Horizontal Moving Video Set Marquee -->
-            <div class="w-full overflow-hidden py-4 relative">
-                <style>
-                    @keyframes videoMarquee {
-                        0% { transform: translateX(0); }
-                        100% { transform: translateX(-50%); }
-                    }
-                    .animate-video-marquee {
-                        display: flex;
-                        width: max-content;
-                        animation: videoMarquee 22s linear infinite;
-                    }
-                    .animate-video-marquee:hover {
-                        animation-play-state: paused;
-                    }
-                </style>
-                <div class="animate-video-marquee flex gap-6">
+            <!-- Testimonios en columna fija -->
+            <div class="w-full max-w-2xl mx-auto py-4">
+                <div class="flex flex-col gap-8">
                     <!-- Video Card 1 (Carlos Ortega) -->
-                    <div class="w-64 sm:w-72 bg-slate-900 rounded-3xl overflow-hidden shadow-xl border border-slate-800 flex-shrink-0 group flex flex-col">
+                    <div class="w-full bg-slate-900 rounded-3xl overflow-hidden shadow-xl border-2 border-purple-200/70 flex flex-col ring-1 ring-purple-100">
                         <div class="aspect-[9/16] relative overflow-hidden bg-slate-950">
                             <iframe 
                                 src="https://www.youtube.com/embed/ja5EoCiIJAg?rel=0&modestbranding=1" 
@@ -728,7 +713,7 @@
                     </div>
 
                     <!-- Video Card 2 -->
-                    <div class="w-64 sm:w-72 bg-slate-900 rounded-3xl overflow-hidden shadow-xl border border-slate-800 flex-shrink-0 group flex flex-col">
+                    <div class="w-full bg-slate-900 rounded-3xl overflow-hidden shadow-xl border-2 border-pink-200/70 flex flex-col ring-1 ring-pink-100">
                         <div class="aspect-[9/16] relative overflow-hidden bg-slate-950">
                             <iframe 
                                 src="https://www.youtube.com/embed/lTSrYjf5a6c?rel=0&modestbranding=1" 
@@ -752,7 +737,7 @@
                     </div>
 
                     <!-- Video Card 3 -->
-                    <div class="w-64 sm:w-72 bg-slate-900 rounded-3xl overflow-hidden shadow-xl border border-slate-800 flex-shrink-0 group flex flex-col">
+                    <div class="w-full bg-slate-900 rounded-3xl overflow-hidden shadow-xl border-2 border-blue-200/70 flex flex-col ring-1 ring-blue-100">
                         <div class="aspect-[9/16] relative overflow-hidden bg-slate-950">
                             <iframe 
                                 src="https://www.youtube.com/embed/irPCGL-VixI?rel=0&modestbranding=1" 
@@ -775,75 +760,6 @@
                         </div>
                     </div>
 
-                    <!-- Duplicate set for infinite smooth marquee looping -->
-                    <div class="w-64 sm:w-72 bg-slate-900 rounded-3xl overflow-hidden shadow-xl border border-slate-800 flex-shrink-0 group flex flex-col">
-                        <div class="aspect-[9/16] relative overflow-hidden bg-slate-950">
-                            <iframe 
-                                src="https://www.youtube.com/embed/ja5EoCiIJAg?rel=0&modestbranding=1" 
-                                title="Testimonio Carlos Ortega" 
-                                frameborder="0" 
-                                loading="lazy"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                                referrerpolicy="strict-origin-when-cross-origin" 
-                                allowfullscreen
-                                class="absolute top-0 left-0 w-full h-full"
-                            ></iframe>
-                        </div>
-                        <div class="p-5 bg-slate-900 text-white flex-grow z-20 relative pointer-events-none">
-                            <div class="flex items-center justify-between text-xs text-purple-400 mb-2">
-                                <span class="font-bold uppercase tracking-wider">Logro</span>
-                                <span class="bg-purple-950 px-2 py-0.5 rounded-full text-[10px]">Certificación B2</span>
-                            </div>
-                            <h4 class="font-extrabold text-base leading-tight">Alcanzó el nivel B2 para obtener su grado de bachillerato</h4>
-                            <p class="text-[10px] text-slate-400 mt-2">Carlos Ortega (Lima, Perú)</p>
-                        </div>
-                    </div>
-
-                    <div class="w-64 sm:w-72 bg-slate-900 rounded-3xl overflow-hidden shadow-xl border border-slate-800 flex-shrink-0 group flex flex-col">
-                        <div class="aspect-[9/16] relative overflow-hidden bg-slate-950">
-                            <iframe 
-                                src="https://www.youtube.com/embed/lTSrYjf5a6c?rel=0&modestbranding=1" 
-                                title="Testimonio Ana G." 
-                                frameborder="0" 
-                                loading="lazy"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                                referrerpolicy="strict-origin-when-cross-origin" 
-                                allowfullscreen
-                                class="absolute top-0 left-0 w-full h-full"
-                            ></iframe>
-                        </div>
-                        <div class="p-5 bg-slate-900 text-white flex-grow z-20 relative pointer-events-none">
-                            <div class="flex items-center justify-between text-xs text-pink-400 mb-2">
-                                <span class="font-bold uppercase tracking-wider">Logro</span>
-                                <span class="bg-pink-950 px-2 py-0.5 rounded-full text-[10px]">Trabajo Remoto</span>
-                            </div>
-                            <h4 class="font-extrabold text-base leading-tight">Conseguí el puesto remoto que tanto soñaba</h4>
-                            <p class="text-[10px] text-slate-400 mt-2">Ana G. (Trabajadora Remota en EE.UU.)</p>
-                        </div>
-                    </div>
-
-                    <div class="w-64 sm:w-72 bg-slate-900 rounded-3xl overflow-hidden shadow-xl border border-slate-800 flex-shrink-0 group flex flex-col">
-                        <div class="aspect-[9/16] relative overflow-hidden bg-slate-950">
-                            <iframe 
-                                src="https://www.youtube.com/embed/irPCGL-VixI?rel=0&modestbranding=1" 
-                                title="Testimonio Diga de la Cruz" 
-                                frameborder="0" 
-                                loading="lazy"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                                referrerpolicy="strict-origin-when-cross-origin" 
-                                allowfullscreen
-                                class="absolute top-0 left-0 w-full h-full"
-                            ></iframe>
-                        </div>
-                        <div class="p-5 bg-slate-900 text-white flex-grow z-20 relative pointer-events-none">
-                            <div class="flex items-center justify-between text-xs text-blue-400 mb-2">
-                                <span class="font-bold uppercase tracking-wider">Logro</span>
-                                <span class="bg-blue-950 px-2 py-0.5 rounded-full text-[10px]">Primeros Puestos</span>
-                            </div>
-                            <h4 class="font-extrabold text-base leading-tight">Certificado de mérito primeros puestos de su hijo</h4>
-                            <p class="text-[10px] text-slate-400 mt-2">Diga de la Cruz (Mamá de Jhonatan)</p>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
