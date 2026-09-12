@@ -302,7 +302,7 @@
             modal.setAttribute('aria-hidden', 'false');
             activeModalId = modalId;
             document.body.classList.add('overflow-hidden');
-            const focusTarget = modal.querySelector('input, select, textarea, button[type="submit"]') || modal;
+            const focusTarget = modal.querySelector('input, select, textarea, button[type="submit"]') || modal.querySelector('.modal-panel') || modal;
             focusTarget.focus();
         }
 
@@ -310,12 +310,14 @@
             const modal = document.getElementById(modalId);
             modal.classList.add('hidden');
             modal.setAttribute('aria-hidden', 'true');
-            activeModalId = null;
-            document.body.classList.remove('overflow-hidden');
-            if (lastFocusedTrigger && typeof lastFocusedTrigger.focus === 'function') {
-                lastFocusedTrigger.focus();
+            if (modalId === activeModalId) {
+                activeModalId = null;
+                document.body.classList.remove('overflow-hidden');
+                if (lastFocusedTrigger && typeof lastFocusedTrigger.focus === 'function') {
+                    lastFocusedTrigger.focus();
+                }
+                lastFocusedTrigger = null;
             }
-            lastFocusedTrigger = null;
         }
 
         // Toast Message Notification
@@ -971,7 +973,7 @@
 
     <!-- MODAL 1: REGISTRO / PRUEBA GRATIS / PRO -->
     <div id="signupModal" class="modal-overlay hidden fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-md p-4" role="dialog" aria-modal="true" aria-labelledby="signupModalTitle" aria-hidden="true" tabindex="-1">
-        <div class="bg-slate-950 border border-slate-800 rounded-3xl p-6 sm:p-8 max-w-md w-full shadow-2xl relative text-white">
+        <div class="modal-panel bg-slate-950 border border-slate-800 rounded-3xl p-6 sm:p-8 max-w-md w-full shadow-2xl relative text-white" tabindex="-1">
             <button onclick="closeModal('signupModal')" aria-label="Cerrar formulario de registro" class="absolute top-5 right-5 text-slate-400 hover:text-white transition">
                 <i class="fa-solid fa-xmark text-lg"></i>
             </button>
@@ -1012,7 +1014,7 @@
 
     <!-- MODAL 2: CLASES EN VIVO -->
     <div id="liveClassModal" class="modal-overlay hidden fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4" role="dialog" aria-modal="true" aria-labelledby="liveClassModalTitle" aria-hidden="true" tabindex="-1">
-        <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-md w-full shadow-2xl relative">
+        <div class="modal-panel bg-white rounded-3xl p-6 sm:p-8 max-w-md w-full shadow-2xl relative" tabindex="-1">
             <button onclick="closeModal('liveClassModal')" aria-label="Cerrar modal de clase en vivo" class="absolute top-5 right-5 text-slate-400 hover:text-slate-600">
                 <i class="fa-solid fa-xmark text-lg"></i>
             </button>
@@ -1048,7 +1050,7 @@
 
     <!-- MODAL 3: HORARIOS FLEXIBLES -->
     <div id="flexibleScheduleModal" class="modal-overlay hidden fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4" role="dialog" aria-modal="true" aria-labelledby="flexibleScheduleModalTitle" aria-hidden="true" tabindex="-1">
-        <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-md w-full shadow-2xl relative">
+        <div class="modal-panel bg-white rounded-3xl p-6 sm:p-8 max-w-md w-full shadow-2xl relative" tabindex="-1">
             <button onclick="closeModal('flexibleScheduleModal')" aria-label="Cerrar modal de horarios flexibles" class="absolute top-5 right-5 text-slate-400 hover:text-slate-600">
                 <i class="fa-solid fa-xmark text-lg"></i>
             </button>
