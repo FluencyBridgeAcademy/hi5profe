@@ -138,6 +138,23 @@
         let activeModalId = null;
         let lastFocusedTrigger = null;
 
+        function getFocusableElements(container) {
+            return Array.from(container.querySelectorAll('a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])'))
+                .filter(el => !el.hasAttribute('hidden') && el.offsetParent !== null);
+        }
+
+        function openWhatsAppWindow(encodedMessage, successMessage, modalId) {
+            const popup = window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`, '_blank');
+            if (popup) {
+                popup.opener = null;
+                closeModal(modalId);
+                showToast(successMessage);
+                return true;
+            }
+            showToast('No se pudo abrir WhatsApp. Habilita las ventanas emergentes e inténtalo de nuevo.');
+            return false;
+        }
+
         document.addEventListener("DOMContentLoaded", function() {
             const animatedElements = document.querySelectorAll('.scroll-animate');
             if ('IntersectionObserver' in window) {
@@ -180,6 +197,23 @@
             document.addEventListener('keydown', (event) => {
                 if (event.key === 'Escape' && activeModalId) {
                     closeModal(activeModalId);
+                    return;
+                }
+                if (event.key === 'Tab' && activeModalId) {
+                    const modal = document.getElementById(activeModalId);
+                    const focusableElements = getFocusableElements(modal);
+                    if (focusableElements.length === 0) {
+                        return;
+                    }
+                    const first = focusableElements[0];
+                    const last = focusableElements[focusableElements.length - 1];
+                    if (event.shiftKey && document.activeElement === first) {
+                        event.preventDefault();
+                        last.focus();
+                    } else if (!event.shiftKey && document.activeElement === last) {
+                        event.preventDefault();
+                        first.focus();
+                    }
                 }
             });
         });
@@ -228,7 +262,9 @@
                 }
             });
             currentPlanType = planName;
-            lastFocusedTrigger = triggerEl;
+            if (!activeModalId) {
+                lastFocusedTrigger = triggerEl;
+            }
             const titleEl = document.getElementById('signupModalTitle');
             const submitBtn = document.getElementById('signupSubmitBtn');
             if(titleEl) {
@@ -304,9 +340,7 @@
             }
 
             const encodedMessage = encodeURIComponent(message);
-            window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`, '_blank', 'noopener,noreferrer');
-            closeModal('signupModal');
-            showToast('¡Redirigiendo a WhatsApp con tus datos!');
+            openWhatsAppWindow(encodedMessage, '¡Redirigiendo a WhatsApp con tus datos!', 'signupModal');
         }
 
         // WhatsApp Form Submit: Clases en Vivo
@@ -318,9 +352,7 @@
             const message = `Hola, quiero unirme a los streams clases en vivo.\n\n*Mis datos:*\n- *Nombre completo:* ${name}\n- *Nivel de inglés:* ${level}`;
             const encodedMessage = encodeURIComponent(message);
 
-            window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`, '_blank', 'noopener,noreferrer');
-            closeModal('liveClassModal');
-            showToast('¡Redirigiendo a WhatsApp para las clases en vivo!');
+            openWhatsAppWindow(encodedMessage, '¡Redirigiendo a WhatsApp para las clases en vivo!', 'liveClassModal');
         }
 
         // WhatsApp Form Submit: Horarios Flexibles
@@ -334,9 +366,7 @@
             const message = `Hola! Me interesa configurar mis Horarios Flexibles en Hi5profe.\n\n*Mis datos:*\n- *Nombre completo:* ${name}\n- *País:* ${country}\n- *Turno preferido:* ${shift}\n- *Frecuencia de clases:* ${frequency}`;
             const encodedMessage = encodeURIComponent(message);
 
-            window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`, '_blank', 'noopener,noreferrer');
-            closeModal('flexibleScheduleModal');
-            showToast('¡Redirigiendo a WhatsApp con tus datos de horario!');
+            openWhatsAppWindow(encodedMessage, '¡Redirigiendo a WhatsApp con tus datos de horario!', 'flexibleScheduleModal');
         }
     </script>
 </head>
@@ -933,7 +963,7 @@
     </footer>
 
     <!-- MODAL 1: REGISTRO / PRUEBA GRATIS / PRO -->
-    <div id="signupModal" class="modal-overlay hidden fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-md p-4" role="dialog" aria-modal="true" aria-labelledby="signupModalTitle" aria-hidden="true">
+    <div id="signupModal" class="modal-overlay hidden fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-md p-4" role="dialog" aria-modal="true" aria-labelledby="signupModalTitle" aria-hidden="true" tabindex="-1">
         <div class="bg-slate-950 border border-slate-800 rounded-3xl p-6 sm:p-8 max-w-md w-full shadow-2xl relative text-white">
             <button onclick="closeModal('signupModal')" aria-label="Cerrar formulario de registro" class="absolute top-5 right-5 text-slate-400 hover:text-white transition">
                 <i class="fa-solid fa-xmark text-lg"></i>
@@ -974,7 +1004,7 @@
     </div>
 
     <!-- MODAL 2: CLASES EN VIVO -->
-    <div id="liveClassModal" class="modal-overlay hidden fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4" role="dialog" aria-modal="true" aria-labelledby="liveClassModalTitle" aria-hidden="true">
+    <div id="liveClassModal" class="modal-overlay hidden fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4" role="dialog" aria-modal="true" aria-labelledby="liveClassModalTitle" aria-hidden="true" tabindex="-1">
         <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-md w-full shadow-2xl relative">
             <button onclick="closeModal('liveClassModal')" aria-label="Cerrar modal de clase en vivo" class="absolute top-5 right-5 text-slate-400 hover:text-slate-600">
                 <i class="fa-solid fa-xmark text-lg"></i>
@@ -1010,7 +1040,7 @@
     </div>
 
     <!-- MODAL 3: HORARIOS FLEXIBLES -->
-    <div id="flexibleScheduleModal" class="modal-overlay hidden fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4" role="dialog" aria-modal="true" aria-labelledby="flexibleScheduleModalTitle" aria-hidden="true">
+    <div id="flexibleScheduleModal" class="modal-overlay hidden fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4" role="dialog" aria-modal="true" aria-labelledby="flexibleScheduleModalTitle" aria-hidden="true" tabindex="-1">
         <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-md w-full shadow-2xl relative">
             <button onclick="closeModal('flexibleScheduleModal')" aria-label="Cerrar modal de horarios flexibles" class="absolute top-5 right-5 text-slate-400 hover:text-slate-600">
                 <i class="fa-solid fa-xmark text-lg"></i>
