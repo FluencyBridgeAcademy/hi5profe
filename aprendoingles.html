@@ -189,8 +189,12 @@
             const menu = document.getElementById('mobileMenu');
             const icon = document.getElementById('menuIcon');
             const mobileMenuButton = document.getElementById('mobileMenuButton');
-            menu.classList.add('hidden');
-            icon.className = 'fa-solid fa-bars text-xl';
+            if (menu) {
+                menu.classList.add('hidden');
+            }
+            if (icon) {
+                icon.className = 'fa-solid fa-bars text-xl';
+            }
             if (mobileMenuButton) {
                 mobileMenuButton.setAttribute('aria-expanded', 'false');
             }
@@ -262,6 +266,7 @@
             if (lastFocusedTrigger && typeof lastFocusedTrigger.focus === 'function') {
                 lastFocusedTrigger.focus();
             }
+            lastFocusedTrigger = null;
         }
 
         // Toast Message Notification
