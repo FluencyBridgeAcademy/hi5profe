@@ -221,6 +221,12 @@
         // Modals Management
         function openModal(modalId, planName = 'Prueba Gratuita', triggerEl = document.activeElement) {
             closeMobileMenu();
+            document.querySelectorAll('.modal-overlay').forEach((modalEl) => {
+                if (modalEl.id !== modalId) {
+                    modalEl.classList.add('hidden');
+                    modalEl.setAttribute('aria-hidden', 'true');
+                }
+            });
             currentPlanType = planName;
             lastFocusedTrigger = triggerEl;
             const titleEl = document.getElementById('signupModalTitle');
