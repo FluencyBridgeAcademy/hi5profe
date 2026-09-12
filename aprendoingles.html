@@ -267,8 +267,10 @@
             closeMobileMenu();
             const hadActiveModal = Boolean(activeModalId);
             const switchingModal = hadActiveModal && activeModalId !== modalId;
+            const activeModal = hadActiveModal ? document.getElementById(activeModalId) : null;
+            const triggerInsideActiveModal = Boolean(activeModal && triggerEl instanceof Element && activeModal.contains(triggerEl));
             if (switchingModal) {
-                const previousModal = document.getElementById(activeModalId);
+                const previousModal = activeModal;
                 if (previousModal) {
                     previousModal.classList.add('hidden');
                     previousModal.setAttribute('aria-hidden', 'true');
@@ -281,7 +283,9 @@
                 }
             });
             currentPlanType = planName;
-            lastFocusedTrigger = triggerEl;
+            if (!triggerInsideActiveModal) {
+                lastFocusedTrigger = triggerEl;
+            }
             const titleEl = document.getElementById('signupModalTitle');
             const submitBtn = document.getElementById('signupSubmitBtn');
             if(titleEl) {
