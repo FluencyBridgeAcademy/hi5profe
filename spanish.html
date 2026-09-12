@@ -84,7 +84,7 @@
                 <a href="#pricing" class="hover:text-purple-600 transition-colors">Pricing</a>
             </nav>
             <div class="flex items-center space-x-3">
-                <a href="#pricing" class="bg-purple-600 text-white font-bold py-2.5 px-5 sm:px-6 rounded-xl shadow-lg shadow-purple-600/30 hover:bg-purple-700 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200 text-sm">Start Now</a>
+                <a href="#pricing" class="bg-purple-600 text-white font-bold py-2.5 px-5 sm:px-6 rounded-xl shadow-lg shadow-purple-600/30 hover:bg-purple-700 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300">Start Free</a>
                 <button id="mobileMenuBtn" class="md:hidden p-2 text-slate-700 hover:text-purple-600 focus:outline-none" aria-label="Toggle navigation menu">
                     <i class="fas fa-bars text-xl"></i>
                 </button>
@@ -122,12 +122,12 @@
 
                     <!-- Exact Buttons matching the shared reference with optimized responsiveness -->
                     <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3.5 sm:gap-4 mb-8">
-                        <a href="#pricing" class="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white font-bold py-4 px-8 rounded-2xl shadow-xl shadow-purple-600/30 hover:shadow-2xl hover:scale-[1.02] active:scale-95 transition-all duration-200 text-base">
+                        <a href="#pricing" class="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white font-bold py-4 px-8 rounded-2xl shadow-lg shadow-purple-600/30 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300">
                             <span>Start Free Now</span>
                             <i class="fas fa-arrow-right text-sm"></i>
                         </a>
 
-                        <button type="button" onclick="playHeroVideoWithSound()" class="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-white text-slate-800 hover:text-purple-700 font-bold py-4 px-7 rounded-2xl border border-slate-200 shadow-md hover:border-purple-300 hover:shadow-lg hover:scale-[1.02] active:scale-95 transition-all duration-200 text-base">
+                        <button type="button" onclick="playHeroVideoWithSound()" class="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-white text-slate-800 hover:text-purple-700 font-bold py-4 px-8 rounded-2xl shadow-lg border border-slate-200 hover:border-purple-200 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300">
                             <span class="w-8 h-8 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center shadow-inner">
                                 <i class="fas fa-play text-xs ml-0.5"></i>
                             </span>
@@ -155,7 +155,7 @@
 
                 <!-- Right Column (or below on iPhones/tablets): Universal Responsive Video Mockup Frame -->
                 <div class="w-full lg:w-5/12 flex justify-center items-center mt-4 lg:mt-0">
-                    <div class="relative w-full max-w-[290px] sm:max-w-[320px] md:max-w-[340px] aspect-[9/16] bg-slate-950 rounded-[2.5rem] p-3 shadow-2xl border-[6px] border-slate-900 video-phone-frame animate-float">
+                    <div class="relative w-full max-w-[290px] sm:max-w-[320px] md:max-w-[340px] aspect-[9/16] bg-slate-950 rounded-[2.5rem] p-3 shadow-2xl border-[6px] border-slate-900 video-phone-frame">
                         <!-- iPhone Speaker & Notch Simulator -->
                         <div class="absolute top-4 left-1/2 -translate-x-1/2 w-28 h-4 bg-slate-900 rounded-full z-20 flex items-center justify-center">
                             <div class="w-10 h-1 bg-slate-800 rounded-full"></div>
@@ -180,13 +180,13 @@
                                     <span class="bg-purple-600/90 backdrop-blur-md text-[10px] uppercase font-extrabold px-2.5 py-1 rounded-full tracking-wider shadow">
                                         <i class="fab fa-youtube mr-1"></i> Hi5Profe
                                     </span>
-                                    <button onclick="toggleAudio()" class="w-9 h-9 rounded-full bg-slate-950/75 backdrop-blur-md flex items-center justify-center pointer-events-auto hover:bg-purple-600 transition-colors shadow-lg cursor-pointer text-white" title="Toggle audio on/off">
+                                    <button onclick="toggleAudio()" class="w-9 h-9 rounded-full bg-slate-950/75 backdrop-blur-md flex items-center justify-center pointer-events-auto hover:bg-purple-600 transition-colors" aria-label="Toggle audio">
                                         <i id="audioIcon" class="fas fa-volume-mute text-xs"></i>
                                     </button>
                                 </div>
 
                                 <div class="space-y-2 pointer-events-auto">
-                                    <button onclick="toggleAudio()" class="w-full bg-slate-950/80 backdrop-blur-md py-2.5 px-3.5 rounded-xl text-center text-xs font-bold border border-white/20 shadow-lg cursor-pointer hover:bg-purple-600 transition-all flex items-center justify-center gap-2">
+                                    <button onclick="toggleAudio()" class="w-full bg-slate-950/80 backdrop-blur-md py-2.5 px-3.5 rounded-xl text-center text-xs font-bold border border-white/20 shadow-lg hover:bg-slate-900 transition-colors">
                                         <i class="fas fa-volume-high text-[11px]"></i>
                                         <span id="soundButtonText">Tap to listen with sound</span>
                                     </button>
@@ -326,12 +326,12 @@
                         <li class="flex items-center gap-3 text-slate-400"><i class="fas fa-times"></i> Live group classes</li>
                         <li class="flex items-center gap-3 text-slate-400"><i class="fas fa-times"></i> Speaking Club access</li>
                     </ul>
-                    <a href="https://wa.me/message/LUZTCXXHNJS7J1" target="_blank" class="block w-full py-4 text-center border-2 border-purple-600 text-purple-600 font-bold rounded-2xl hover:bg-purple-600 hover:text-white transition-all text-sm">Start Free</a>
+                    <a href="https://wa.me/message/LUZTCXXHNJS7J1" target="_blank" rel="noopener noreferrer" class="block w-full py-4 text-center border-2 border-purple-600 text-purple-600 font-bold rounded-2xl hover:bg-purple-50 transition-colors">Get Started</a>
                 </div>
 
                 <!-- Boost Pro Plan -->
                 <div class="bg-slate-900 text-white rounded-3xl shadow-2xl p-8 relative md:-translate-y-4 border-2 border-purple-500">
-                    <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-purple-600 to-pink-600 text-white text-xs font-extrabold px-4 py-1.5 rounded-full uppercase tracking-wider shadow-lg">Most Popular</div>
+                    <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-purple-600 to-pink-600 text-white text-xs font-extrabold px-4 py-1.5 rounded-full uppercase tracking-widest">Most Popular</div>
                     <h4 class="text-2xl font-extrabold mb-2 mt-2">Boost Pro Plan</h4>
                     <p class="text-slate-300 text-sm mb-6 h-10">Everything you need to speak fluently and confidently.</p>
                     <div class="text-4xl font-extrabold mb-6">$250 <span class="text-sm font-medium text-slate-400">/ month</span></div>
@@ -341,7 +341,7 @@
                         <li class="flex items-start gap-3"><i class="fas fa-check text-purple-400 mt-1"></i> <span>Full Speaking Club membership</span></li>
                         <li class="flex items-start gap-3"><i class="fas fa-check text-purple-400 mt-1"></i> <span>Official B2 Level Certificate</span></li>
                     </ul>
-                    <a href="https://wa.me/message/LUZTCXXHNJS7J1" target="_blank" class="block w-full py-4 text-center bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold rounded-2xl shadow-xl shadow-purple-900/50 hover:opacity-95 transition-all text-sm">Get Pro Access</a>
+                    <a href="https://wa.me/message/LUZTCXXHNJS7J1" target="_blank" rel="noopener noreferrer" class="block w-full py-4 text-center bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold rounded-2xl shadow-lg hover:shadow-xl transition-all">Choose Boost Pro</a>
                 </div>
 
                 <!-- VIP / Teams Plan -->
@@ -355,7 +355,7 @@
                         <li class="flex items-start gap-3"><i class="fas fa-check text-amber-500 mt-1"></i> <span>Advanced Business Spanish</span></li>
                         <li class="flex items-start gap-3"><i class="fas fa-check text-amber-500 mt-1"></i> <span>Priority 24/7 Support</span></li>
                     </ul>
-                    <a href="https://wa.me/message/LUZTCXXHNJS7J1" target="_blank" class="block w-full py-4 text-center bg-slate-900 text-white font-bold rounded-2xl hover:bg-slate-800 transition-all text-sm">Start VIP</a>
+                    <a href="https://wa.me/message/LUZTCXXHNJS7J1" target="_blank" rel="noopener noreferrer" class="block w-full py-4 text-center bg-slate-900 text-white font-bold rounded-2xl hover:bg-slate-800 transition-all">Contact Sales</a>
                 </div>
             </div>
         </div>
@@ -392,7 +392,7 @@
                 <h4 class="text-white font-bold text-base mb-4">Contact</h4>
                 <ul class="space-y-2.5 text-sm">
                     <li><a href="mailto:contact@hi5profe.com" class="hover:text-purple-400 transition-colors">contact@hi5profe.com</a></li>
-                    <li><a href="https://wa.me/message/LUZTCXXHNJS7J1" target="_blank" class="hover:text-purple-400 transition-colors">+51 936932398</a></li>
+                    <li><a href="https://wa.me/message/LUZTCXXHNJS7J1" target="_blank" rel="noopener noreferrer" class="hover:text-purple-400 transition-colors">+51 936932398</a></li>
                     <li class="flex space-x-4 pt-2">
                         <a href="#" class="w-10 h-10 rounded-xl bg-slate-900 flex items-center justify-center text-white hover:bg-purple-600 transition-colors" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
                         <a href="#" class="w-10 h-10 rounded-xl bg-slate-900 flex items-center justify-center text-white hover:bg-purple-600 transition-colors" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
@@ -423,39 +423,39 @@
             const iframe = document.getElementById('heroVideo');
             const icon = document.getElementById('audioIcon');
             const label = document.getElementById('soundButtonText');
+            if (!iframe) return;
+
             isMuted = !isMuted;
-            
-            let src = iframe.src;
+            const url = new URL(iframe.src);
+
             if (isMuted) {
-                if (!src.includes('mute=1')) src += '&mute=1';
-                icon.className = 'fas fa-volume-mute text-xs';
+                url.searchParams.set('mute', '1');
+                if (icon) icon.className = 'fas fa-volume-mute text-xs';
                 if (label) label.textContent = 'Tap to listen with sound';
             } else {
-                src = src.replace('&mute=1', '').replace('mute=1&', '').replace('?mute=1', '?');
-                icon.className = 'fas fa-volume-high text-xs';
+                url.searchParams.delete('mute');
+                if (icon) icon.className = 'fas fa-volume-high text-xs';
                 if (label) label.textContent = 'Sound ON (Tap to mute)';
             }
-            iframe.src = src;
+
+            iframe.src = url.toString();
         }
 
         // Dedicated handler for the "See How It Works" button
         function playHeroVideoWithSound() {
             const heroVideo = document.getElementById('heroVideo');
             if (heroVideo) {
-                // Ensure sound is unmuted and plays directly
                 isMuted = false;
                 const icon = document.getElementById('audioIcon');
                 const label = document.getElementById('soundButtonText');
                 if (icon) icon.className = 'fas fa-volume-high text-xs';
                 if (label) label.textContent = 'Sound ON (Tap to mute)';
 
-                let cleanSrc = heroVideo.src.replace('&mute=1', '').replace('mute=1&', '').replace('?mute=1', '?');
-                if (!cleanSrc.includes('autoplay=1')) {
-                    cleanSrc += '&autoplay=1';
-                }
-                heroVideo.src = cleanSrc;
+                const url = new URL(heroVideo.src);
+                url.searchParams.delete('mute');
+                url.searchParams.set('autoplay', '1');
+                heroVideo.src = url.toString();
 
-                // Smooth scroll to video if on small screens (iPhone/iPad portrait)
                 if (window.innerWidth < 1024) {
                     heroVideo.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 }
@@ -464,10 +464,13 @@
 
         function toggleMobileMenu() {
             const menu = document.getElementById('mobileMenu');
-            menu.classList.toggle('hidden');
+            if (menu) menu.classList.toggle('hidden');
         }
 
-        document.getElementById('mobileMenuBtn').addEventListener('click', toggleMobileMenu);
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        if (mobileMenuBtn) {
+            mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+        }
     </script>
 </body>
 </html>
