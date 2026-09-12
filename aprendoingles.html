@@ -306,6 +306,9 @@
                 }
             }
             const modal = document.getElementById(modalId);
+            if (!modal) {
+                return;
+            }
             modal.classList.remove('hidden');
             modal.setAttribute('aria-hidden', 'false');
             activeModalId = modalId;
@@ -316,6 +319,9 @@
 
         function closeModal(modalId) {
             const modal = document.getElementById(modalId);
+            if (!modal) {
+                return;
+            }
             modal.classList.add('hidden');
             modal.setAttribute('aria-hidden', 'true');
             if (modalId === activeModalId) {
