@@ -82,7 +82,7 @@
     <style>
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #FFFFFF;
+            background: radial-gradient(circle at top, rgba(124, 58, 237, 0.08) 0%, rgba(255, 255, 255, 0.94) 34%, #FFFFFF 62%);
             color: #0F172A;
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
@@ -98,12 +98,12 @@
         }
 
         .glow-top {
-            top: -120px;
+            top: -160px;
             left: 50%;
             transform: translateX(-50%);
-            width: 850px;
-            height: 480px;
-            background: radial-gradient(circle, rgba(236, 72, 153, 0.12) 0%, rgba(139, 92, 246, 0.14) 40%, rgba(6, 182, 212, 0.08) 70%, transparent 80%);
+            width: 980px;
+            height: 520px;
+            background: radial-gradient(circle, rgba(124, 58, 237, 0.2) 0%, rgba(139, 92, 246, 0.14) 38%, rgba(167, 139, 250, 0.08) 65%, transparent 80%);
         }
 
         .glow-left {
@@ -111,7 +111,7 @@
             left: -150px;
             width: 500px;
             height: 500px;
-            background: radial-gradient(circle, rgba(124, 58, 237, 0.12) 0%, rgba(236, 72, 153, 0.06) 50%, transparent 75%);
+            background: radial-gradient(circle, rgba(124, 58, 237, 0.13) 0%, rgba(167, 139, 250, 0.07) 50%, transparent 75%);
         }
 
         .glow-right {
@@ -119,7 +119,14 @@
             right: -150px;
             width: 500px;
             height: 500px;
-            background: radial-gradient(circle, rgba(6, 182, 212, 0.12) 0%, rgba(16, 185, 129, 0.07) 50%, transparent 75%);
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.13) 0%, rgba(124, 58, 237, 0.07) 50%, transparent 75%);
+        }
+
+        .premium-shell {
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(124, 58, 237, 0.12);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 14px 42px -16px rgba(76, 29, 149, 0.35);
         }
 
         /* Buttons with brand gradient */
@@ -159,6 +166,30 @@
         .gateway-card:hover {
             transform: translateY(-8px);
         }
+
+        a:focus-visible,
+        button:focus-visible {
+            outline: 3px solid rgba(124, 58, 237, 0.45);
+            outline-offset: 3px;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html:focus-within {
+                scroll-behavior: auto;
+            }
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+            .gateway-card:hover,
+            .btn-gradient-purple:hover,
+            .btn-gradient-amber:hover {
+                transform: none;
+            }
+        }
     </style>
 </head>
 <body class="relative flex flex-col min-h-screen bg-white">
@@ -169,20 +200,10 @@
     <div class="glow-right ambient-glow"></div>
 
     <!-- Header bar -->
-    <header class="relative z-30 w-full max-w-7xl mx-auto px-6 py-6 flex items-center justify-between">
-        <!-- Logo Hi5profe matching screenshot typography & icon -->
-        <a href="#" class="flex items-center gap-3 group">
-            <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-purple-600 via-fuchsia-500 to-pink-500 flex items-center justify-center text-white font-black text-xl shadow-lg shadow-purple-500/30">
-                Hi5
-            </div>
-            <div class="flex flex-col">
-                <span class="text-2xl font-black tracking-tight text-gray-950 leading-none">
-                    Hi5<span class="text-gray-900">profe</span>
-                </span>
-                <span class="text-[10px] font-bold text-purple-600 tracking-wider uppercase mt-0.5">
-                    Academia de Idiomas
-                </span>
-            </div>
+    <header class="premium-shell relative z-30 w-full max-w-7xl mx-auto mt-4 px-5 sm:px-6 py-4 sm:py-5 rounded-2xl flex items-center justify-between gap-4">
+        <!-- Official Hi5profe logo -->
+        <a href="#" class="flex items-center group" aria-label="Hi5profe inicio">
+            <img src="logomania.svg" alt="Logotipo oficial de Hi5profe" class="h-10 sm:h-12 w-auto transition-transform duration-300 group-hover:scale-[1.02]" decoding="async">
         </a>
 
         <!-- Portal Info Pill -->
@@ -195,23 +216,21 @@
         <a href="https://wa.me/?text=Hola%20Hi5profe!%20Deseo%20informaci%C3%B3n%20sobre%20los%20cursos" 
            target="_blank" 
            rel="noopener noreferrer"
-           class="px-5 py-2.5 rounded-full bg-gray-50 hover:bg-gray-100 border border-gray-200 text-gray-800 text-xs sm:text-sm font-bold transition-all shadow-sm flex items-center gap-2">
+           class="px-5 py-2.5 rounded-full bg-white hover:bg-gray-50 border border-purple-100 text-gray-800 text-xs sm:text-sm font-bold transition-all shadow-sm shadow-purple-100/50 flex items-center gap-2">
             <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
             <span>Contacto</span>
         </a>
     </header>
 
-    <main class="relative z-20 flex-grow flex flex-col items-center justify-center max-w-6xl mx-auto px-6 py-6 md:py-10 w-full">
+    <main class="relative z-20 flex-grow flex flex-col items-center justify-center max-w-6xl mx-auto px-6 py-8 md:py-12 w-full">
         
         <!-- Header Text Section -->
         <div class="text-center max-w-3xl mx-auto mb-12">
             
-            <!-- Multi-colored Hi5profe letters matching screenshot colors -->
-            <div class="mb-4 inline-block select-none">
-                <h1 class="text-5xl sm:text-6xl md:text-7xl font-black tracking-tight leading-none">
-                    <span class="text-[#7C3AED]">H</span><span class="text-[#8B5CF6]">i</span><span class="text-[#06B6D4]">5</span><span class="text-[#10B981]">p</span><span class="text-[#F59E0B]">r</span><span class="text-[#EC4899]">o</span><span class="text-[#F43F5E]">f</span><span class="text-[#7C3AED]">e</span>
-                </h1>
-            </div>
+            <!-- Official brand wordmark -->
+            <h1 class="mb-5 inline-flex items-center justify-center rounded-3xl border border-purple-100 bg-white/90 shadow-card-soft px-5 py-3 sm:px-8 sm:py-4 select-none">
+                <img src="logomania.svg" alt="Logo Hi5profe Academia de Idiomas" class="w-[min(78vw,390px)] sm:w-[min(56vw,440px)] h-auto" decoding="async">
+            </h1>
 
             <h2 class="text-3xl sm:text-5xl font-black text-gray-950 tracking-tight leading-tight mb-2">
                 Aprende un nuevo idioma.
@@ -232,7 +251,7 @@
         <div class="grid md:grid-cols-2 gap-8 w-full max-w-4xl mx-auto mb-12">
             
             <!-- OPTION 1: APRENDER INGLÉS (Destino: aprendoingles.html) -->
-            <div class="gateway-card bg-white rounded-3xl p-8 sm:p-10 border-2 border-purple-100 hover:border-purple-500 shadow-card-soft hover:shadow-card-hover flex flex-col justify-between relative group overflow-hidden">
+            <div class="gateway-card bg-white/95 rounded-3xl p-8 sm:p-10 border-2 border-purple-100 hover:border-purple-500 shadow-card-soft hover:shadow-card-hover flex flex-col justify-between relative group overflow-hidden">
                 
                 <!-- Background ambient accent inside card -->
                 <div class="absolute -top-20 -right-20 w-44 h-44 rounded-full bg-purple-100/50 pointer-events-none blur-2xl group-hover:bg-purple-200/60 transition-colors"></div>
@@ -285,7 +304,7 @@
             </div>
 
             <!-- OPTION 2: LEARN SPANISH (Destino: spanish.html) -->
-            <div class="gateway-card bg-white rounded-3xl p-8 sm:p-10 border-2 border-amber-100 hover:border-amber-500 shadow-card-soft hover:shadow-card-hover flex flex-col justify-between relative group overflow-hidden">
+            <div class="gateway-card bg-white/95 rounded-3xl p-8 sm:p-10 border-2 border-amber-100 hover:border-amber-500 shadow-card-soft hover:shadow-card-hover flex flex-col justify-between relative group overflow-hidden">
                 
                 <!-- Background ambient accent inside card -->
                 <div class="absolute -top-20 -right-20 w-44 h-44 rounded-full bg-amber-100/50 pointer-events-none blur-2xl group-hover:bg-amber-200/60 transition-colors"></div>
@@ -389,7 +408,7 @@
     </div>
 
     <!-- Footer -->
-    <footer class="relative z-20 w-full border-t border-gray-100 bg-white/80 backdrop-blur-md py-6 mt-8">
+    <footer class="premium-shell relative z-20 w-full max-w-7xl mx-auto rounded-2xl border-t border-purple-100 py-6 mt-4 mb-4">
         <div class="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-semibold text-gray-500">
             <p>&copy; 2026 Hi5profe. Todos los derechos reservados.</p>
             <div class="flex items-center gap-6">
