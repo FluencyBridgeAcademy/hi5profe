@@ -96,7 +96,7 @@
     <header class="bg-white/90 backdrop-blur-md py-4 shadow-sm fixed w-full z-40 top-0 transition-all" role="banner">
         <div class="container mx-auto flex justify-between items-center px-4 lg:px-8">
             <a href="#" class="flex items-center gap-3 group" aria-label="Hi5Profe home">
-                <img src="logomania.png" alt="Hi5Profe Logo" class="h-10 w-10 logo-image shadow-md">
+                <img src="logomania.png" alt="Hi5Profe Logo" class="h-10 w-10 logo-image shadow-md" loading="eager">
                 <div class="text-2xl font-extrabold tracking-tight flex items-center">
                     <span class="text-slate-900">Hi5</span><span class="text-purple-600">Profe</span>
                 </div>
@@ -108,8 +108,8 @@
                 <a href="#pricing" class="hover:text-purple-600 transition-colors">Pricing</a>
             </nav>
             <div class="flex items-center space-x-3">
-                <a href="#pricing" class="bg-purple-600 text-white font-bold py-2.5 px-5 sm:px-6 rounded-xl shadow-lg shadow-purple-600/30 hover:bg-purple-700 hover:shadow-xl hover:-translate-y-0.5 tr[...]
-                <button id="mobileMenuBtn" class="md:hidden p-2 text-slate-700 hover:text-purple-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 rounded-lg" aria-label="Toggl[...]
+                <a href="#pricing" class="bg-purple-600 text-white font-bold py-2.5 px-5 sm:px-6 rounded-xl shadow-lg shadow-purple-600/30 hover:bg-purple-700 hover:shadow-xl hover:-translate-y-0.5 transition-all">Get Started</a>
+                <button id="mobileMenuBtn" class="md:hidden p-2 text-slate-700 hover:text-purple-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 rounded-lg" aria-label="Toggle menu">
                     <i class="fas fa-bars text-xl" aria-hidden="true"></i>
                 </button>
             </div>
@@ -128,7 +128,7 @@
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col lg:flex-row items-center justify-between gap-10 lg:gap-12">
                 <div class="w-full lg:w-7/12 text-center lg:text-left">
-                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-100/90 text-purple-700 font-bold text-xs uppercase tracking-wider mb-6 shadow-sm" aria-label="Promotiona[...]
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-100/90 text-purple-700 font-bold text-xs uppercase tracking-wider mb-6 shadow-sm" aria-label="Promotional badge">
                         <span class="w-2 h-2 rounded-full bg-purple-600 animate-pulse" aria-hidden="true"></span>
                         The Ultimate Spanish Learning Platform
                     </div>
@@ -143,12 +143,12 @@
                     </p>
 
                     <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3.5 sm:gap-4 mb-8">
-                        <a href="#pricing" class="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-pu[...]
+                        <a href="#pricing" class="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white font-bold py-3 px-6 rounded-xl shadow-lg shadow-purple-600/40 hover:shadow-xl transition-all">
                             <span>Start Free Now</span>
                             <i class="fas fa-arrow-right text-sm" aria-hidden="true"></i>
                         </a>
 
-                        <button type="button" onclick="playHeroVideoWithSound()" class="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-white text-slate-800 hover:text-purple-70[...]
+                        <button type="button" onclick="playHeroVideoWithSound()" class="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-white text-slate-800 hover:text-purple-700 font-bold py-3 px-6 rounded-xl border-2 border-slate-200 hover:border-purple-300 shadow-sm hover:shadow-md transition-all">
                             <span class="w-8 h-8 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center shadow-inner" aria-hidden="true">
                                 <i class="fas fa-play text-xs ml-0.5"></i>
                             </span>
@@ -165,7 +165,7 @@
                         </div>
                         <div class="text-center sm:text-left">
                             <div class="flex items-center justify-center sm:justify-start gap-1 text-amber-400 text-sm" aria-label="Rated 4.9 out of 5.0">
-                                <i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" ar[...]
+                                <i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star-half-alt" aria-hidden="true"></i>
                                 <span class="text-slate-800 font-bold ml-1.5">4.9 / 5.0</span>
                             </div>
                             <p class="text-xs text-slate-500 font-medium mt-0.5">Trusted by over 2,000+ active global students</p>
@@ -174,7 +174,7 @@
                 </div>
 
                 <div class="w-full lg:w-5/12 flex justify-center items-center mt-4 lg:mt-0">
-                    <div class="relative w-full max-w-[290px] sm:max-w-[320px] md:max-w-[340px] aspect-[9/16] bg-slate-950 rounded-[2.5rem] p-3 shadow-2xl border-[6px] border-slate-900 video-phone-fra[...]
+                    <div class="relative w-full max-w-[290px] sm:max-w-[320px] md:max-w-[340px] aspect-[9/16] bg-slate-950 rounded-[2.5rem] p-3 shadow-2xl border-[6px] border-slate-900 video-phone-frame">
                         <div class="absolute top-4 left-1/2 -translate-x-1/2 w-28 h-4 bg-slate-900 rounded-full z-20 flex items-center justify-center" aria-hidden="true">
                             <div class="w-10 h-1 bg-slate-800 rounded-full"></div>
                             <div class="w-2.5 h-2.5 bg-slate-950 rounded-full ml-3 border border-slate-800"></div>
@@ -196,13 +196,13 @@
                                     <span class="bg-purple-600/90 backdrop-blur-md text-[10px] uppercase font-extrabold px-2.5 py-1 rounded-full tracking-wider shadow">
                                         <i class="fab fa-youtube mr-1" aria-hidden="true"></i> Hi5Profe
                                     </span>
-                                    <button onclick="toggleAudio()" class="w-9 h-9 rounded-full bg-slate-950/75 backdrop-blur-md flex items-center justify-center pointer-events-auto hover:bg-purple-60[...]
+                                    <button onclick="toggleAudio()" class="w-9 h-9 rounded-full bg-slate-950/75 backdrop-blur-md flex items-center justify-center pointer-events-auto hover:bg-purple-600 transition-colors">
                                         <i id="audioIcon" class="fas fa-volume-mute text-xs" aria-hidden="true"></i>
                                     </button>
                                 </div>
 
                                 <div class="space-y-2 pointer-events-auto">
-                                    <button onclick="toggleAudio()" class="w-full bg-slate-950/80 backdrop-blur-md py-2.5 px-3.5 rounded-xl text-center text-xs font-bold border border-white/20 sh[...]
+                                    <button onclick="toggleAudio()" class="w-full bg-slate-950/80 backdrop-blur-md py-2.5 px-3.5 rounded-xl text-center text-xs font-bold border border-white/20 shadow-lg hover:bg-slate-900 transition-colors">
                                         <i class="fas fa-volume-high text-[11px]" aria-hidden="true"></i>
                                         <span id="soundButtonText">Tap to listen with sound</span>
                                     </button>
@@ -225,28 +225,28 @@
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 <div class="bg-slate-50/80 rounded-3xl p-8 border border-slate-100 hover:border-purple-200 hover:bg-white hover:shadow-xl transition-all duration-300 group">
-                    <div class="w-14 h-14 bg-purple-100 text-purple-600 rounded-2xl flex items-center justify-center mb-6 text-2xl group-hover:bg-purple-600 group-hover:text-white transition-colo[...]
+                    <div class="w-14 h-14 bg-purple-100 text-purple-600 rounded-2xl flex items-center justify-center mb-6 text-2xl group-hover:bg-purple-600 group-hover:text-white transition-colors" aria-hidden="true">
                         <i class="fas fa-laptop-code"></i>
                     </div>
                     <h4 class="text-xl font-bold text-slate-900 mb-3">Interactive Courses</h4>
                     <p class="text-slate-600 text-sm leading-relaxed">Dynamic, bite-sized lessons tailored precisely to your current level and goals.</p>
                 </div>
                 <div class="bg-slate-50/80 rounded-3xl p-8 border border-slate-100 hover:border-pink-200 hover:bg-white hover:shadow-xl transition-all duration-300 group">
-                    <div class="w-14 h-14 bg-pink-100 text-pink-600 rounded-2xl flex items-center justify-center mb-6 text-2xl group-hover:bg-pink-600 group-hover:text-white transition-colors" ar[...]
+                    <div class="w-14 h-14 bg-pink-100 text-pink-600 rounded-2xl flex items-center justify-center mb-6 text-2xl group-hover:bg-pink-600 group-hover:text-white transition-colors" aria-hidden="true">
                         <i class="fas fa-comments"></i>
                     </div>
                     <h4 class="text-xl font-bold text-slate-900 mb-3">Practice Speaking</h4>
                     <p class="text-slate-600 text-sm leading-relaxed">Boost pronunciation, overcome fear, and master conversational fluency naturally.</p>
                 </div>
                 <div class="bg-slate-50/80 rounded-3xl p-8 border border-slate-100 hover:border-emerald-200 hover:bg-white hover:shadow-xl transition-all duration-300 group">
-                    <div class="w-14 h-14 bg-emerald-100 text-emerald-600 rounded-2xl flex items-center justify-center mb-6 text-2xl group-hover:bg-emerald-600 group-hover:text-white transition-c[...]
+                    <div class="w-14 h-14 bg-emerald-100 text-emerald-600 rounded-2xl flex items-center justify-center mb-6 text-2xl group-hover:bg-emerald-600 group-hover:text-white transition-colors" aria-hidden="true">
                         <i class="fas fa-chart-line"></i>
                     </div>
                     <h4 class="text-xl font-bold text-slate-900 mb-3">Personal Tracking</h4>
                     <p class="text-slate-600 text-sm leading-relaxed">Monitor daily streaks, target objectives, and watch your vocabulary expand day by day.</p>
                 </div>
                 <div class="bg-slate-50/80 rounded-3xl p-8 border border-slate-100 hover:border-amber-200 hover:bg-white hover:shadow-xl transition-all duration-300 group">
-                    <div class="w-14 h-14 bg-amber-100 text-amber-600 rounded-2xl flex items-center justify-center mb-6 text-2xl group-hover:bg-amber-500 group-hover:text-white transition-colors" aria[...]
+                    <div class="w-14 h-14 bg-amber-100 text-amber-600 rounded-2xl flex items-center justify-center mb-6 text-2xl group-hover:bg-amber-500 group-hover:text-white transition-colors" aria-hidden="true">
                         <i class="fas fa-clock"></i>
                     </div>
                     <h4 class="text-xl font-bold text-slate-900 mb-3">Learn at Your Pace</h4>
@@ -333,11 +333,11 @@
                         <li class="flex items-center gap-3 text-slate-400"><i class="fas fa-times" aria-hidden="true"></i> Live group classes</li>
                         <li class="flex items-center gap-3 text-slate-400"><i class="fas fa-times" aria-hidden="true"></i> Speaking Club access</li>
                     </ul>
-                    <a href="https://wa.me/message/LUZTCXXHNJS7J1" target="_blank" rel="noopener noreferrer" class="block w-full py-4 text-center border-2 border-purple-600 text-purple-600 font-b[...]
+                    <a href="https://wa.me/message/LUZTCXXHNJS7J1" target="_blank" rel="noopener noreferrer" class="block w-full py-4 text-center border-2 border-purple-600 text-purple-600 font-bold rounded-2xl hover:bg-purple-50 transition-colors">Get Started</a>
                 </div>
 
                 <div class="bg-slate-900 text-white rounded-3xl shadow-2xl p-8 relative md:-translate-y-4 border-2 border-purple-500">
-                    <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-purple-600 to-pink-600 text-white text-xs font-extrabold px-4 py-1.5 rounded-full uppercase trackin[...]
+                    <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-purple-600 to-pink-600 text-white text-xs font-extrabold px-4 py-1.5 rounded-full uppercase tracking-wider">MOST POPULAR</div>
                     <h4 class="text-2xl font-extrabold mb-2 mt-2">Boost Pro Plan</h4>
                     <p class="text-slate-300 text-sm mb-6 h-10">Everything you need to speak fluently and confidently.</p>
                     <div class="text-4xl font-extrabold mb-6">$250 <span class="text-sm font-medium text-slate-400">/ month</span></div>
@@ -347,7 +347,7 @@
                         <li class="flex items-start gap-3"><i class="fas fa-check text-purple-400 mt-1" aria-hidden="true"></i> <span>Full Speaking Club membership</span></li>
                         <li class="flex items-start gap-3"><i class="fas fa-check text-purple-400 mt-1" aria-hidden="true"></i> <span>Official B2 Level Certificate</span></li>
                     </ul>
-                    <a href="https://wa.me/message/LUZTCXXHNJS7J1" target="_blank" rel="noopener noreferrer" class="block w-full py-4 text-center bg-gradient-to-r from-purple-600 to-pink-600 text[...]
+                    <a href="https://wa.me/message/LUZTCXXHNJS7J1" target="_blank" rel="noopener noreferrer" class="block w-full py-4 text-center bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold rounded-2xl hover:from-purple-700 hover:to-pink-700 transition-all">Upgrade Now</a>
                 </div>
 
                 <div class="bg-white rounded-3xl shadow-sm p-8 border border-slate-200">
@@ -360,7 +360,7 @@
                         <li class="flex items-start gap-3"><i class="fas fa-check text-amber-500 mt-1" aria-hidden="true"></i> <span>Advanced Business Spanish</span></li>
                         <li class="flex items-start gap-3"><i class="fas fa-check text-amber-500 mt-1" aria-hidden="true"></i> <span>Priority 24/7 Support</span></li>
                     </ul>
-                    <a href="https://wa.me/message/LUZTCXXHNJS7J1" target="_blank" rel="noopener noreferrer" class="block w-full py-4 text-center bg-slate-900 text-white font-bold rounded-2xl hov[...]
+                    <a href="https://wa.me/message/LUZTCXXHNJS7J1" target="_blank" rel="noopener noreferrer" class="block w-full py-4 text-center bg-slate-900 text-white font-bold rounded-2xl hover:bg-slate-800 transition-colors">Contact Sales</a>
                 </div>
             </div>
         </div>
@@ -371,7 +371,7 @@
         <div class="container mx-auto px-4 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
             <div>
                 <a href="#" class="flex items-center gap-3 mb-4 group" aria-label="Hi5Profe home">
-                    <img src="logomania.png" alt="Hi5Profe Logo" class="h-8 w-8 logo-image">
+                    <img src="logomania.png" alt="Hi5Profe Logo" class="h-8 w-8 logo-image" loading="eager">
                     <span class="text-2xl font-extrabold text-white">Hi5<span class="text-purple-400">Profe</span></span>
                 </a>
                 <p class="text-sm leading-relaxed text-slate-400">The premier online destination to learn Spanish effectively, naturally, and enjoyably.</p>
@@ -400,10 +400,10 @@
                     <li><a href="mailto:contact@hi5profe.com" class="hover:text-purple-400 transition-colors">contact@hi5profe.com</a></li>
                     <li><a href="https://wa.me/message/LUZTCXXHNJS7J1" target="_blank" rel="noopener noreferrer" class="hover:text-purple-400 transition-colors">+51 936932398</a></li>
                     <li class="flex space-x-4 pt-2">
-                        <a href="#" class="w-10 h-10 rounded-xl bg-slate-900 flex items-center justify-center text-white hover:bg-purple-600 transition-colors" aria-label="Facebook"><i class="fab[...]
-                        <a href="#" class="w-10 h-10 rounded-xl bg-slate-900 flex items-center justify-center text-white hover:bg-purple-600 transition-colors" aria-label="Twitter"><i class="fab [...]
-                        <a href="#" class="w-10 h-10 rounded-xl bg-slate-900 flex items-center justify-center text-white hover:bg-purple-600 transition-colors" aria-label="Instagram"><i class="fa[...]
-                        <a href="#" class="w-10 h-10 rounded-xl bg-slate-900 flex items-center justify-center text-white hover:bg-purple-600 transition-colors" aria-label="LinkedIn"><i class="fab[...]
+                        <a href="#" class="w-10 h-10 rounded-xl bg-slate-900 flex items-center justify-center text-white hover:bg-purple-600 transition-colors" aria-label="Facebook"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-xl bg-slate-900 flex items-center justify-center text-white hover:bg-purple-600 transition-colors" aria-label="Twitter"><i class="fab fa-twitter" aria-hidden="true"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-xl bg-slate-900 flex items-center justify-center text-white hover:bg-purple-600 transition-colors" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-xl bg-slate-900 flex items-center justify-center text-white hover:bg-purple-600 transition-colors" aria-label="LinkedIn"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
                     </li>
                 </ul>
             </div>
@@ -417,7 +417,7 @@
         </div>
     </footer>
 
-    <a href="https://wa.me/message/LUZTCXXHNJS7J1" target="_blank" rel="noopener noreferrer" class="fixed bottom-6 right-6 z-40 bg-[#25D366] text-white rounded-full w-14 h-14 flex items-center ju[...]
+    <a href="https://wa.me/message/LUZTCXXHNJS7J1" target="_blank" rel="noopener noreferrer" class="fixed bottom-6 right-6 z-40 bg-[#25D366] text-white rounded-full w-14 h-14 flex items-center justify-center shadow-lg hover:shadow-xl hover:scale-110 transition-all" aria-label="Contact via WhatsApp">
         <i class="fab fa-whatsapp text-3xl" aria-hidden="true"></i>
     </a>
 
