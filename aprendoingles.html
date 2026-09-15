@@ -8,9 +8,11 @@
     <!-- Standard Favicon SVG Fallback -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚀</text></svg>">
     
+    <!-- Tailwind CSS & Fonts CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
         body {
             font-family: 'Inter', sans-serif;
@@ -18,6 +20,7 @@
             color: #1e293b;
             overflow-x: hidden;
         }
+
         /* Smooth motor pulse & float animation for CTA buttons */
         @keyframes motorPulse {
             0% { transform: scale(1); box-shadow: 0 10px 25px -5px rgba(168, 85, 247, 0.4); }
@@ -130,6 +133,7 @@
             }
         }
     </style>
+
     <script>
         document.documentElement.classList.add('js');
         const WHATSAPP_NUMBER = '51936932398';
@@ -486,12 +490,12 @@
                 </div>
 
                 <div class="flex items-center space-x-4 pt-4 border-t border-slate-100">
-                  <div class="flex -space-x-2 overflow-hidden">
-                    <img src="isa.svg" alt="ISA" loading="lazy" class="inline-block h-10 w-10 rounded-full ring-2 ring-white object-cover">
-                    <img src="leo.svg" alt="LEO" loading="lazy" class="inline-block h-10 w-10 rounded-full ring-2 ring-white object-cover">
-                    <img src="julio.svg" alt="JULIO" loading="lazy" class="inline-block h-10 w-10 rounded-full ring-2 ring-white object-cover">
-                    <img src="juan.svg" alt="JUAN" loading="lazy" class="inline-block h-10 w-10 rounded-full ring-2 ring-white object-cover">
-                    <img src="homa.svg" alt="HOMA" loading="lazy" class="inline-block h-10 w-10 rounded-full ring-2 ring-white object-cover">
+                    <div class="flex -space-x-2 overflow-hidden">
+                        <img src="isa.svg" alt="ISA" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/80x80/9333ea/ffffff?text=IS';" class="inline-block h-10 w-10 rounded-full ring-2 ring-white object-cover">
+                        <img src="leo.svg" alt="LEO" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/80x80/ec4899/ffffff?text=LE';" class="inline-block h-10 w-10 rounded-full ring-2 ring-white object-cover">
+                        <img src="julio.svg" alt="JULIO" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/80x80/4f46e5/ffffff?text=JU';" class="inline-block h-10 w-10 rounded-full ring-2 ring-white object-cover">
+                        <img src="juan.svg" alt="JUAN" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/80x80/f59e0b/ffffff?text=JN';" class="inline-block h-10 w-10 rounded-full ring-2 ring-white object-cover">
+                        <img src="homa.svg" alt="HOMA" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/80x80/10b981/ffffff?text=HO';" class="inline-block h-10 w-10 rounded-full ring-2 ring-white object-cover">
                     </div>
                     <div>
                         <div class="flex items-center space-x-1 text-amber-400 text-sm">
@@ -673,7 +677,7 @@
 
     <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 scroll-animate">
         <div class="bg-white rounded-3xl p-6 sm:p-10 shadow-xl border border-slate-100 overflow-hidden">
-            <div class="flex flex-col md:flex-row items-start md:items-center justify-between mb-8">
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between mb-10">
                 <div>
                     <div class="flex items-center space-x-3 mb-3">
                         <span class="h-px w-8 bg-gradient-to-r from-transparent to-purple-500"></span>
@@ -685,82 +689,93 @@
                 <p class="text-sm text-slate-500 mt-4 md:mt-0 max-w-sm border-l-2 border-purple-100 pl-4 py-1">Mira el progreso real de nuestra comunidad y escucha sus resultados.</p>
             </div>
 
-            <!-- Testimonios en columna fija -->
-            <div class="w-full max-w-2xl mx-auto py-4">
-                <div class="flex flex-col gap-8">
-                    <!-- Video Card 1 (Carlos Ortega) -->
-                    <div class="w-full bg-slate-900 rounded-3xl overflow-hidden shadow-xl border-2 border-purple-200/70 flex flex-col ring-1 ring-purple-100">
-                        <div class="aspect-[9/16] relative overflow-hidden bg-slate-950">
-                            <iframe 
-                                src="https://www.youtube.com/embed/ja5EoCiIJAg?rel=0&modestbranding=1" 
-                                title="Testimonio Carlos Ortega" 
-                                frameborder="0" 
-                                loading="lazy"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                                referrerpolicy="strict-origin-when-cross-origin" 
-                                allowfullscreen
-                                class="absolute top-0 left-0 w-full h-full"
-                            ></iframe>
-                        </div>
-                        <div class="p-5 bg-slate-900 text-white flex-grow z-20 relative pointer-events-none">
-                            <div class="flex items-center justify-between text-xs text-purple-400 mb-2">
-                                <span class="font-bold uppercase tracking-wider">Logro</span>
-                                <span class="bg-purple-950 px-2 py-0.5 rounded-full text-[10px]">Certificación B2</span>
-                            </div>
-                            <h4 class="font-extrabold text-base leading-tight">Alcanzó el nivel B2 para obtener su grado de bachillerato</h4>
-                            <p class="text-[10px] text-slate-400 mt-2">Carlos Ortega (Lima, Perú)</p>
-                        </div>
+            <!-- Responsive Grid with exact max-w-sm header dimensions for each video -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center items-stretch py-2">
+                
+                <!-- Video Card 1: Carlos Ortega -->
+                <div class="w-full max-w-sm bg-gradient-to-tr from-purple-900 to-indigo-900 p-3 sm:p-4 rounded-3xl shadow-2xl shadow-indigo-900/30 flex flex-col justify-between transition-transform duration-300 hover:-translate-y-1">
+                    <div class="relative w-full aspect-[9/16] rounded-2xl overflow-hidden bg-slate-900 shadow-inner">
+                        <iframe 
+                            src="https://www.youtube.com/embed/ja5EoCiIJAg?rel=0&modestbranding=1" 
+                            title="Testimonio Carlos Ortega" 
+                            frameborder="0" 
+                            loading="lazy" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                            referrerpolicy="strict-origin-when-cross-origin" 
+                            allowfullscreen
+                            class="absolute top-0 left-0 w-full h-full rounded-2xl"
+                        ></iframe>
                     </div>
-
-                    <!-- Video Card 2 -->
-                    <div class="w-full bg-slate-900 rounded-3xl overflow-hidden shadow-xl border-2 border-pink-200/70 flex flex-col ring-1 ring-pink-100">
-                        <div class="aspect-[9/16] relative overflow-hidden bg-slate-950">
-                            <iframe 
-                                src="https://www.youtube.com/embed/lTSrYjf5a6c?rel=0&modestbranding=1" 
-                                title="Testimonio Ana G." 
-                                frameborder="0" 
-                                loading="lazy"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                                referrerpolicy="strict-origin-when-cross-origin" 
-                                allowfullscreen
-                                class="absolute top-0 left-0 w-full h-full"
-                            ></iframe>
+                    <div class="pt-4 pb-1 px-1.5 text-white">
+                        <div class="flex items-center justify-between text-xs mb-2">
+                            <span class="font-bold uppercase tracking-wider text-purple-300 text-[11px] flex items-center gap-1.5">
+                                <i class="fa-solid fa-graduation-cap"></i> Logro
+                            </span>
+                            <span class="bg-purple-950/90 border border-purple-500/40 text-purple-200 px-2.5 py-0.5 rounded-full text-[10px] font-bold">Certificación B2</span>
                         </div>
-                        <div class="p-5 bg-slate-900 text-white flex-grow z-20 relative pointer-events-none">
-                            <div class="flex items-center justify-between text-xs text-pink-400 mb-2">
-                                <span class="font-bold uppercase tracking-wider">Logro</span>
-                                <span class="bg-pink-950 px-2 py-0.5 rounded-full text-[10px]">Trabajo Remoto</span>
-                            </div>
-                            <h4 class="font-extrabold text-base leading-tight">Conseguí el puesto remoto que tanto soñaba</h4>
-                            <p class="text-[10px] text-slate-400 mt-2">Ana G. (Trabajadora Remota en EE.UU.)</p>
-                        </div>
+                        <h4 class="font-extrabold text-base leading-snug text-white">Alcanzó el nivel B2 para obtener su grado de bachillerato</h4>
+                        <p class="text-xs text-purple-200/80 mt-2 flex items-center gap-1.5">
+                            <i class="fa-solid fa-circle-check text-emerald-400 text-xs"></i> Carlos Ortega (Lima, Perú)
+                        </p>
                     </div>
-
-                    <!-- Video Card 3 -->
-                    <div class="w-full bg-slate-900 rounded-3xl overflow-hidden shadow-xl border-2 border-blue-200/70 flex flex-col ring-1 ring-blue-100">
-                        <div class="aspect-[9/16] relative overflow-hidden bg-slate-950">
-                            <iframe 
-                                src="https://www.youtube.com/embed/irPCGL-VixI?rel=0&modestbranding=1" 
-                                title="Testimonio Diga de la Cruz" 
-                                frameborder="0" 
-                                loading="lazy"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                                referrerpolicy="strict-origin-when-cross-origin" 
-                                allowfullscreen
-                                class="absolute top-0 left-0 w-full h-full"
-                            ></iframe>
-                        </div>
-                        <div class="p-5 bg-slate-900 text-white flex-grow z-20 relative pointer-events-none">
-                            <div class="flex items-center justify-between text-xs text-blue-400 mb-2">
-                                <span class="font-bold uppercase tracking-wider">Logro</span>
-                                <span class="bg-blue-950 px-2 py-0.5 rounded-full text-[10px]">Primeros Puestos</span>
-                            </div>
-                            <h4 class="font-extrabold text-base leading-tight">Certificado de mérito primeros puestos de su hijo</h4>
-                            <p class="text-[10px] text-slate-400 mt-2">Diga de la Cruz (Mamá de Jhonatan)</p>
-                        </div>
-                    </div>
-
                 </div>
+
+                <!-- Video Card 2: Ana G. -->
+                <div class="w-full max-w-sm bg-gradient-to-tr from-purple-900 to-pink-900 p-3 sm:p-4 rounded-3xl shadow-2xl shadow-pink-900/30 flex flex-col justify-between transition-transform duration-300 hover:-translate-y-1">
+                    <div class="relative w-full aspect-[9/16] rounded-2xl overflow-hidden bg-slate-900 shadow-inner">
+                        <iframe 
+                            src="https://www.youtube.com/embed/lTSrYjf5a6c?rel=0&modestbranding=1" 
+                            title="Testimonio Ana G." 
+                            frameborder="0" 
+                            loading="lazy" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                            referrerpolicy="strict-origin-when-cross-origin" 
+                            allowfullscreen
+                            class="absolute top-0 left-0 w-full h-full rounded-2xl"
+                        ></iframe>
+                    </div>
+                    <div class="pt-4 pb-1 px-1.5 text-white">
+                        <div class="flex items-center justify-between text-xs mb-2">
+                            <span class="font-bold uppercase tracking-wider text-pink-300 text-[11px] flex items-center gap-1.5">
+                                <i class="fa-solid fa-briefcase"></i> Logro
+                            </span>
+                            <span class="bg-pink-950/90 border border-pink-500/40 text-pink-200 px-2.5 py-0.5 rounded-full text-[10px] font-bold">Trabajo Remoto</span>
+                        </div>
+                        <h4 class="font-extrabold text-base leading-snug text-white">Conseguí el puesto remoto que tanto soñaba</h4>
+                        <p class="text-xs text-pink-200/80 mt-2 flex items-center gap-1.5">
+                            <i class="fa-solid fa-circle-check text-emerald-400 text-xs"></i> Ana G. (Trabajadora Remota en EE.UU.)
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Video Card 3: Diga de la Cruz -->
+                <div class="w-full max-w-sm bg-gradient-to-tr from-indigo-900 to-blue-900 p-3 sm:p-4 rounded-3xl shadow-2xl shadow-blue-900/30 flex flex-col justify-between transition-transform duration-300 hover:-translate-y-1">
+                    <div class="relative w-full aspect-[9/16] rounded-2xl overflow-hidden bg-slate-900 shadow-inner">
+                        <iframe 
+                            src="https://www.youtube.com/embed/irPCGL-VixI?rel=0&modestbranding=1" 
+                            title="Testimonio Diga de la Cruz" 
+                            frameborder="0" 
+                            loading="lazy" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                            referrerpolicy="strict-origin-when-cross-origin" 
+                            allowfullscreen
+                            class="absolute top-0 left-0 w-full h-full rounded-2xl"
+                        ></iframe>
+                    </div>
+                    <div class="pt-4 pb-1 px-1.5 text-white">
+                        <div class="flex items-center justify-between text-xs mb-2">
+                            <span class="font-bold uppercase tracking-wider text-blue-300 text-[11px] flex items-center gap-1.5">
+                                <i class="fa-solid fa-award"></i> Logro
+                            </span>
+                            <span class="bg-blue-950/90 border border-blue-500/40 text-blue-200 px-2.5 py-0.5 rounded-full text-[10px] font-bold">Primeros Puestos</span>
+                        </div>
+                        <h4 class="font-extrabold text-base leading-snug text-white">Certificado de mérito primeros puestos de su hijo</h4>
+                        <p class="text-xs text-blue-200/80 mt-2 flex items-center gap-1.5">
+                            <i class="fa-solid fa-circle-check text-emerald-400 text-xs"></i> Diga de la Cruz (Mamá de Jhonatan)
+                        </p>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
@@ -901,7 +916,7 @@
             </div>
             <div>
                 <h4 class="text-white font-bold text-sm mb-4">Contacto Directo</h4>
-                <p class="text-xs text-slate-400 leading-relaxed">Escríbenos directamente por WhatsApp para cualquier consulta.</p>
+                <p class="text-xs text-slate-400 leading-relaxed">Escríbenos directamente por WhatsApp para cualquier consulta personalizada.</p>
             </div>
         </div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 border-t border-slate-800 text-center text-xs text-slate-500">
