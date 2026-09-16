@@ -159,6 +159,144 @@
         .gateway-card:hover {
             transform: translateY(-8px);
         }
+
+        .video-preview {
+            position: relative;
+            width: 100%;
+            border-radius: 1.25rem;
+            overflow: hidden;
+            border: 1px solid rgba(148, 163, 184, 0.20);
+            margin-top: 1.25rem;
+            margin-bottom: 1.375rem;
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.04), 0 18px 28px -20px rgba(15, 23, 42, 0.5);
+        }
+
+        .video-screen {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 220px;
+            background: linear-gradient(180deg, rgba(17,24,39,0.12), rgba(17,24,39,0.44)), linear-gradient(135deg, #2f0d52 0%, #4c1d95 38%, #7c3aed 100%);
+        }
+
+        .video-screen--spanish {
+            background: linear-gradient(180deg, rgba(17,24,39,0.1), rgba(17,24,39,0.4)), linear-gradient(135deg, #3b1d0a 0%, #7c2d12 35%, #d97706 100%);
+        }
+
+        .video-screen::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at center, rgba(255,255,255,0.14), transparent 52%);
+            pointer-events: none;
+        }
+
+        .play-button {
+            position: relative;
+            z-index: 1;
+            width: 68px;
+            height: 68px;
+            border: 0;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.18);
+            backdrop-filter: blur(6px);
+            box-shadow: 0 18px 30px -14px rgba(15, 23, 42, 0.55);
+            color: #fff;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .play-button::before {
+            content: "▶";
+            transform: translateX(2px);
+        }
+
+        .video-meta {
+            position: absolute;
+            left: 12px;
+            right: 12px;
+            top: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1;
+            color: rgba(255,255,255,0.9);
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .video-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 10px;
+            border-radius: 999px;
+            background: rgba(15, 23, 42, 0.3);
+            border: 1px solid rgba(255,255,255,0.12);
+        }
+
+        .video-chip::before {
+            content: "●";
+            font-size: 8px;
+            color: #f8fafc;
+        }
+
+        .video-label {
+            position: absolute;
+            left: 50%;
+            bottom: 10px;
+            transform: translateX(-50%);
+            z-index: 1;
+            color: white;
+            text-align: center;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+        }
+
+        .card-list {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            display: grid;
+            gap: 0.55rem;
+            color: #334155;
+            font-size: 0.76rem;
+            line-height: 1.4;
+        }
+
+        .card-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.55rem;
+        }
+
+        .card-list li::before {
+            content: "✓";
+            min-width: 1.1rem;
+            height: 1.1rem;
+            border-radius: 9999px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(16,185,129,0.12);
+            color: #059669;
+            font-weight: 900;
+            font-size: 0.7rem;
+            margin-top: 0.05rem;
+        }
+
+        @media (max-width: 767px) {
+            .video-screen {
+                min-height: 200px;
+            }
+        }
     </style>
 </head>
 <body class="relative flex flex-col min-h-screen bg-white">
@@ -201,7 +339,7 @@
             <!-- Multi-colored Hi5profe letters matching screenshot colors -->
             <div class="mb-4 inline-block select-none">
                 <h1 class="text-5xl sm:text-6xl md:text-7xl font-black tracking-tight leading-none">
-                    <span class="text-[#7C3AED]">H</span><span class="text-[#8B5CF6]">i</span><span class="text-[#06B6D4]">5</span><span class="text-[#10B981]">p</span><span class="text-[#F59E0B]">r</span><span class="text-[#EC4899]">o</span><span class="text-[#F43F5E]">f</span><span class="text-[#7C3AED]">e</span>
+                    <span class="text-[#7C3AED]">H</span><span class="text-[#8B5CF6]">i</span><span class="text-[#06B6D4]">5</span><span class="text-[#10B981]">p</span><span class="text-[#F59E0B]">r</span><span class="text-[#F97316]">o</span><span class="text-[#EC4899]">f</span><span class="text-[#D946EF]">e</span>
                 </h1>
             </div>
 
@@ -223,110 +361,96 @@
 
         <div class="grid md:grid-cols-2 gap-8 w-full max-w-4xl mx-auto mb-12">
             
-            <!-- OPTION 1: APRENDER INGLÉS (Destino: aprendoingles.html) -->
-            <div class="gateway-card bg-white rounded-3xl p-8 sm:p-10 border-2 border-purple-100 hover:border-purple-500 shadow-card-soft hover:shadow-card-hover flex flex-col justify-between relative group overflow-hidden">
-                
-                <!-- Background ambient accent inside card -->
+            <!-- OPTION 1: APRENDER INGLÉS -->
+            <div class="gateway-card bg-white rounded-[28px] p-5 sm:p-6 border-2 border-purple-100 hover:border-purple-500 shadow-card-soft hover:shadow-card-hover flex flex-col justify-between relative group">
                 <div class="absolute -top-20 -right-20 w-44 h-44 rounded-full bg-purple-100/50 pointer-events-none blur-2xl group-hover:bg-purple-200/60 transition-colors"></div>
 
                 <div>
-                    <!-- Card Top: Tag + Flag badge -->
-                    <div class="flex items-center justify-between mb-6">
-                        <span class="px-3.5 py-1.5 rounded-full bg-purple-100 text-purple-700 text-xs font-extrabold uppercase tracking-wide">
-                            Para Hispanohablantes
+                    <div class="flex items-center justify-between mb-5">
+                        <span class="px-3 py-1.5 rounded-full bg-purple-100 text-purple-700 text-[10px] font-extrabold uppercase tracking-wide">
+                            Para hispanohablantes
                         </span>
-                        <!-- Flag circle badge -->
-                        <div class="w-12 h-12 rounded-2xl overflow-hidden border border-purple-200/70 bg-white shadow-sm group-hover:scale-110 transition-transform">
+                        <div class="w-10 h-10 rounded-xl overflow-hidden border border-purple-200/70 bg-white shadow-sm group-hover:scale-110 transition-transform">
                             <img src="english.svg" alt="Bandera del idioma inglés" class="block w-full h-full object-cover">
                         </div>
                     </div>
 
-                    <!-- Title & Subheading -->
-                    <h3 class="text-2xl sm:text-3xl font-black text-gray-950 mb-2 group-hover:text-purple-600 transition-colors">
+                    <h3 class="text-2xl sm:text-[2rem] font-black text-gray-950 mb-2 group-hover:text-purple-600 transition-colors">
                         Aprender Inglés
                     </h3>
-                    <p class="text-sm sm:text-base text-gray-600 font-medium leading-relaxed mb-6">
+                    <p class="text-sm sm:text-base text-gray-600 font-medium leading-relaxed mb-5">
                         Diseñado especialmente para hablar con soltura, perder la vergüenza y entender inglés nativo desde la primera lección.
                     </p>
 
-                    <!-- Feature checkmarks -->
-                    <ul class="space-y-3 mb-8 text-xs sm:text-sm font-semibold text-gray-700">
-                        <li class="flex items-center gap-2.5">
-                            <div class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-xs font-black">✓</div>
-                            <span>Escucha activa y pronunciación guiada</span>
-                        </li>
-                        <li class="flex items-center gap-2.5">
-                            <div class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-xs font-black">✓</div>
-                            <span>Inglés real para trabajo y viajes</span>
-                        </li>
-                        <li class="flex items-center gap-2.5">
-                            <div class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-xs font-black">✓</div>
-                            <span>Ejercicios prácticos con retroalimentación</span>
-                        </li>
+                    <div class="video-preview" aria-label="Vista previa de curso de inglés">
+                        <div class="video-screen">
+                            <div class="video-meta">
+                                <span class="video-chip">Curso en vivo</span>
+                                <span>2:14</span>
+                            </div>
+                            <button type="button" class="play-button" aria-label="Ver demo de inglés"></button>
+                            <span class="video-label">Ver demo</span>
+                        </div>
+                    </div>
+
+                    <ul class="card-list mb-6">
+                        <li>Spot publicitario: Conoce en 30 segundos por qué aprender inglés da más oportunidades.</li>
+                        <li>Escucha activa y pronunciación guiada.</li>
+                        <li>Inglés real para trabajo, viajes y confianza diaria.</li>
+                        <li>Ejercicios prácticos con retroalimentación.</li>
                     </ul>
                 </div>
 
-                <!-- CTA Action Button -->
-                <div class="pt-4 border-t border-gray-100 flex flex-col gap-3">
-                    <a href="aprendoingles.html" onclick="goToPath(event, 'aprendoingles.html', 'Aprender Inglés', '🇬🇧')" class="btn-gradient-purple group/btn w-full py-4 px-6 rounded-2xl text-white font-black text-sm sm:text-base flex items-center justify-center gap-2">
-                        <span>Entrar a Aprender Inglés</span>
-                        <span class="group-hover/btn:translate-x-1 transition-transform">&rarr;</span>
-                    </a>
-                </div>
-
+                <a href="aprendoingles.html" onclick="goToPath(event, 'aprendoingles.html', 'Aprender Inglés', '🇬🇧')" class="btn-gradient-purple group/btn w-full py-3.5 px-6 rounded-2xl text-white font-black text-sm sm:text-base text-center inline-flex items-center justify-center gap-2">
+                    <span>Entrar a Aprender Inglés</span>
+                    <span class="group-hover/btn:translate-x-1 transition-transform">→</span>
+                </a>
             </div>
 
-            <!-- OPTION 2: LEARN SPANISH (Destino: spanish.html) -->
-            <div class="gateway-card bg-white rounded-3xl p-8 sm:p-10 border-2 border-amber-100 hover:border-amber-500 shadow-card-soft hover:shadow-card-hover flex flex-col justify-between relative group overflow-hidden">
-                
-                <!-- Background ambient accent inside card -->
+            <!-- OPTION 2: LEARN SPANISH -->
+            <div class="gateway-card bg-white rounded-[28px] p-5 sm:p-6 border-2 border-amber-100 hover:border-amber-500 shadow-card-soft hover:shadow-card-hover flex flex-col justify-between relative group">
                 <div class="absolute -top-20 -right-20 w-44 h-44 rounded-full bg-amber-100/50 pointer-events-none blur-2xl group-hover:bg-amber-200/60 transition-colors"></div>
 
                 <div>
-                    <!-- Card Top: Tag + Flag badge -->
-                    <div class="flex items-center justify-between mb-6">
-                        <span class="px-3.5 py-1.5 rounded-full bg-amber-100 text-amber-800 text-xs font-extrabold uppercase tracking-wide">
-                            For English Speakers
+                    <div class="flex items-center justify-between mb-5">
+                        <span class="px-3 py-1.5 rounded-full bg-amber-100 text-amber-800 text-[10px] font-extrabold uppercase tracking-wide">
+                            For English speakers
                         </span>
-                        <!-- Flag circle badge -->
-                        <div class="w-12 h-12 rounded-2xl overflow-hidden border border-amber-200/70 bg-white shadow-sm group-hover:scale-110 transition-transform">
+                        <div class="w-10 h-10 rounded-xl overflow-hidden border border-amber-200/70 bg-white shadow-sm group-hover:scale-110 transition-transform">
                             <img src="espana.svg" alt="Bandera de España" class="block w-full h-full object-cover">
                         </div>
                     </div>
 
-                    <!-- Title & Subheading -->
-                    <h3 class="text-2xl sm:text-3xl font-black text-gray-950 mb-2 group-hover:text-amber-600 transition-colors">
+                    <h3 class="text-2xl sm:text-[2rem] font-black text-gray-950 mb-2 group-hover:text-amber-600 transition-colors">
                         Learn Spanish
                     </h3>
-                    <p class="text-sm sm:text-base text-gray-600 font-medium leading-relaxed mb-6">
+                    <p class="text-sm sm:text-base text-gray-600 font-medium leading-relaxed mb-5">
                         Zero to conversational confidence. Master natural Spanish, local slang, and speak like a native through immersion.
                     </p>
 
-                    <!-- Feature checkmarks -->
-                    <ul class="space-y-3 mb-8 text-xs sm:text-sm font-semibold text-gray-700">
-                        <li class="flex items-center gap-2.5">
-                            <div class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-xs font-black">✓</div>
-                            <span>Conversational Spanish from lesson one</span>
-                        </li>
-                        <li class="flex items-center gap-2.5">
-                            <div class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-xs font-black">✓</div>
-                            <span>Latin American & Spain cultural phrases</span>
-                        </li>
-                        <li class="flex items-center gap-2.5">
-                            <div class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-xs font-black">✓</div>
-                            <span>Interactive listening & active voice tasks</span>
-                        </li>
+                    <div class="video-preview" aria-label="Vista previa de curso de español">
+                        <div class="video-screen video-screen--spanish">
+                            <div class="video-meta">
+                                <span class="video-chip">Live class</span>
+                                <span>2:12</span>
+                            </div>
+                            <button type="button" class="play-button" aria-label="Ver demo de español"></button>
+                            <span class="video-label">Watch demo</span>
+                        </div>
+                    </div>
+
+                    <ul class="card-list mb-6">
+                        <li>Video publicitario: Un vistazo rápido de 30 segundos para entender el valor del español.</li>
+                        <li>Conversational Spanish from lesson one.</li>
+                        <li>Latin American &amp; Spain cultural phrases.</li>
+                        <li>Interactive listening &amp; active voice tasks.</li>
                     </ul>
                 </div>
 
-                <!-- CTA Action Button -->
-                <div class="pt-4 border-t border-gray-100 flex flex-col gap-3">
-                    <a href="spanish.html" onclick="goToPath(event, 'spanish.html', 'Learn Spanish', '🇪🇸')" class="btn-gradient-amber group/btn w-full py-4 px-6 rounded-2xl text-white font-black text-sm sm:text-base flex items-center justify-center gap-2">
-                        <span>Start Learning Spanish</span>
-                        <span class="group-hover/btn:translate-x-1 transition-transform">&rarr;</span>
-                    </a>
-                </div>
-
+                <a href="spanish.html" onclick="goToPath(event, 'spanish.html', 'Learn Spanish', '🇪🇸')" class="btn-gradient-amber group/btn w-full py-3.5 px-6 rounded-2xl text-white font-black text-sm sm:text-base text-center inline-flex items-center justify-center gap-2">
+                    <span>Start Learning Spanish</span>
+                    <span class="group-hover/btn:translate-x-1 transition-transform">→</span>
+                </a>
             </div>
 
         </div>
@@ -460,7 +584,9 @@
             if (isNavigating) return;
             isNavigating = true;
 
-            playChime(587.33, 880);
+            try {
+                playChime(587.33, 880);
+            } catch (e) {}
 
             const overlay = document.getElementById('loading-overlay');
             const card = document.getElementById('loading-card');
@@ -476,15 +602,13 @@
                 card.classList.remove('scale-95');
                 card.classList.add('scale-100');
 
-                setTimeout(() => {
+                requestAnimationFrame(() => {
                     progressBar.style.width = '100%';
-                }, 80);
+                });
             }
 
-            // Perform redirection
-            setTimeout(() => {
-                window.location.href = url;
-            }, 750);
+            // Navegar inmediatamente para respetar el tap del usuario en iOS Safari
+            window.location.href = url;
 
             // Safety timeout: if destination doesn't load or user stays, unfreeze after 4s
             setTimeout(() => {
