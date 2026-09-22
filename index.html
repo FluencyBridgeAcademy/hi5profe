@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang="es" class="scroll-smooth">
-<head>
+    <html lang="es" class="scroll-smooth overflow-x-hidden w-full">
+    <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hi5profe - Bienvenido / Welcome | Elige tu camino</title>
@@ -79,7 +79,17 @@
         }
     </script>
 
-    <style>
+ <style>
+        html, body {
+            max-width: 100vw;
+            overflow-x: hidden !important;
+        }
+
+        * {
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: #FFFFFF;
@@ -310,11 +320,12 @@
         }
     </style>
 </head>
-<body class="relative flex flex-col min-h-screen w-full bg-white overflow-x-hidden">
-    <!-- Ambient background glows -->
-    <div class="glow-top ambient-glow"></div>
-    <div class="glow-left ambient-glow"></div>
-    <div class="glow-right ambient-glow"></div>
+<!-- Ambient background glows -->
+    <div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
+        <div class="glow-top ambient-glow"></div>
+        <div class="glow-left ambient-glow"></div>
+        <div class="glow-right ambient-glow"></div>
+    </div>
 
     <!-- Header bar -->
     <header class="relative z-30 w-full max-w-7xl mx-auto px-6 py-6 flex items-center justify-between">
