@@ -25,9 +25,8 @@
 
     <!-- Favicons -->
     <link rel="icon" type="image/svg+xml" href="hi5.svg">
-    <link rel="icon" type="image/png" sizes="32x32" href="hi5.svg">
-    <link rel="apple-touch-icon" sizes="180x180" href="hi5.svg">
-    <link rel="shortcut icon" href="hi5.svg">
+    <link rel="apple-touch-icon" href="hi5.svg">
+    <link rel="shortcut icon" type="image/svg+xml" href="hi5.svg">
 
     <!-- Structured Data (helps Google show your logo in search results) -->
     <script type="application/ld+json">
@@ -81,12 +80,13 @@
 
  <style>
         html, body {
-            max-width: 100vw;
+            max-width: 100%;
             overflow-x: hidden !important;
         }
 
-        * {
-            max-width: 100%;
+        *,
+        *::before,
+        *::after {
             box-sizing: border-box;
         }
 
@@ -96,6 +96,14 @@
             color: #0F172A;
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
+        }
+
+        a:focus-visible,
+        button:focus-visible {
+            outline: 3px solid rgba(124, 58, 237, 0.45);
+            outline-offset: 4px;
+            border-radius: 1rem;
         }
 
         /* Ambient Glow Blobs matching screenshot style */
@@ -320,7 +328,8 @@
             }
         }
     </style>
-</head>
+    </head>
+    <body class="min-h-screen w-full overflow-x-hidden bg-white text-slate-900">
 <!-- Ambient background glows -->
     <div class="fixed inset-0 pointer-events-none overflow-hidden z-0" style="contain: paint;" aria-hidden="true">
         <div class="glow-top ambient-glow"></div>
@@ -331,7 +340,7 @@
     <!-- Header bar -->
     <header class="relative z-30 w-full max-w-7xl mx-auto px-6 py-6 flex items-center justify-between">
         <!-- Logo Hi5profe matching screenshot typography & icon -->
-        <a href="#" class="flex items-center gap-3 group">
+        <a href="#" aria-label="Ir al inicio de Hi5profe" class="flex items-center gap-3 group">
             <img src="hi5.svg" alt="Logo de Hi5profe" width="44" height="44" class="w-11 h-11 flex-shrink-0 object-contain drop-shadow-sm">
             <div class="flex flex-col">
                 <span class="text-2xl font-black tracking-tight text-gray-950 leading-none">
@@ -347,7 +356,7 @@
 <a href="https://w.app/hi5profe" target="_blank" rel="noopener noreferrer" aria-label="Contactar por WhatsApp" class="fixed bottom-6 right-6 z-50 flex items-center justify-center w-16 h-16 bg-[#25D366] hover:bg-[#20ba5a] rounded-full shadow-2xl transition-all duration-300 hover:scale-110 group">
   
   <!-- Efecto de pulso / onda expansiva -->
-  <span class="absolute inset-0 rounded-full bg-[#25D366] animate-ping opacity-75 group-hover:opacity-100"></span>
+  <span aria-hidden="true" class="absolute inset-0 rounded-full bg-[#25D366] animate-ping opacity-75 group-hover:opacity-100"></span>
 
   <!-- Icono wsp.svg -->
   <img src="wsp.svg" alt="WhatsApp" class="relative z-10 w-9 h-9 object-contain drop-shadow-md transition-transform duration-300 group-hover:rotate-12" />
@@ -420,7 +429,7 @@
 
                 <a href="aprendoingles.html" onclick="goToPath(event, 'aprendoingles.html', 'Aprender Inglés', '🇬🇧')" class="btn-gradient-purple group/btn w-full py-3.5 px-6 rounded-2xl text-white font-black text-sm sm:text-base text-center inline-flex items-center justify-center gap-2">
                     <span>Entrar a Aprender Inglés</span>
-                    <span class="group-hover/btn:translate-x-1 transition-transform">→</span>
+                    <span aria-hidden="true" class="group-hover/btn:translate-x-1 transition-transform">→</span>
                 </a>
             </div>
 
@@ -430,7 +439,7 @@
 
                 <div>
                     <div class="flex items-center justify-between mb-5">
-                        <span class="px-3 py-1.5 rounded-full bg-amber-100 text-amber-800 text-[10px] font-extrabold uppercase tracking-wide">
+                        <span lang="en" class="px-3 py-1.5 rounded-full bg-amber-100 text-amber-800 text-[10px] font-extrabold uppercase tracking-wide">
                             For English speakers
                         </span>
                         <div class="w-10 h-10 rounded-xl overflow-hidden border border-amber-200/70 bg-white shadow-sm group-hover:scale-110 transition-transform">
@@ -438,14 +447,14 @@
                         </div>
                     </div>
 
-                    <h3 class="text-2xl sm:text-[2rem] font-black text-gray-950 mb-2 group-hover:text-amber-600 transition-colors">
+                    <h3 lang="en" class="text-2xl sm:text-[2rem] font-black text-gray-950 mb-2 group-hover:text-amber-600 transition-colors">
                         Learn Spanish
                     </h3>
-                    <p class="text-sm sm:text-base text-gray-600 font-medium leading-relaxed mb-5">
+                    <p lang="en" class="text-sm sm:text-base text-gray-600 font-medium leading-relaxed mb-5">
                         Zero to conversational confidence. Master natural Spanish, local slang, and speak like a native through immersion.
                     </p>
 
-                    <div class="video-preview max-w-full overflow-hidden" aria-label="Vista previa de curso">
+                    <div class="video-preview max-w-full overflow-hidden" aria-label="Vista previa de curso de español">
                     <video class="w-full max-w-full aspect-[9/16] object-cover rounded-2xl" controls playsinline poster="jup.jpeg" preload="none">
                     <source src="eddiel4.mp4" type="video/mp4">
                     Tu navegador no soporta el elemento de video.
@@ -453,15 +462,15 @@
                     </div>
 
                     <ul class="card-list mb-6">
-                        <li>Conversational Spanish from lesson one.</li>
-                        <li>Latin American &amp; Spain cultural phrases.</li>
-                        <li>Interactive listening &amp; active voice tasks.</li>
+                        <li lang="en">Conversational Spanish from lesson one.</li>
+                        <li lang="en">Latin American &amp; Spain cultural phrases.</li>
+                        <li lang="en">Interactive listening &amp; active voice tasks.</li>
                     </ul>
                 </div>
 
                 <a href="spanish.html" onclick="goToPath(event, 'spanish.html', 'Learn Spanish', '🇪🇸')" class="btn-gradient-amber group/btn w-full py-3.5 px-6 rounded-2xl text-white font-black text-sm sm:text-base text-center inline-flex items-center justify-center gap-2">
-                    <span>Start Learning Spanish</span>
-                    <span class="group-hover/btn:translate-x-1 transition-transform">→</span>
+                    <span lang="en">Start Learning Spanish</span>
+                    <span aria-hidden="true" class="group-hover/btn:translate-x-1 transition-transform">→</span>
                 </a>
             </div>
 
@@ -547,6 +556,19 @@
         }
 
         let resetOverlayFrame = null;
+        let audioContext = null;
+
+        function getAudioContext() {
+            const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+            if (!AudioContextClass) return null;
+
+            if (!audioContext) {
+                audioContext = new AudioContextClass();
+            }
+
+            return audioContext;
+        }
+
         function scheduleResetOverlay() {
             if (resetOverlayFrame !== null) return;
             resetOverlayFrame = requestAnimationFrame(() => {
@@ -573,12 +595,13 @@
         // Web Audio chime feedback
         function playChime(freq1 = 523.25, freq2 = 783.99) {
             try {
-                const AudioContext = window.AudioContext || window.webkitAudioContext;
-                if (!AudioContext) return;
-                const ctx = new AudioContext();
+                const ctx = getAudioContext();
+                if (!ctx) return;
+
                 if (ctx.state === 'suspended') {
-                    ctx.resume();
+                    ctx.resume().catch(() => {});
                 }
+
                 const osc = ctx.createOscillator();
                 const gain = ctx.createGain();
 
@@ -593,6 +616,10 @@
                 gain.connect(ctx.destination);
                 osc.start();
                 osc.stop(ctx.currentTime + 0.36);
+                osc.addEventListener('ended', () => {
+                    osc.disconnect();
+                    gain.disconnect();
+                }, { once: true });
             } catch (e) {}
         }
 
