@@ -48,11 +48,9 @@
     <link rel="preload" href="hi5.svg" as="image" type="image/svg+xml" fetchpriority="high">
     <link rel="preload" href="wsp.svg" as="image" type="image/svg+xml" fetchpriority="high">
         
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com" defer></script>
-
     <script>
-        tailwind.config = {
+        window.tailwind = window.tailwind || {};
+        window.tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: {
@@ -80,6 +78,9 @@
             }
         }
     </script>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com" defer></script>
 
  <style>
         html, body {
