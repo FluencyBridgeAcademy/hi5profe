@@ -104,31 +104,32 @@
             pointer-events: none;
             z-index: 0;
             border-radius: 50%;
-            filter: blur(120px);
+            -webkit-filter: blur(72px);
+            filter: blur(72px);
         }
 
         .glow-top {
             top: -120px;
             left: 50%;
             transform: translateX(-50%);
-            width: 850px;
-            height: 480px;
+            width: 680px;
+            height: 360px;
             background: radial-gradient(circle, rgba(236, 72, 153, 0.12) 0%, rgba(139, 92, 246, 0.14) 40%, rgba(6, 182, 212, 0.08) 70%, transparent 80%);
         }
 
         .glow-left {
             top: 40%;
             left: -150px;
-            width: 500px;
-            height: 500px;
+            width: 380px;
+            height: 380px;
             background: radial-gradient(circle, rgba(124, 58, 237, 0.12) 0%, rgba(236, 72, 153, 0.06) 50%, transparent 75%);
         }
 
         .glow-right {
             top: 45%;
             right: -150px;
-            width: 500px;
-            height: 500px;
+            width: 380px;
+            height: 380px;
             background: radial-gradient(circle, rgba(6, 182, 212, 0.12) 0%, rgba(16, 185, 129, 0.07) 50%, transparent 75%);
         }
 
@@ -321,7 +322,7 @@
     </style>
 </head>
 <!-- Ambient background glows -->
-    <div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
+    <div class="fixed inset-0 pointer-events-none overflow-hidden z-0" style="contain: paint;" aria-hidden="true">
         <div class="glow-top ambient-glow"></div>
         <div class="glow-left ambient-glow"></div>
         <div class="glow-right ambient-glow"></div>
@@ -404,7 +405,7 @@
                     </p>
 
              <div class="video-preview max-w-full overflow-hidden" aria-label="Vista previa de curso de inglés">
-              <video class="w-full max-w-full aspect-[9/16] object-cover rounded-2xl" controls playsinline poster="lea.jpeg" preload="metadata">
+              <video class="w-full max-w-full aspect-[9/16] object-cover rounded-2xl" controls playsinline poster="lea.jpeg" preload="none">
                     <source src="lee2.MP4" type="video/mp4">
                     Tu navegador no soporta el elemento de video.
                     </video>
@@ -445,7 +446,7 @@
                     </p>
 
                     <div class="video-preview max-w-full overflow-hidden" aria-label="Vista previa de curso">
-                    <video class="w-full max-w-full aspect-[9/16] object-cover rounded-2xl" controls playsinline poster="jup.jpeg" preload="metadata">
+                    <video class="w-full max-w-full aspect-[9/16] object-cover rounded-2xl" controls playsinline poster="jup.jpeg" preload="none">
                     <source src="eddiel4.mp4" type="video/mp4">
                     Tu navegador no soporta el elemento de video.
                     </video>
@@ -545,19 +546,28 @@
             }
         }
 
+        let resetOverlayFrame = null;
+        function scheduleResetOverlay() {
+            if (resetOverlayFrame !== null) return;
+            resetOverlayFrame = requestAnimationFrame(() => {
+                resetOverlayFrame = null;
+                resetOverlay();
+            });
+        }
+
         // Handle page restorations from browser history (Back button / BFCache)
         window.addEventListener('pageshow', function (event) {
-            resetOverlay();
+            scheduleResetOverlay();
         });
 
         // Handle browser popstate (e.g. back button on mobile)
         window.addEventListener('popstate', function () {
-            resetOverlay();
+            scheduleResetOverlay();
         });
 
         // Ensure clean state on initial DOM content load
         document.addEventListener('DOMContentLoaded', function () {
-            resetOverlay();
+            scheduleResetOverlay();
         });
 
         // Web Audio chime feedback
