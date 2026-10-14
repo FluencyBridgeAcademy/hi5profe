@@ -299,20 +299,16 @@
 
         // Configuración de Entorno (Proporcionada por el sistema)
         const appId = typeof __app_id !== 'undefined' ? __app_id : 'hi5profe-app-v1';
-        const hasInjectedFirebaseConfig = typeof __firebase_config !== 'undefined' && __firebase_config;
-        const firebaseConfig = hasInjectedFirebaseConfig ? JSON.parse(__firebase_config) : null;
+        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {
+            // Mock config para prevenir fallos si se ejecuta fuera del entorno
+            apiKey: "mock-key", projectId: "mock-project" 
+        };
         const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
 
-        // Inicializar Firebase solo si hay configuración real
-        let app = null;
-        let auth = null;
-        let db = null;
-
-        if (firebaseConfig) {
-            app = initializeApp(firebaseConfig);
-            auth = getAuth(app);
-            db = getFirestore(app);
-        }
+        // Inicializar Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
 
         // Estado Global de la App
         let appState = {
@@ -359,32 +355,7 @@
             { id: 25, level: 'Avanzado', title: '25. Reported Speech y Phrasal Verbs', src: 'https://www.w3schools.com/html/mov_bbb.mp4', duration: '25:00' }
         ];
 
-        function explainFirebaseAuthError(error) {
-            const code = error?.code || '';
-            const fallback = 'Error de conexión con Firebase. Revisa la configuración del proyecto.';
-
-            const map = {
-                'auth/configuration-not-found': 'No se encontró configuración de Firebase Auth. Habilita el método de acceso en Firebase Console.',
-                'auth/invalid-api-key': 'API Key de Firebase inválida. Verifica __firebase_config.',
-                'auth/app-not-authorized': 'App no autorizada en Firebase. Revisa restricciones de API Key y dominio.',
-                'auth/operation-not-allowed': 'Inicio de sesión anónimo deshabilitado. Actívalo en Firebase Auth > Sign-in method.',
-                'auth/network-request-failed': 'Error de red al conectar con Firebase. Revisa internet, firewall o bloqueadores.',
-                'auth/too-many-requests': 'Demasiados intentos. Espera un momento e inténtalo de nuevo.',
-                'auth/invalid-custom-token': 'Token personalizado inválido. Revisa __initial_auth_token.',
-                'auth/custom-token-mismatch': 'El token personalizado no pertenece a este proyecto Firebase.',
-                'auth/unauthorized-domain': 'Dominio no autorizado en Firebase Auth. Agrega este dominio en Authentication > Settings > Authorized domains.'
-            };
-
-            return map[code] || `${fallback} (${code || 'sin código'})`;
-        }
-
         async function initAuth() {
-            if (!firebaseConfig) {
-                showToast('Falta __firebase_config. Debes abrir la página desde el entorno integrado (no como archivo suelto).', 'error');
-                console.error('Firebase config no inyectada (__firebase_config indefinido).');
-                return;
-            }
-
             try {
                 if (initialAuthToken) {
                     await signInWithCustomToken(auth, initialAuthToken);
@@ -396,12 +367,12 @@
                 listenToStudents();
             } catch (error) {
                 console.error("Error en auth:", error);
-                showToast(explainFirebaseAuthError(error), "error");
+                showToast("Error de conexión. Recarga la página.", "error");
             }
         }
 
         function listenToStudents() {
-            if (!auth?.currentUser) return; // Regla 3: Guard operation
+            if (!auth.currentUser) return; // Regla 3: Guard operation
             
             // Regla 1: Path estricto a public/data para que Administrador y Alumnos vean la info.
             const studentsRef = collection(db, 'artifacts', appId, 'public', 'data', 'students');
@@ -429,7 +400,7 @@
         }
 
         async function createDefaultAdmin() {
-            if (!auth?.currentUser) return;
+            if (!auth.currentUser) return;
             const studentsRef = collection(db, 'artifacts', appId, 'public', 'data', 'students');
             try {
                 await addDoc(studentsRef, {
@@ -511,7 +482,7 @@
         
         document.getElementById('create-student-form').addEventListener('submit', async (e) => {
             e.preventDefault();
-            if (!auth?.currentUser || appState.currentUser.role !== 'admin') return;
+            if (!auth.currentUser || appState.currentUser.role !== 'admin') return;
 
             const name = document.getElementById('new-name').value.trim();
             const username = document.getElementById('new-username').value.trim().toLowerCase();
@@ -620,7 +591,7 @@
         }
 
         window.deleteStudent = async function(docId) {
-            if(!auth?.currentUser) return;
+            if(!auth.currentUser) return;
             // Usamos un modal propio si quisiéramos, pero por rapidez visual sin confirm(), simulamos click seguro
             // (La regla dice NO alert o confirm. Haremos borrado directo con toast de aviso por simplicidad en este Immersive)
             try {
@@ -758,7 +729,7 @@
 
         document.getElementById('change-password-form').addEventListener('submit', async (e) => {
             e.preventDefault();
-            if (!auth?.currentUser || !appState.currentUser) return;
+            if (!auth.currentUser || !appState.currentUser) return;
 
             const pass1 = document.getElementById('new-user-password').value;
             const pass2 = document.getElementById('confirm-user-password').value;
@@ -799,7 +770,7 @@
         // ==========================================
 
         function escapeHTML(str) {
-            return String(str ?? '').replace(/[&<>'"]/g, 
+            return str.replace(/[&<>'"]/g, 
                 tag => ({
                     '&': '&amp;',
                     '<': '&lt;',
@@ -820,18 +791,18 @@
             if (type === 'success') { bgClass = "bg-emerald-900 border-emerald-600"; icon = "fa-check-circle text-emerald-400"; }
             if (type === 'error') { bgClass = "bg-red-900 border-red-600"; icon = "fa-exclamation-circle text-red-400"; }
             
-            toast.className = `flex items-center gap-3 px-4 py-3 rounded-lg shadow-xl border ${bgClass} text-white text-sm fade-in max-w-sm`;
+            toast.className = `flex items-center gap-3 px-4 py-3 rounded-lg shadow-xl border ${bgClass} text-white text-sm fade-in max-w-xs`;
             toast.innerHTML = `<i class="fas ${icon} text-lg"></i> <span>${escapeHTML(message)}</span>`;
             
             container.appendChild(toast);
             
-            // Auto eliminar después de 5 segundos
+            // Auto eliminar después de 4 segundos
             setTimeout(() => {
                 toast.style.opacity = '0';
                 toast.style.transform = 'translateY(-10px)';
                 toast.style.transition = 'all 0.3s ease';
                 setTimeout(() => toast.remove(), 300);
-            }, 5000);
+            }, 4000);
         }
 
         // Inicializar Firebase al cargar el script
