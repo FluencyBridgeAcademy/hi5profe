@@ -300,16 +300,41 @@
     <!-- INTEGRACIÓN FIREBASE Y LÓGICA DE LA APP -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
         import { getFirestore, doc, collection, onSnapshot, addDoc, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
         // Configuración de Entorno (Proporcionada por el sistema)
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'hi5profe-app-v1';
-        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {
-            // Mock config para prevenir fallos si se ejecuta fuera del entorno
-            apiKey: "mock-key", projectId: "mock-project" 
-        };
-        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+       <script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+  import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+  import { getFirestore, doc, collection, onSnapshot, addDoc, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+  const appId = 'hi5profe-app-v1';
+
+  const firebaseConfig = {
+    apiKey: "TU_API_KEY",
+    authDomain: "TU_PROJECT_ID.firebaseapp.com",
+    projectId: "TU_PROJECT_ID",
+    storageBucket: "TU_PROJECT_ID.firebasestorage.app",
+    messagingSenderId: "TU_MESSAGING_SENDER_ID",
+    appId: "TU_APP_ID"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+
+  async function initAuth() {
+    try {
+      await signInAnonymously(auth);
+      console.log("Firebase Auth OK");
+      listenToStudents();
+    } catch (error) {
+      console.error("Error en auth:", error);
+      showToast("Error de conexión con Firebase.", "error");
+    }
+  }
+</script>
 
         // Inicializar Firebase
         const app = initializeApp(firebaseConfig);
@@ -361,22 +386,17 @@
             { id: 25, level: 'Avanzado', title: '25. Reported Speech y Phrasal Verbs', src: 'https://www.w3schools.com/html/mov_bbb.mp4', duration: '25:00' }
         ];
 
-        async function initAuth() {
-            try {
-                if (initialAuthToken) {
-                    await signInWithCustomToken(auth, initialAuthToken);
-                } else {
-                    await signInAnonymously(auth);
-                }
-                console.log("Firebase Auth OK");
-                // Una vez autenticados con Firebase, escuchamos la base de datos de estudiantes
-                listenToStudents();
-            } catch (error) {
-                console.error("Error en auth:", error);
-                showToast("Error de conexión. Recarga la página.", "error");
-            }
-        }
-
+     async function initAuth() {
+    try {
+        await signInAnonymously(auth);
+        console.log("Firebase Auth OK");
+        // Una vez autenticados con Firebase, escuchamos la base de datos de estudiantes
+        listenToStudents();
+    } catch (error) {
+        console.error("Error en auth:", error);
+        showToast("Error de conexión con Firebase.", "error");
+    }
+}
         function listenToStudents() {
             if (!auth.currentUser) return; // Regla 3: Guard operation
             
