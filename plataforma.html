@@ -1,14 +1,13 @@
+```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hi5profe - Plataforma</title>
-
-<title>Hi5profe - Aprende inglés, impulsa tu futuro</title>
-<link rel="icon" type="image/svg+xml" href="/hi5.svg">
-<link rel="alternate icon" type="image/png" href="/logomania.png">
-<link rel="apple-touch-icon" href="/logomania.png">
+    <title>Hi5profe - Aprende inglés, impulsa tu futuro</title>
+    <link rel="icon" type="image/svg+xml" href="/hi5.svg">
+    <link rel="alternate icon" type="image/png" href="/logomania.png">
+    <link rel="apple-touch-icon" href="/logomania.png">
     
     <!-- Tailwind CSS para estilos rápidos y responsivos -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -303,40 +302,18 @@
         import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
         import { getFirestore, doc, collection, onSnapshot, addDoc, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-        // Configuración de Entorno (Proporcionada por el sistema)
-       <script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-  import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-  import { getFirestore, doc, collection, onSnapshot, addDoc, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        const appId = 'hi5profe-app-v1';
 
-  const appId = 'hi5profe-app-v1';
+        const firebaseConfig = {
+            apiKey: "AIzaSyCYzUxJZp0J94IexsAZ388G3Ebb65L0vfs",
+            authDomain: "hi5profe.firebaseapp.com",
+            projectId: "hi5profe",
+            storageBucket: "hi5profe.firebasestorage.app",
+            messagingSenderId: "610395308999",
+            appId: "1:610395308999:web:3bf3b24486e2e1b70c4fe2",
+            measurementId: "G-RH4QXCXDY1"
+        };
 
-  const firebaseConfig = {
-    apiKey: "TU_API_KEY",
-    authDomain: "TU_PROJECT_ID.firebaseapp.com",
-    projectId: "TU_PROJECT_ID",
-    storageBucket: "TU_PROJECT_ID.firebasestorage.app",
-    messagingSenderId: "TU_MESSAGING_SENDER_ID",
-    appId: "TU_APP_ID"
-  };
-
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-  const db = getFirestore(app);
-
-  async function initAuth() {
-    try {
-      await signInAnonymously(auth);
-      console.log("Firebase Auth OK");
-      listenToStudents();
-    } catch (error) {
-      console.error("Error en auth:", error);
-      showToast("Error de conexión con Firebase.", "error");
-    }
-  }
-</script>
-
-        // Inicializar Firebase
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const db = getFirestore(app);
@@ -386,17 +363,18 @@
             { id: 25, level: 'Avanzado', title: '25. Reported Speech y Phrasal Verbs', src: 'https://www.w3schools.com/html/mov_bbb.mp4', duration: '25:00' }
         ];
 
-     async function initAuth() {
-    try {
-        await signInAnonymously(auth);
-        console.log("Firebase Auth OK");
-        // Una vez autenticados con Firebase, escuchamos la base de datos de estudiantes
-        listenToStudents();
-    } catch (error) {
-        console.error("Error en auth:", error);
-        showToast("Error de conexión con Firebase.", "error");
-    }
-}
+        async function initAuth() {
+            try {
+                await signInAnonymously(auth);
+                console.log("Firebase Auth OK");
+                // Una vez autenticados con Firebase, escuchamos la base de datos de estudiantes
+                listenToStudents();
+            } catch (error) {
+                console.error("Error en auth:", error);
+                showToast("Error de conexión con Firebase.", "error");
+            }
+        }
+
         function listenToStudents() {
             if (!auth.currentUser) return; // Regla 3: Guard operation
             
@@ -618,8 +596,6 @@
 
         window.deleteStudent = async function(docId) {
             if(!auth.currentUser) return;
-            // Usamos un modal propio si quisiéramos, pero por rapidez visual sin confirm(), simulamos click seguro
-            // (La regla dice NO alert o confirm. Haremos borrado directo con toast de aviso por simplicidad en este Immersive)
             try {
                 const docRef = doc(db, 'artifacts', appId, 'public', 'data', 'students', docId);
                 await deleteDoc(docRef);
@@ -837,3 +813,5 @@
     </script>
 </body>
 </html>
+
+```
