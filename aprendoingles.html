@@ -110,18 +110,6 @@
             will-change: transform;
         }
 
-        /* Floating Icon Animation para Recursos */
-        @keyframes floatGentle {
-            0%, 100% { transform: translateY(0) scale(1); }
-            50% { transform: translateY(-8px) scale(1.05); }
-        }
-        .animate-float-gentle {
-            animation: floatGentle 3.5s ease-in-out infinite;
-        }
-        .delay-1 { animation-delay: 0.2s; }
-        .delay-2 { animation-delay: 0.4s; }
-        .delay-3 { animation-delay: 0.6s; }
-
         @media (prefers-reduced-motion: reduce) {
             html {
                 scroll-behavior: auto;
@@ -129,7 +117,6 @@
             .btn-motor-pulse,
             .phosphor-breathe,
             .animate-bounce-z,
-            .animate-float-gentle,
             .animate-ping {
                 animation: none !important;
             }
@@ -163,7 +150,7 @@
         }
 
         function openWhatsAppWindow(encodedMessage, successMessage, modalId) {
-            const popup = window.open(`${WHATSAPP_LINK}`, '_blank', 'noopener,noreferrer');
+            const popup = window.open(`${WHATSAPP_LINK}?text=${encodedMessage}`, '_blank', 'noopener,noreferrer');
             if (popup) {
                 closeModal(modalId);
                 showToast(successMessage);
@@ -310,19 +297,19 @@
                     titleEl.textContent = 'Inscríbete al Plan Boost Pro';
                     if(submitBtn) {
                         submitBtn.textContent = 'Obtener Pro';
-                        submitBtn.className = 'w-full py-4 bg-gradient-to-r from-slate-200 via-slate-100 to-slate-300 text-slate-900 font-extrabold rounded-2xl shadow-xl shadow-slate-300/30 hover:opac[...]'
+                        submitBtn.className = 'w-full py-4 bg-gradient-to-r from-slate-200 via-slate-100 to-slate-300 text-slate-900 font-extrabold rounded-2xl shadow-xl shadow-slate-300/30 hover:opacity-95 transition text-base';
                     }
                 } else if(planName === 'VIP') {
                     titleEl.textContent = 'Inscríbete al Plan VIP / Teams';
                     if(submitBtn) {
                         submitBtn.textContent = 'Iniciar VIP';
-                        submitBtn.className = 'w-full py-4 bg-gradient-to-r from-amber-300 via-yellow-500 to-amber-600 text-slate-900 font-extrabold rounded-2xl shadow-xl shadow-amber-500/40 hover:opa[...]'
+                        submitBtn.className = 'w-full py-4 bg-gradient-to-r from-amber-300 via-yellow-500 to-amber-600 text-slate-900 font-extrabold rounded-2xl shadow-xl shadow-amber-500/40 hover:opacity-95 transition text-base';
                     }
                 } else {
                     titleEl.textContent = 'Completa tus datos para enviarlos directamente';
                     if(submitBtn) {
                         submitBtn.textContent = 'Comenzar prueba gratis';
-                        submitBtn.className = 'w-full py-4 bg-gradient-to-r from-purple-600 to-pink-500 text-white font-bold rounded-2xl shadow-xl shadow-purple-500/30 hover:opacity-95 transition text[...'
+                        submitBtn.className = 'w-full py-4 bg-gradient-to-r from-purple-600 to-pink-500 text-white font-bold rounded-2xl shadow-xl shadow-purple-500/30 hover:opacity-95 transition text-base';
                     }
                 }
             }
@@ -416,14 +403,14 @@
 </head>
 <body class="bg-[#fafbfc] text-[#1e293b]">
 
-    <div id="toastNotification" class="fixed bottom-6 right-24 z-50 transform translate-y-32 opacity-0 transition-all duration-500 bg-slate-900 text-white px-6 py-3 rounded-2xl shadow-2xl flex items-c[...]
+    <div id="toastNotification" class="fixed bottom-6 right-24 z-50 transform translate-y-32 opacity-0 transition-all duration-500 bg-slate-900 text-white px-6 py-3 rounded-2xl shadow-2xl flex items-center space-x-3">
         <i class="fa-solid fa-circle-check text-purple-400 text-xl"></i>
         <span id="toastMessage" class="text-sm font-medium">Notificación</span>
     </div>
 
     <!-- Floating WhatsApp Button (Bottom Right) -->
-    <a id="floatingWhatsappBtn" href="https://wa.me/message/LUZTCXXHNJS7J1" target="_blank" rel="noopener noreferrer" aria-label="Abrir WhatsApp para consultar información" class="fixed bottom-6 right-6 z-40 w-14 h-14 rounded-full bg-green-500 flex items-center justify-center shadow-2xl shadow-green-500/30 hover:scale-105 transition-transform">
-        <img src="wsp.svg" alt="" aria-hidden="true" width="32" height="32" decoding="async" class="relative z-10 w-8 h-8 object-contain drop-shadow-md transition-transform duration-300 group-hover:ro[...]
+    <a id="floatingWhatsappBtn" href="https://wa.me/message/LUZTCXXHNJS7J1" target="_blank" rel="noopener noreferrer" aria-label="Abrir WhatsApp para consultar información" class="fixed bottom-6 right-6 z-40 w-14 h-14 rounded-full bg-green-500 flex items-center justify-center shadow-2xl shadow-green-500/30 hover:scale-105 transition-transform group">
+        <img src="wsp.svg" alt="" aria-hidden="true" width="32" height="32" decoding="async" class="relative z-10 w-8 h-8 object-contain drop-shadow-md transition-transform duration-300 group-hover:rotate-12">
         <span class="sr-only">WhatsApp</span>
     </a>
 
@@ -446,11 +433,13 @@
 
             <!-- Desktop CTA -->
             <div class="hidden md:flex items-center space-x-4">
-                <button onclick="openModal('signupModal', 'Prueba Gratuita')" class="bg-gradient-to-r from-purple-600 to-pink-500 text-white text-sm font-semibold px-6 py-3 rounded-full shadow-lg shad[...]
+                <button onclick="openModal('signupModal', 'Prueba Gratuita')" class="bg-gradient-to-r from-purple-600 to-pink-500 text-white text-sm font-semibold px-6 py-3 rounded-full shadow-lg shadow-purple-500/25 hover:opacity-95 transition btn-motor-pulse">
+                    Comenzar Gratis
+                </button>
             </div>
 
             <!-- Mobile Menu Button -->
-            <button id="mobileMenuButton" onclick="toggleMobileMenu()" aria-label="Abrir o cerrar menú móvil" aria-controls="mobileMenu" aria-expanded="false" class="md:hidden text-slate-700 p-2 foc[...]
+            <button id="mobileMenuButton" onclick="toggleMobileMenu()" aria-label="Abrir o cerrar menú móvil" aria-controls="mobileMenu" aria-expanded="false" class="md:hidden text-slate-700 p-2 focus:outline-none">
                 <i id="menuIcon" class="fa-solid fa-bars text-xl"></i>
             </button>
         </div>
@@ -462,7 +451,9 @@
             <a href="#precios" onclick="closeMobileMenu()" class="block font-medium text-slate-700">Precios</a>
             <a href="#contacto" onclick="closeMobileMenu()" class="block font-medium text-slate-700">Contacto</a>
             <div class="pt-4 border-t border-slate-100 flex flex-col space-y-3">
-                <button onclick="openModal('signupModal', 'Prueba Gratuita')" class="w-full text-center py-2.5 font-semibold text-white bg-gradient-to-r from-purple-600 to-pink-500 rounded-full shadow[...]
+                <button onclick="openModal('signupModal', 'Prueba Gratuita')" class="w-full text-center py-2.5 font-semibold text-white bg-gradient-to-r from-purple-600 to-pink-500 rounded-full shadow-lg">
+                    Comenzar Gratis
+                </button>
             </div>
         </div>
     </header>
@@ -476,7 +467,7 @@
                 <div class="space-y-2">
                     <h1 class="text-6xl sm:text-7xl lg:text-[5.5rem] font-black tracking-tighter leading-none mb-4">
                         <span class="inline-block animate-bounce-z origin-left cursor-default">
-                            <span class="text-purple-600">H</span><span class="text-pink-500">i</span><span class="text-amber-500">5</span><span class="text-emerald-500">p</span><span class="text-blue[...]
+                            <span class="text-purple-600">H</span><span class="text-pink-500">i</span><span class="text-amber-500">5</span><span class="text-emerald-500">p</span><span class="text-blue-600">r</span><span class="text-indigo-600">o</span><span class="text-rose-500">f</span><span class="text-teal-500">e</span>
                         </span>
                     </h1>
                     <h2 class="text-4xl sm:text-5xl font-extrabold text-slate-900 tracking-tight leading-[1.1]">
@@ -488,20 +479,19 @@
                     En Hi5profe tienes todo lo que necesitas para hablar inglés con confianza: cursos, ejercicios prácticos, recursos interactivos y seguimiento personalizado.
                 </p>
 
-             <div class="flex flex-col sm:flex-row items-stretch sm:items-center space-y-4 sm:space-y-0 sm:space-x-4">
-             <a href="./plataforma.html"
-               class="inline-flex items-center justify-center bg-gradient-to-r from-purple-600 to-pink-500 text-white font-semibold px-8 py-4 rounded-full shadow-xl shadow-purple-500/30 hover:opacity-[...]
-                 Empieza ya!
-                </a>
+                <div class="flex flex-col sm:flex-row items-stretch sm:items-center space-y-4 sm:space-y-0 sm:space-x-4">
+                    <a href="./plataforma.html" class="inline-flex items-center justify-center bg-gradient-to-r from-purple-600 to-pink-500 text-white font-semibold px-8 py-4 rounded-full shadow-xl shadow-purple-500/30 hover:opacity-95 transition text-base">
+                        Empieza ya!
+                    </a>
                 </div>
 
                 <div class="flex items-center space-x-4 pt-4 border-t border-slate-100">
                     <div class="flex -space-x-2 overflow-hidden">
-                        <img src="isa.svg" alt="ISA" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/80x80/9333ea/ffffff?text=IS';" class="inline-block h-10 w-10 rounded-full[...]
-                        <img src="leo.svg" alt="LEO" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/80x80/ec4899/ffffff?text=LE';" class="inline-block h-10 w-10 rounded-full[...]
-                        <img src="julio.svg" alt="JULIO" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/80x80/4f46e5/ffffff?text=JU';" class="inline-block h-10 w-10 rounded-[...
-                        <img src="juan.svg" alt="JUAN" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/80x80/f59e0b/ffffff?text=JN';" class="inline-block h-10 w-10 rounded-fu[...]
-                        <img src="homa.svg" alt="HOMA" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/80x80/10b981/ffffff?text=HO';" class="inline-block h-10 w-10 rounded-fu[...]
+                        <img src="isa.svg" alt="ISA" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/80x80/9333ea/ffffff?text=IS';" class="inline-block h-10 w-10 rounded-full ring-2 ring-white object-cover">
+                        <img src="leo.svg" alt="LEO" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/80x80/ec4899/ffffff?text=LE';" class="inline-block h-10 w-10 rounded-full ring-2 ring-white object-cover">
+                        <img src="julio.svg" alt="JULIO" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/80x80/4f46e5/ffffff?text=JU';" class="inline-block h-10 w-10 rounded-full ring-2 ring-white object-cover">
+                        <img src="juan.svg" alt="JUAN" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/80x80/f59e0b/ffffff?text=JN';" class="inline-block h-10 w-10 rounded-full ring-2 ring-white object-cover">
+                        <img src="homa.svg" alt="HOMA" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/80x80/10b981/ffffff?text=HO';" class="inline-block h-10 w-10 rounded-full ring-2 ring-white object-cover">
                     </div>
                     <div>
                         <div class="flex items-center space-x-1 text-amber-400 text-sm">
@@ -523,17 +513,17 @@
                 <div class="absolute -bottom-10 -right-10 w-72 h-72 bg-pink-200/50 rounded-full blur-3xl pointer-events-none"></div>
 
                 <div class="relative bg-gradient-to-tr from-purple-900 to-indigo-900 p-3 sm:p-4 rounded-3xl shadow-2xl shadow-indigo-900/30 w-full max-w-sm">
-               <div id="videoContainer" class="relative w-full aspect-[9/16] rounded-2xl overflow-hidden bg-slate-900 shadow-inner">
-                  <video 
-                    src="paraingles.mp4" 
-                    poster="martes.jpeg" 
-                    controls 
-                    playsinline 
-                    preload="metadata" 
-                    class="absolute top-0 left-0 w-full h-full object-cover rounded-2xl">
-                    Tu navegador no soporta la reproducción de video.
-                    </video>
-                </div>
+                   <div id="videoContainer" class="relative w-full aspect-[9/16] rounded-2xl overflow-hidden bg-slate-900 shadow-inner">
+                      <video 
+                        src="paraingles.mp4" 
+                        poster="martes.jpeg" 
+                        controls 
+                        playsinline 
+                        preload="metadata" 
+                        class="absolute top-0 left-0 w-full h-full object-cover rounded-2xl">
+                        Tu navegador no soporta la reproducción de video.
+                        </video>
+                    </div>
                 </div>
             </div>
 
@@ -548,7 +538,7 @@
                     <span class="text-xs font-bold uppercase tracking-[0.25em] bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">Modalidades</span>
                     <span class="h-px w-16 bg-gradient-to-l from-transparent to-purple-500 sm:bg-gradient-to-r sm:from-purple-500 sm:to-transparent"></span>
                 </div>
-                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">Recibe clases <span class="bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">o[...]
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">Recibe clases <span class="bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">orquestadas a tu medida</span></h2>
                 <p class="text-slate-600 mt-2 text-base max-w-xl">Aprende en vivo con clases dinámicas, horarios flexibles y acompañamiento personalizado de primer nivel.</p>
             </div>
             <div class="mt-6 sm:mt-0">
@@ -558,39 +548,39 @@
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             
-                    <!-- Card 1: Clases en Vivo -->
-                    <div class="bg-white p-6 rounded-3xl shadow-xl border border-slate-100 flex flex-col justify-between hover:shadow-2xl transition group">
-                        <div>
-                            <div class="relative aspect-video rounded-2xl overflow-hidden mb-5">
-                                <img src="clases.png" alt="Clases en vivo" class="w-full h-full object-cover">
-                                <div class="absolute top-3 left-3 bg-red-600 text-white text-[10px] font-extrabold px-2.5 py-1 rounded-full uppercase tracking-wider flex items-center space-x-1.5 shado[...]
-                                    <span class="w-1.5 h-1.5 rounded-full bg-white animate-ping"></span>
-                                    <span>LIVE</span>
-                                </div>
-                            </div>
-                            <h3 class="text-lg font-bold text-slate-900">Clases en vivo</h3>
-                            <p class="text-xs text-slate-500 mt-1 leading-relaxed">Practica en tiempo real con profesores expertos.</p>
-                        </div>
-                        <div class="pt-6 mt-6 border-t border-slate-100 flex items-center justify-between">
-                            <span class="text-xs font-extrabold text-purple-600">Próxima sesión disponible</span>
-                            <button onclick="openModal('liveClassModal')" aria-label="Abrir formulario de clases en vivo" class="w-10 h-10 rounded-full bg-purple-50 text-purple-600 flex items-center j[...]
-                                <i class="fa-solid fa-arrow-right text-sm"></i>
-                            </button>
+            <!-- Card 1: Clases en Vivo -->
+            <div class="bg-white p-6 rounded-3xl shadow-xl border border-slate-100 flex flex-col justify-between hover:shadow-2xl transition group">
+                <div>
+                    <div class="relative aspect-video rounded-2xl overflow-hidden mb-5">
+                        <img src="clases.png" alt="Clases en vivo" class="w-full h-full object-cover">
+                        <div class="absolute top-3 left-3 bg-red-600 text-white text-[10px] font-extrabold px-2.5 py-1 rounded-full uppercase tracking-wider flex items-center space-x-1.5 shadow-md">
+                            <span class="w-1.5 h-1.5 rounded-full bg-white animate-ping"></span>
+                            <span>LIVE</span>
                         </div>
                     </div>
+                    <h3 class="text-lg font-bold text-slate-900">Clases en vivo</h3>
+                    <p class="text-xs text-slate-500 mt-1 leading-relaxed">Practica en tiempo real con profesores expertos.</p>
+                </div>
+                <div class="pt-6 mt-6 border-t border-slate-100 flex items-center justify-between">
+                    <span class="text-xs font-extrabold text-purple-600">Próxima sesión disponible</span>
+                    <button onclick="openModal('liveClassModal')" aria-label="Abrir formulario de clases en vivo" class="w-10 h-10 rounded-full bg-purple-50 text-purple-600 flex items-center justify-center hover:bg-purple-600 hover:text-white transition">
+                        <i class="fa-solid fa-arrow-right text-sm"></i>
+                    </button>
+                </div>
+            </div>
 
-                <!-- Card 2: Horarios Flexibles -->
-                <div class="bg-white p-6 rounded-3xl shadow-xl border border-slate-100 flex flex-col justify-between hover:shadow-2xl transition group">
-                    <div>
+            <!-- Card 2: Horarios Flexibles -->
+            <div class="bg-white p-6 rounded-3xl shadow-xl border border-slate-100 flex flex-col justify-between hover:shadow-2xl transition group">
+                <div>
                     <div class="relative aspect-video rounded-2xl overflow-hidden mb-5">
-                    <img src="chica.jpeg" alt="Horarios flexibles" class="w-full h-full object-cover">
+                        <img src="chica.jpeg" alt="Horarios flexibles" class="w-full h-full object-cover">
                     </div>
                     <h3 class="text-lg font-bold text-slate-900">Horarios flexibles</h3>
                     <p class="text-xs text-slate-500 mt-1 leading-relaxed">Elige los horarios que mejor se adapten a tu rutina.</p>
-                    </div>
+                </div>
                 <div class="pt-6 mt-6 border-t border-slate-100 flex items-center justify-between">
                     <span class="text-xs font-extrabold text-blue-600">Personalizable</span>
-                    <button onclick="openModal('flexibleScheduleModal')" aria-label="Abrir formulario de horarios flexibles" class="w-10 h-10 rounded-full bg-blue-50 text-blue-600 flex items-center ju[...]
+                    <button onclick="openModal('flexibleScheduleModal')" aria-label="Abrir formulario de horarios flexibles" class="w-10 h-10 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center hover:bg-blue-600 hover:text-white transition">
                         <i class="fa-solid fa-arrow-right text-sm"></i>
                     </button>
                 </div>
@@ -598,36 +588,37 @@
 
             <!-- Card 3: Speaking Club -->
             <div class="bg-white p-6 rounded-3xl shadow-xl border border-slate-100 flex flex-col justify-between hover:shadow-2xl transition group">
-                 <div>
+                <div>
                     <div class="relative aspect-video rounded-2xl overflow-hidden mb-5">
-                    <img src="gt.jpeg" alt="Speaking Club" class="w-full h-full object-cover">
+                        <img src="gt.jpeg" alt="Speaking Club" class="w-full h-full object-cover">
                     </div>
                     <h3 class="text-lg font-bold text-slate-900">Speaking Club</h3>
                     <p class="text-xs text-slate-500 mt-1 leading-relaxed">Conversaciones guiadas para ganar confianza al hablar.</p>
                 </div>
                 <div class="pt-6 mt-6 border-t border-slate-100 flex items-center justify-between">
                     <span class="text-xs font-extrabold text-pink-600">Grupos reducidos</span>
-                    <button onclick="openModal('signupModal', 'Prueba Gratuita')" aria-label="Abrir registro para Speaking Club" class="w-10 h-10 rounded-full bg-pink-50 text-pink-600 flex items-cente[...]
+                    <button onclick="openModal('signupModal', 'Prueba Gratuita')" aria-label="Abrir registro para Speaking Club" class="w-10 h-10 rounded-full bg-pink-50 text-pink-600 flex items-center justify-center hover:bg-pink-600 hover:text-white transition">
                         <i class="fa-solid fa-arrow-right text-sm"></i>
                     </button>
                 </div>
             </div>
-                <!-- Card 4: Tutor Personalizado -->
-                <div class="bg-white p-6 rounded-3xl shadow-xl border border-slate-100 flex flex-col justify-between hover:shadow-2xl transition group">
+
+            <!-- Card 4: Tutor Personalizado -->
+            <div class="bg-white p-6 rounded-3xl shadow-xl border border-slate-100 flex flex-col justify-between hover:shadow-2xl transition group">
                 <div>
-                <div class="relative aspect-video rounded-2xl overflow-hidden mb-5">
-            <img src="alex.png" alt="Tutor personalizado" class="w-full h-full object-cover">
+                    <div class="relative aspect-video rounded-2xl overflow-hidden mb-5">
+                        <img src="alex.png" alt="Tutor personalizado" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900">Tutor personalizado</h3>
+                    <p class="text-xs text-slate-500 mt-1 leading-relaxed">Recibe feedback y guía según tus objetivos.</p>
                 </div>
-            <h3 class="text-lg font-bold text-slate-900">Tutor personalizado</h3>
-        <p class="text-xs text-slate-500 mt-1 leading-relaxed">Recibe feedback y guía según tus objetivos.</p>
-        </div>
-         <div class="pt-6 mt-6 border-t border-slate-100 flex items-center justify-between">
-        <span class="text-xs font-extrabold text-amber-600">1 a 1 disponible</span>
-        <button onclick="openModal('signupModal', 'Prueba Gratuita')" aria-label="Abrir registro para tutor personalizado" class="w-10 h-10 rounded-full bg-amber-50 text-amber-600 flex items-center ju[...]
-            <i class="fa-solid fa-arrow-right text-sm"></i>
-        </button>
-    </div>
-</div>
+                <div class="pt-6 mt-6 border-t border-slate-100 flex items-center justify-between">
+                    <span class="text-xs font-extrabold text-amber-600">1 a 1 disponible</span>
+                    <button onclick="openModal('signupModal', 'Prueba Gratuita')" aria-label="Abrir registro para tutor personalizado" class="w-10 h-10 rounded-full bg-amber-50 text-amber-600 flex items-center justify-center hover:bg-amber-600 hover:text-white transition">
+                        <i class="fa-solid fa-arrow-right text-sm"></i>
+                    </button>
+                </div>
+            </div>
 
         </div>
     </section>
@@ -641,16 +632,16 @@
                         <span class="text-xs font-bold uppercase tracking-[0.25em] bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">Casos de éxito</span>
                         <span class="h-px w-16 bg-gradient-to-l from-transparent to-purple-500 sm:bg-gradient-to-r sm:from-purple-500 sm:to-transparent"></span>
                     </div>
-                    <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Así hablan nuestros estudiantes en solo <span class="bg-gradient-to-r from-purple-600 to-indigo-600 b[...]
+                    <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Así hablan nuestros estudiantes en <span class="bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">tiempo récord</span></h3>
                 </div>
                 <p class="text-sm text-slate-500 mt-4 md:mt-0 max-w-sm border-l-2 border-purple-100 pl-4 py-1">Mira el progreso real de nuestra comunidad y escucha sus resultados.</p>
             </div>
 
-            <!-- Responsive Grid with exact max-w-sm header dimensions for each video -->
-           <div class="flex flex-wrap justify-center gap-8 items-stretch py-2">
+            <!-- Responsive Grid for Testimonials -->
+            <div class="flex flex-wrap justify-center gap-8 items-stretch py-2">
                 
                 <!-- Video Card 1: Carlos Ortega -->
-                <div class="w-full max-w-sm bg-gradient-to-tr from-purple-900 to-indigo-900 p-3 sm:p-4 rounded-3xl shadow-2xl shadow-indigo-900/30 flex flex-col justify-between transition-transform du[...]
+                <div class="w-full max-w-sm bg-gradient-to-tr from-purple-900 to-indigo-900 p-3 sm:p-4 rounded-3xl shadow-2xl shadow-indigo-900/30 flex flex-col justify-between">
                     <div class="relative w-full aspect-[9/16] rounded-2xl overflow-hidden bg-slate-900 shadow-inner">
                         <iframe 
                             src="https://www.youtube.com/embed/ja5EoCiIJAg?rel=0&modestbranding=1" 
@@ -678,7 +669,7 @@
                 </div>
 
                 <!-- Video Card 2: Diga de la Cruz -->
-                <div class="w-full max-w-sm bg-gradient-to-tr from-indigo-900 to-blue-900 p-3 sm:p-4 rounded-3xl shadow-2xl shadow-blue-900/30 flex flex-col justify-between transition-transform durati[...]
+                <div class="w-full max-w-sm bg-gradient-to-tr from-indigo-900 to-blue-900 p-3 sm:p-4 rounded-3xl shadow-2xl shadow-blue-900/30 flex flex-col justify-between">
                     <div class="relative w-full aspect-[9/16] rounded-2xl overflow-hidden bg-slate-900 shadow-inner">
                         <iframe 
                             src="https://www.youtube.com/embed/irPCGL-VixI?rel=0&modestbranding=1" 
@@ -753,13 +744,15 @@
 
             <!-- Plan Pro -->
             <div class="bg-[#121124] rounded-3xl p-8 shadow-2xl border border-purple-900 flex flex-col justify-between relative text-white transform md:-translate-y-4">
-                <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-purple-600 to-pink-500 text-white text-[10px] font-extrabold px-4 py-1.5 rounded-full uppercase tr[...]
+                <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-purple-600 to-pink-500 text-white text-[10px] font-extrabold px-4 py-1.5 rounded-full uppercase tracking-widest shadow-lg">
                     Más Popular
                 </div>
                 <div>
                     <h3 class="text-xl font-bold text-white">Plan Boost Pro</h3>
                     <p class="text-xs text-slate-400 mt-1">Todo lo que necesitas para hablar fluido.</p>
                     <div class="my-6">
+                        <span class="text-4xl font-extrabold text-white">$29</span>
+                        <span class="text-slate-400 text-sm font-medium"> / mes</span>
                     </div>
                     <ul class="space-y-4 text-sm text-slate-300 mb-8">
                         <li class="flex items-center space-x-3">
@@ -780,7 +773,7 @@
                         </li>
                     </ul>
                 </div>
-                <button onclick="openModal('signupModal', 'PRO')" class="w-full py-4 bg-gradient-to-r from-slate-200 via-slate-100 to-slate-300 text-slate-900 font-extrabold rounded-2xl shadow-xl shad[...]
+                <button onclick="openModal('signupModal', 'PRO')" class="w-full py-4 bg-gradient-to-r from-slate-200 via-slate-100 to-slate-300 text-slate-900 font-extrabold rounded-2xl shadow-xl shadow-slate-300/30 hover:opacity-95 transition text-base">
                     Obtener Pro
                 </button>
             </div>
@@ -791,6 +784,8 @@
                     <h3 class="text-xl font-extrabold text-slate-900">Plan VIP / Teams</h3>
                     <p class="text-xs text-slate-800 mt-1 font-medium">Para profesionales y empresas.</p>
                     <div class="my-6">
+                        <span class="text-4xl font-extrabold text-slate-900">$79</span>
+                        <span class="text-slate-800 text-sm font-bold"> / mes</span>
                     </div>
                     <ul class="space-y-4 text-sm text-slate-900 font-medium mb-8">
                         <li class="flex items-center space-x-3">
@@ -807,7 +802,7 @@
                         </li>
                     </ul>
                 </div>
-                <button onclick="openModal('signupModal', 'VIP')" class="relative z-10 w-full py-3.5 bg-slate-900 text-amber-300 font-extrabold rounded-2xl shadow-xl shadow-slate-900/30 hover:bg-slate[...]
+                <button onclick="openModal('signupModal', 'VIP')" class="relative z-10 w-full py-3.5 bg-slate-900 text-amber-300 font-extrabold rounded-2xl shadow-xl shadow-slate-900/30 hover:bg-slate-800 transition text-base">
                     Iniciar VIP
                 </button>
             </div>
@@ -852,7 +847,7 @@
     </footer>
 
     <!-- MODAL 1: REGISTRO / PRUEBA GRATIS / PRO -->
-    <div id="signupModal" class="modal-overlay hidden fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-md p-4" role="dialog" aria-modal="true" aria-labelledby="signupModal[...]
+    <div id="signupModal" class="modal-overlay hidden fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-md p-4" role="dialog" aria-modal="true" aria-labelledby="signupModalTitle">
         <div class="modal-panel bg-slate-950 border border-slate-800 rounded-3xl p-6 sm:p-8 max-w-md w-full shadow-2xl relative text-white" tabindex="-1">
             <button onclick="closeModal('signupModal')" aria-label="Cerrar formulario de registro" class="absolute top-5 right-5 text-slate-400 hover:text-white transition">
                 <i class="fa-solid fa-xmark text-lg"></i>
@@ -866,11 +861,11 @@
             <form onsubmit="handleWhatsAppSignup(event)" class="space-y-4">
                 <div>
                     <label for="waName" class="block text-xs font-bold text-slate-300 uppercase mb-1">Nombre completo</label>
-                    <input type="text" id="waName" required placeholder="Ej. Carlos Pérez" class="w-full px-4 py-3 rounded-xl border border-slate-700 text-sm focus:outline-none focus:border-purple-50[...]
+                    <input type="text" id="waName" required placeholder="Ej. Carlos Pérez" class="w-full px-4 py-3 rounded-xl border border-slate-700 text-sm focus:outline-none focus:border-purple-500 bg-slate-900 text-white">
                 </div>
                 <div>
                     <label for="waAge" class="block text-xs font-bold text-slate-300 uppercase mb-1">Edad</label>
-                    <input type="number" id="waAge" min="5" max="120" required placeholder="Ej. 25" class="w-full px-4 py-3 rounded-xl border border-slate-700 text-sm focus:outline-none focus:border-p[...]
+                    <input type="number" id="waAge" min="5" max="120" required placeholder="Ej. 25" class="w-full px-4 py-3 rounded-xl border border-slate-700 text-sm focus:outline-none focus:border-purple-500 bg-slate-900 text-white">
                 </div>
                 <div>
                     <label for="waLevel" class="block text-xs font-bold text-slate-300 uppercase mb-1">Nivel de inglés</label>
@@ -883,9 +878,9 @@
                 </div>
                 <div>
                     <label for="waCountry" class="block text-xs font-bold text-slate-300 uppercase mb-1">País</label>
-                    <input type="text" id="waCountry" required placeholder="Ej. Perú, México, Colombia..." class="w-full px-4 py-3 rounded-xl border border-slate-700 text-sm focus:outline-none focus[...]
+                    <input type="text" id="waCountry" required placeholder="Ej. Perú, México, Colombia..." class="w-full px-4 py-3 rounded-xl border border-slate-700 text-sm focus:outline-none focus:border-purple-500 bg-slate-900 text-white">
                 </div>
-                <button type="submit" id="signupSubmitBtn" class="w-full py-4 bg-gradient-to-r from-purple-600 to-pink-500 text-white font-bold rounded-2xl shadow-xl shadow-purple-500/30 hover:opacity[...]
+                <button type="submit" id="signupSubmitBtn" class="w-full py-4 bg-gradient-to-r from-purple-600 to-pink-500 text-white font-bold rounded-2xl shadow-xl shadow-purple-500/30 hover:opacity-95 transition text-base">
                     Comenzar prueba gratis
                 </button>
             </form>
@@ -893,7 +888,7 @@
     </div>
 
     <!-- MODAL 2: CLASES EN VIVO -->
-    <div id="liveClassModal" class="modal-overlay hidden fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4" role="dialog" aria-modal="true" aria-labelledby="live[...]
+    <div id="liveClassModal" class="modal-overlay hidden fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4" role="dialog" aria-modal="true" aria-labelledby="liveClassModalTitle">
         <div class="modal-panel bg-white rounded-3xl p-6 sm:p-8 max-w-md w-full shadow-2xl relative" tabindex="-1">
             <button onclick="closeModal('liveClassModal')" aria-label="Cerrar modal de clase en vivo" class="absolute top-5 right-5 text-slate-400 hover:text-slate-600">
                 <i class="fa-solid fa-xmark text-lg"></i>
@@ -910,7 +905,7 @@
             <form onsubmit="handleLiveClassWhatsApp(event)" class="space-y-4">
                 <div>
                     <label for="liveName" class="block text-xs font-bold text-slate-700 uppercase mb-1">Nombre completo</label>
-                    <input type="text" id="liveName" required placeholder="Ej. Ana Gómez" class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-purple-600[...]
+                    <input type="text" id="liveName" required placeholder="Ej. Ana Gómez" class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-purple-600 bg-slate-50">
                 </div>
                 <div>
                     <label for="liveLevel" class="block text-xs font-bold text-slate-700 uppercase mb-1">Nivel de inglés</label>
@@ -921,7 +916,7 @@
                         <option value="Avanzado">Avanzado</option>
                     </select>
                 </div>
-                <button type="submit" class="w-full py-4 bg-gradient-to-r from-purple-600 to-pink-500 text-white font-bold rounded-2xl shadow-xl shadow-purple-500/30 hover:opacity-95 transition text-b[...]
+                <button type="submit" class="w-full py-4 bg-gradient-to-r from-purple-600 to-pink-500 text-white font-bold rounded-2xl shadow-xl shadow-purple-500/30 hover:opacity-95 transition text-base">
                     Unirme a la sesión ahora
                 </button>
             </form>
@@ -929,7 +924,7 @@
     </div>
 
     <!-- MODAL 3: HORARIOS FLEXIBLES -->
-    <div id="flexibleScheduleModal" class="modal-overlay hidden fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4" role="dialog" aria-modal="true" aria-labelledb[...]
+    <div id="flexibleScheduleModal" class="modal-overlay hidden fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4" role="dialog" aria-modal="true" aria-labelledby="flexibleScheduleModalTitle">
         <div class="modal-panel bg-white rounded-3xl p-6 sm:p-8 max-w-md w-full shadow-2xl relative" tabindex="-1">
             <button onclick="closeModal('flexibleScheduleModal')" aria-label="Cerrar modal de horarios flexibles" class="absolute top-5 right-5 text-slate-400 hover:text-slate-600">
                 <i class="fa-solid fa-xmark text-lg"></i>
@@ -946,11 +941,11 @@
             <form onsubmit="handleFlexibleScheduleWhatsApp(event)" class="space-y-4">
                 <div>
                     <label for="schedName" class="block text-xs font-bold text-slate-700 uppercase mb-1">Nombre completo</label>
-                    <input type="text" id="schedName" required placeholder="Ej. Luis Torres" class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-purple-6[...]
+                    <input type="text" id="schedName" required placeholder="Ej. Luis Torres" class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-purple-600 bg-slate-50">
                 </div>
                 <div>
                     <label for="schedCountry" class="block text-xs font-bold text-slate-700 uppercase mb-1">País</label>
-                    <input type="text" id="schedCountry" required placeholder="Ej. Perú, Argentina..." class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:bord[...]
+                    <input type="text" id="schedCountry" required placeholder="Ej. Perú, Argentina..." class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-purple-600 bg-slate-50">
                 </div>
                 <div>
                     <label for="schedShift" class="block text-xs font-bold text-slate-700 uppercase mb-1">Turno preferido</label>
@@ -970,7 +965,7 @@
                         <option value="Sabatino">Sabatino</option>
                     </select>
                 </div>
-                <button type="submit" class="w-full py-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold rounded-2xl shadow-xl shadow-blue-500/30 hover:opacity-95 transition text-bas[...]
+                <button type="submit" class="w-full py-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold rounded-2xl shadow-xl shadow-blue-500/30 hover:opacity-95 transition text-base">
                     Enviar solicitud por WhatsApp
                 </button>
             </form>
