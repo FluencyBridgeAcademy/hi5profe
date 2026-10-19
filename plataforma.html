@@ -239,6 +239,9 @@
                         <source src="" type="video/mp4">
                         Tu navegador no soporta videos HTML5.
                     </video>
+                    <iframe id="main-iframe-player" class="hidden w-full h-full absolute inset-0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen></iframe>
                     <!-- Overlay de carga -->
                     <div id="video-loader" class="absolute inset-0 bg-black/80 flex items-center justify-center hidden">
                         <i class="fas fa-spinner fa-spin text-4xl text-indigo-500"></i>
@@ -461,7 +464,12 @@
             // Pausar video si está reproduciendo
             const videoEl = document.getElementById('main-video-player');
             videoEl.pause();
+            videoEl.onerror = null;
             videoEl.src = "";
+            const iframeEl = document.getElementById('main-iframe-player');
+            iframeEl.src = "";
+            iframeEl.classList.add('hidden');
+            videoEl.classList.remove('hidden');
 
             switchView('view-login');
             showToast("Has cerrado sesión correctamente.", "info");
@@ -680,23 +688,44 @@
             document.getElementById('current-video-title').innerText = video.title;
             
             const player = document.getElementById('main-video-player');
+            const iframe = document.getElementById('main-iframe-player');
             const loader = document.getElementById('video-loader');
-            
-            // Mostrar loader simulado de carga
-            loader.classList.remove('hidden');
-            player.src = video.src;
-            
-            player.onloadeddata = () => {
-                loader.classList.add('hidden');
-                player.play().catch(e => console.log("Auto-play prevenido por el navegador."));
-            };
+
+            loader.classList.add('hidden');
+
+            if (video.src.includes('youtube.com/embed')) {
+                // YouTube: usar iframe
+                player.onerror = null;
+                player.pause();
+                player.removeAttribute('src');
+                player.load();
+                player.classList.add('hidden');
+                iframe.src = video.src + '?autoplay=1&rel=0';
+                iframe.classList.remove('hidden');
+            } else {
+                // Archivo mp4: usar <video>
+                iframe.src = '';
+                iframe.classList.add('hidden');
+                player.classList.remove('hidden');
+                loader.classList.remove('hidden');
+                player.src = video.src;
+                player.onloadeddata = () => {
+                    loader.classList.add('hidden');
+                    player.play().catch(() => console.log("Auto-play prevenido por el navegador."));
+                };
+                player.onerror = () => {
+                    if (!player.getAttribute('src')) return;
+                    loader.classList.add('hidden');
+                    showToast("No se pudo cargar este video.", "error");
+                };
+            }
 
             // Volver a renderizar la playlist para actualizar colores activos
             renderCoursePlaylist();
             
             // Hacer scroll en móvil para ver el video
             if(window.innerWidth < 1024) {
-                player.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                document.getElementById('main-video-player').scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
         }
 
